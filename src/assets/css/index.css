@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+    background-color: #333;
+    color: #ffffff;
+    height: 100%;
+}
+
+.input-group {
+    @apply mt-5
+}
+
+.input-text {
+    @apply block rounded-sm p-1 flex justify-center bg-gray-500 text-center
+}
+
+.input-select {
+    @apply input-text
+}
+
+.input-error {
+    @apply text-red-500 text-sm flex justify-start
+}
