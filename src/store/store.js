@@ -1,6 +1,7 @@
 import {configureStore, createSerializableStateInvariantMiddleware} from '@reduxjs/toolkit'
 import util from "../store/util";
 import project from "../store/project";
+import user from "../store/user";
 
 // Augment middleware to consider Immutable.JS iterables serializable
 const isSerializable = (val) => {
@@ -17,7 +18,8 @@ const serializableMiddleware = createSerializableStateInvariantMiddleware({
 export const store = configureStore({
     reducer: {
         util: util,
-        project: project
+        project: project,
+        user: user
     },
     middleware: [serializableMiddleware],
 })

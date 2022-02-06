@@ -24,7 +24,7 @@ export default function Menu({activeName}) {
                 </svg>
             ),
             name: "Users",
-            active: activeName === 'map',
+            active: activeName === 'user',
             route: '/user'
         },
         {

@@ -1,9 +1,11 @@
 import authentication from "./authentication";
 import project from "./project";
+import user from "./user";
 
 const api = {
     authentication,
-    project
+    project,
+    user
 };
 
 export default api;
