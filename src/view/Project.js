@@ -1,5 +1,6 @@
 import Menu from "../component/Menu";
 import React from "react";
+import List from "../component/project/List";
 
 export default function Project() {
     return (
@@ -8,8 +9,8 @@ export default function Project() {
                 <div className="">
                     <Menu activeName={'project'}/>
                 </div>
-                <div className="w-full">
-
+                <div className="w-full m-3">
+                    <List/>
                 </div>
             </div>
         </>

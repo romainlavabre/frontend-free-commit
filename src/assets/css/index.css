@@ -7,6 +7,15 @@ body {
     background-color: #333;
     color: #ffffff;
     height: 100%;
+    @apply text-lg
+}
+
+.table th {
+    @apply border border-dark py-2
+}
+
+.table td {
+    @apply border border-dark py-1
 }
 
 .input-group {
@@ -23,4 +32,8 @@ body {
 
 .input-error {
     @apply text-red-500 text-sm flex justify-start
+}
+
+.table {
+    @apply border border-dark w-full text-center bg-light
 }
