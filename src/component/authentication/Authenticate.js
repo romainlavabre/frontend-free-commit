@@ -27,7 +27,7 @@ export default function Authenticate() {
         const decodedToken = mixin.decodeAccessToken(response.access_token);
 
         database.write(database.TABLE_AUTHENTICATION, 'access_token', response.access_token);
-        database.write(database.TABLE_AUTHENTICATION, 'roles', decodedToken.realm_access.roles);
+        database.write(database.TABLE_AUTHENTICATION, 'roles', decodedToken.roles);
 
         navigate('/operational')
     }
