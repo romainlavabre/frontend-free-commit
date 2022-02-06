@@ -29,7 +29,7 @@ export default function Authenticate() {
         database.write(database.TABLE_AUTHENTICATION, 'access_token', response.access_token);
         database.write(database.TABLE_AUTHENTICATION, 'roles', decodedToken.roles);
 
-        navigate('/operational')
+        navigate('/project')
     }
 
     return (
