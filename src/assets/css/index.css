@@ -30,6 +30,10 @@ body {
     @apply input-text
 }
 
+.form-submit {
+    @apply flex flex-row justify-end
+}
+
 .input-error {
     @apply text-red-500 text-sm flex justify-start
 }

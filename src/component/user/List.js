@@ -2,6 +2,7 @@ import {useEffect} from "react";
 import api from "../../api/api";
 import {useDispatch, useSelector} from "react-redux";
 import {load} from "../../store/user";
+import mixin from "../../mixin/mixin";
 
 export default function User() {
     const dispatch = useDispatch();
@@ -19,7 +20,7 @@ export default function User() {
                 <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Name</th>
+                    <th>Username</th>
                     <th>Email</th>
                     <th>Granted</th>
                 </tr>
@@ -31,7 +32,7 @@ export default function User() {
                             <tr key={user.id}>
                                 <td className="text-blue-500 hover:underline hover:cursor-pointer">#{user.id}</td>
                                 <td>{user.username}</td>
-                                <td>{user.email === null ? 'TODO' : user.email}</td>
+                                <td>{mixin.isNull(user.email) || user.email.length === 0 ? 'TODO' : user.email}</td>
                                 <td>
                                     {
                                         user.roles.includes("ROLE_ADMIN")

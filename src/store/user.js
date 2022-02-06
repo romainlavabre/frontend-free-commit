@@ -11,7 +11,7 @@ export const user = createSlice({
         load: (state, action) => {
             state.user = action.payload;
         },
-        updateOne: ({state, action}) => {
+        updateOne: (state, action) => {
             const index = state.user.findIndex(user => user.id === action.payload.id);
 
             if (index !== -1)

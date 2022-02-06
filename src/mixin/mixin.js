@@ -4,6 +4,7 @@ import isAuthenticate from "./isAuthenticate";
 import decodeAccessToken from "./decodeAccessToken";
 import dateFormatter from "./dateFormatter";
 import isNull from "./isNull";
+import mapErrorMessage from "./mapErrorMessage";
 
 export default {
     uuid,
@@ -11,5 +12,6 @@ export default {
     isAuthenticate,
     decodeAccessToken,
     dateFormatter,
-    isNull
+    isNull,
+    mapErrorMessage
 }
