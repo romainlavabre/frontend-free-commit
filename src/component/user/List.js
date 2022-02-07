@@ -3,10 +3,16 @@ import api from "../../api/api";
 import {useDispatch, useSelector} from "react-redux";
 import {load} from "../../store/user";
 import mixin from "../../mixin/mixin";
+import {useNavigate} from "react-router";
 
 export default function User() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const users = useSelector(state => state.user.user);
+
+    const openUser = id => {
+        navigate(`/user/update/${id}`);
+    }
 
     useEffect(async () => {
         const users = await api.user.findAll();
@@ -30,7 +36,8 @@ export default function User() {
                     users.map(user => (
                         <>
                             <tr key={user.id}>
-                                <td className="text-blue-500 hover:underline hover:cursor-pointer">#{user.id}</td>
+                                <td className="text-blue-500 hover:underline hover:cursor-pointer"
+                                    onClick={() => openUser(user.id)}>#{user.id}</td>
                                 <td>{user.username}</td>
                                 <td>{mixin.isNull(user.email) || user.email.length === 0 ? 'TODO' : user.email}</td>
                                 <td>
