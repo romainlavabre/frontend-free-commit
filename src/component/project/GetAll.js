@@ -3,7 +3,7 @@ import api from "../../api/api";
 import {useDispatch, useSelector} from "react-redux";
 import {load} from "../../store/project";
 
-export default function List() {
+export default function GetAll() {
     const dispatch = useDispatch();
     const projects = useSelector(state => state.project.project);
 

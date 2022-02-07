@@ -1,6 +1,6 @@
 import Menu from "../component/Menu";
 import React from "react";
-import List from "../component/user/List";
+import List from "../component/user/GetAll";
 import {useNavigate} from "react-router";
 
 export default function User() {

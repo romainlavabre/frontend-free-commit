@@ -6,7 +6,7 @@ import {useNavigate, useParams} from "react-router";
 import {openAlert} from "../../store/util";
 import mixin from "../../mixin/mixin";
 
-export default function Update() {
+export default function GetOne() {
     const {id} = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();

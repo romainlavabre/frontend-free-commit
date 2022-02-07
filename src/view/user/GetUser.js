@@ -1,9 +1,9 @@
 import {useNavigate} from "react-router";
 import Menu from "../../component/Menu";
 import React from "react";
-import Update from "../../component/user/Update";
+import GetOne from "../../component/user/GetOne";
 
-export default function UpdateUser() {
+export default function GetUser() {
     const navigate = useNavigate();
 
     return (
@@ -23,7 +23,7 @@ export default function UpdateUser() {
                             </svg>
                         </button>
                     </div>
-                    <Update/>
+                    <GetOne/>
                 </div>
             </div>
         </>

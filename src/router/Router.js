@@ -5,7 +5,7 @@ import Login from "../view/Login";
 import Project from "../view/Project";
 import User from "../view/User";
 import CreateUser from "../view/user/CreateUser";
-import UpdateUser from "../view/user/UpdateUser";
+import GetUser from "../view/user/GetUser";
 
 export default function Router() {
     return (
@@ -15,7 +15,7 @@ export default function Router() {
                 <Route exact path="/project" element={<Project/>}/>
                 <Route exact path="/user" element={<User/>}/>
                 <Route exact path="/user/create" element={<CreateUser/>}/>
-                <Route exact path="/user/update/:id" element={<UpdateUser/>}/>
+                <Route exact path="/user/update/:id" element={<GetUser/>}/>
             </Routes>
         </BrowserRouter>
     );

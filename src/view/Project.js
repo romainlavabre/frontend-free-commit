@@ -1,6 +1,6 @@
 import Menu from "../component/Menu";
 import React from "react";
-import List from "../component/project/List";
+import GetAll from "../component/project/GetAll";
 
 export default function Project() {
     return (
@@ -10,7 +10,7 @@ export default function Project() {
                     <Menu activeName={'project'}/>
                 </div>
                 <div className="w-full m-3">
-                    <List/>
+                    <GetAll/>
                 </div>
             </div>
         </>
