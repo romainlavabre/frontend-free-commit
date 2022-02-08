@@ -25,7 +25,7 @@ export default function Create() {
             dispatch(updateOne(developer));
             dispatch(openAlert({
                 type: 'success',
-                title: 'Successfully created\n'
+                title: 'Successfully created'
             }));
         } catch (e) {
             dispatch(openAlert({

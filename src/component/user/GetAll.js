@@ -11,7 +11,7 @@ export default function User() {
     const users = useSelector(state => state.user.user);
 
     const openUser = id => {
-        navigate(`/user/update/${id}`);
+        navigate(`/user/${id}`);
     }
 
     useEffect(async () => {

@@ -44,7 +44,7 @@ export default function GetOne() {
     }
 
     const getProject = id => {
-        return projects.find(project => project.id === id);
+        return projects.find(project => project.id == id);
     }
 
     if (mixin.isNull(user)) {
@@ -95,13 +95,12 @@ export default function GetOne() {
                             {
                                 user.projects_id.length === 0
                                     ? 'TODO'
-                                    : (
+                                    : user.projects_id.map(id => (
                                         <>
-                                            user.projects_id.map(id => (
                                             <span>{getProject(id).name}</span>
-                                            ))
+                                            <br/>
                                         </>
-                                    )
+                                    ))
                             }
                         </td>
                     </tr>

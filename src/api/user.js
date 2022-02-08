@@ -17,6 +17,9 @@ const project = {
         const response = await axios.post(process.env.REACT_APP_API_URL + '/api/admin/developers', payload, this.getConfig());
         return response.data;
     },
+    async update(id, property, payload) {
+        await axios.patch(process.env.REACT_APP_API_URL + `/api/admin/developers/${id}/${property}`, payload, this.getConfig());
+    },
     getConfig() {
         const accessToken = database.read(database.TABLE_AUTHENTICATION, 'access_token');
 
