@@ -11,8 +11,8 @@ export default function Update() {
     const {id} = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const users = useSelector(state => state.user.user);
-    const projects = useSelector(state => state.project.project);
+    const users = useSelector(state => state.user.users);
+    const projects = useSelector(state => state.project.projects);
     const [user, setUser] = useState(null);
     const {register, handleSubmit} = useForm();
 

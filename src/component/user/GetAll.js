@@ -8,7 +8,7 @@ import {useNavigate} from "react-router";
 export default function User() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const users = useSelector(state => state.user.user);
+    const users = useSelector(state => state.user.users);
 
     const openUser = id => {
         navigate(`/user/${id}`);

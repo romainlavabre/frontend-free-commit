@@ -7,7 +7,7 @@ export default function Project() {
         <>
             <div className="flex flex-row">
                 <div className="">
-                    <Menu activeName={'project'}/>
+                    <Menu/>
                 </div>
                 <div className="w-full m-3">
                     <GetAll/>

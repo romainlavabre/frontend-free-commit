@@ -11,7 +11,7 @@ export default function UpdateUser() {
         <>
             <div className="flex flex-row">
                 <div className="">
-                    <Menu activeName={'user'}/>
+                    <Menu/>
                 </div>
                 <div className="w-full m-3">
                     <div className="flex justify-end">

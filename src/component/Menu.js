@@ -1,8 +1,9 @@
 import React from "react";
-import {useNavigate} from "react-router";
-import * as PropTypes from "prop-types";
+import {useLocation, useNavigate} from "react-router";
 
-export default function Menu({activeName}) {
+export default function Menu() {
+    const location = useLocation();
+
     const items = [
         {
             icon: (
@@ -13,7 +14,7 @@ export default function Menu({activeName}) {
                 </svg>
             ),
             name: "Projects",
-            active: activeName === 'project',
+            active: location.pathname.startsWith('/project'),
             route: '/project'
         },
         {
@@ -24,7 +25,7 @@ export default function Menu({activeName}) {
                 </svg>
             ),
             name: "Users",
-            active: activeName === 'user',
+            active: location.pathname.startsWith('/user'),
             route: '/user'
         },
         {
@@ -36,7 +37,7 @@ export default function Menu({activeName}) {
                 </svg>
             ),
             name: "Secrets",
-            active: activeName === 'secret',
+            active: location.pathname.startsWith('/secret'),
             route: '/secret'
         },
         {
@@ -48,7 +49,7 @@ export default function Menu({activeName}) {
                 </svg>
             ),
             name: "Credentials",
-            active: activeName === 'credential',
+            active: location.pathname.startsWith('/credential'),
             route: '/credential'
         }
     ];
@@ -81,9 +82,5 @@ export default function Menu({activeName}) {
                 </ul>
             </div>
         </>
-    )
-}
-
-Menu.propTypes = {
-    activeName: PropTypes.string
+    );
 }

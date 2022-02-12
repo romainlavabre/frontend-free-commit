@@ -5,7 +5,7 @@ import {load} from "../../store/project";
 
 export default function GetAll() {
     const dispatch = useDispatch();
-    const projects = useSelector(state => state.project.project);
+    const projects = useSelector(state => state.project.projects);
 
     useEffect(async () => {
         const projects = await api.project.findAll();

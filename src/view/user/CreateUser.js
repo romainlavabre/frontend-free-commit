@@ -10,7 +10,7 @@ export default function CreateUser() {
         <>
             <div className="flex flex-row">
                 <div className="">
-                    <Menu activeName={'user'}/>
+                    <Menu/>
                 </div>
                 <div className="w-full m-3">
                     <div className="flex justify-end">

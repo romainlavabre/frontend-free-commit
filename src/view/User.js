@@ -1,6 +1,6 @@
 import Menu from "../component/Menu";
 import React from "react";
-import List from "../component/user/GetAll";
+import GetAll from "../component/user/GetAll";
 import {useNavigate} from "react-router";
 
 export default function User() {
@@ -10,7 +10,7 @@ export default function User() {
         <>
             <div className="flex flex-row">
                 <div className="">
-                    <Menu activeName={'user'}/>
+                    <Menu/>
                 </div>
                 <div className="w-full m-3">
                     <div className="flex justify-end">
@@ -22,7 +22,7 @@ export default function User() {
                             </svg>
                         </button>
                     </div>
-                    <List/>
+                    <GetAll/>
                 </div>
             </div>
         </>
