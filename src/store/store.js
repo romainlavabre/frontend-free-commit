@@ -3,6 +3,7 @@ import util from "../store/util";
 import project from "../store/project";
 import user from "../store/user";
 import secret from "../store/secret";
+import credential from "../store/credential";
 
 // Augment middleware to consider Immutable.JS iterables serializable
 const isSerializable = (val) => {
@@ -21,7 +22,8 @@ export const store = configureStore({
         util: util,
         project: project,
         user: user,
-        secret: secret
+        secret: secret,
+        credential: credential
     },
     middleware: [serializableMiddleware],
 })
