@@ -1,6 +1,7 @@
 import {useNavigate, useParams} from "react-router";
 import Menu from "../../component/Menu";
 import React from "react";
+import Update from "../../component/secret/Update";
 
 export default function UpdateSecret() {
     const {id} = useParams();
@@ -23,6 +24,8 @@ export default function UpdateSecret() {
                             </svg>
                         </button>
                     </div>
+
+                    <Update/>
                 </div>
             </div>
         </>

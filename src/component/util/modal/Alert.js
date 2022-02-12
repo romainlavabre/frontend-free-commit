@@ -37,7 +37,7 @@ function Alert() {
             let interval = setInterval(() => {
                 dispatcher(closeAlert());
                 clearInterval(interval);
-            }, 3000);
+            }, 1000);
 
         }
 

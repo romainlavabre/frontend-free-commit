@@ -53,7 +53,7 @@ export const util = createSlice({
             state.modal.alert.title = action.payload.title;
             state.modal.alert.description = action.payload.description;
             state.modal.alert.type = action.payload.type;
-            state.modal.alert.duration = action.payload.duration !== null ? action.payload.duration : 3000;
+            state.modal.alert.duration = action.payload.duration !== null ? action.payload.duration : 2000;
             state.modal.alert.open = true;
         },
         closeAlert: (state) => {
