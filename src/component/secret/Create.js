@@ -1,32 +1,34 @@
+import {useDispatch, useSelector} from "react-redux";
 import {useForm} from "react-hook-form";
 import api from "../../api/api";
-import {useDispatch} from "react-redux";
 import {updateOne} from "../../store/user";
 import {openAlert} from "../../store/util";
 import mixin from "../../mixin/mixin";
+import {useNavigate} from "react-router";
 
 export default function Create() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const projects = useSelector(state => state.project.projects);
     const {register, handleSubmit} = useForm();
 
     const onSubmit = async (data) => {
         const payload = {
-            developer: {
-                username: data.username,
-                password: data.password,
-                github_username: data.githubUsername,
-                email: data.email,
-                roles: data.roles
+            secret: {
+                name: data.name,
+                value: data.value,
+                project_id: data.projectId
             }
         };
 
         try {
-            const developer = await api.user.create(payload);
+            const developer = await api.secret.create(payload);
             dispatch(updateOne(developer));
             dispatch(openAlert({
                 type: 'success',
                 title: 'Successfully created'
             }));
+            navigate('/secret');
         } catch (e) {
             dispatch(openAlert({
                 type: 'error',
@@ -41,36 +43,41 @@ export default function Create() {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="grid grid-cols-2 gap-4">
                         <div className="input-group">
-                            <label>Username</label>
-                            <input type="text" className="input-text w-full"
-                                   placeholder="Username" {...register("username")}/>
+                            <label>Name</label>
+                            <input
+                                type="text" className="input-text w-full"
+                                pattern="[A-Z0-9-_]+"
+                                title="[A-Z0-9-_]+"
+                                placeholder="CLIENT_SECRET" {...register("name")}
+                            />
                         </div>
 
                         <div className="input-group">
-                            <label>Email</label>
-                            <input type="email" className="input-text w-full"
-                                   placeholder="Email" {...register("email")}/>
+                            <label>Value</label>
+                            <textarea
+                                className="input-text w-full"
+                                placeholder="Secret value" {...register("value")}
+                            />
                         </div>
 
                         <div className="input-group">
-                            <label>Password</label>
-                            <input type="password" className="input-text w-full"
-                                   placeholder="Password" {...register("password")}/>
-                        </div>
-
-                        <div className="input-group">
-                            <label>Github Username</label>
-                            <input type="text" className="input-text w-full"
-                                   placeholder="Github Username" {...register("githubUsername")}/>
-                        </div>
-
-                        <div className="input-group">
-                            <label>Granted</label>
-                            <select type="text" className="input-select w-full"
-                                    multiple
-                                    placeholder="Granted" {...register("roles")}>
-                                <option value="ROLE_ADMIN">ADMIN</option>
-                                <option value="ROLE_DEVELOPER">DEVELOPER</option>
+                            <label>
+                                Scope (
+                                <span className="text-sm italic">
+                                    If you let this field empty, the default scope is global
+                                </span>
+                                )
+                            </label>
+                            <select
+                                className="input-select w-full"
+                                {...register("projectId")}
+                            >
+                                <option value="">GLOBAL</option>
+                                {
+                                    projects.map(project => (
+                                        <option key={project.id} value={project.id}>{project.name}</option>
+                                    ))
+                                }
                             </select>
                         </div>
                     </div>
@@ -88,5 +95,5 @@ export default function Create() {
                 </form>
             </div>
         </>
-    );
+    )
 }

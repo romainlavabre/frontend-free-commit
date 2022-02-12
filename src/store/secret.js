@@ -9,15 +9,15 @@ export const secret = createSlice({
     initialState,
     reducers: {
         load: (state, action) => {
-            state.secret = action.payload;
+            state.secrets = action.payload;
         },
         updateOne: (state, action) => {
-            const index = state.secret.findIndex(secret => secret.id === action.payload.id);
+            const index = state.secrets.findIndex(secret => secret.id === action.payload.id);
 
             if (index !== -1)
-                delete state.secret[index];
+                delete state.secrets[index];
 
-            state.secret.push(action.payload);
+            state.secrets.push(action.payload);
         }
     }
 })

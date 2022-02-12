@@ -33,6 +33,15 @@ export default function User() {
                 </thead>
                 <tbody>
                 {
+                    users.length === 0
+                        ? (
+                            <tr>
+                                <td colSpan="4">No data available</td>
+                            </tr>
+                        )
+                        : null
+                }
+                {
                     users.map(user => (
                         <>
                             <tr key={user.id}>

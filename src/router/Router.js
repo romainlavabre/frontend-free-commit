@@ -8,6 +8,7 @@ import CreateUser from "../view/user/CreateUser";
 import GetUser from "../view/user/GetUser";
 import UpdateUser from "../view/user/UpdateUser";
 import Secret from "../view/Secret";
+import CreateSecret from "../view/secret/CreateSecret";
 
 export default function Router() {
     return (
@@ -20,6 +21,7 @@ export default function Router() {
                 <Route exact path="/user/create" element={<CreateUser/>}/>
                 <Route exact path="/user/update/:id" element={<UpdateUser/>}/>
                 <Route exact path="/secret" element={<Secret/>}/>
+                <Route exact path="/secret/create" element={<CreateSecret/>}/>
             </Routes>
         </BrowserRouter>
     );

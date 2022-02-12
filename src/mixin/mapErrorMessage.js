@@ -7,5 +7,5 @@ export default function (error) {
 
     return enums.error[error.response.data.message] !== undefined
         ? enums.error[error.response.data.message]
-        : 'An error occurred';
+        : error.response.data.message;
 }

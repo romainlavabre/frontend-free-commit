@@ -8,6 +8,7 @@ export default function GetAll() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const secrets = useSelector(state => state.secret.secrets);
+    const projects = useSelector(state => state.project.projects);
 
     useEffect(async () => {
         const secrets = await api.secret.findAll();
@@ -17,6 +18,10 @@ export default function GetAll() {
 
     const openSecret = id => {
         navigate(`/secret/${id}`)
+    }
+
+    const getProject = id => {
+        return projects.find(project => project.id === id);
     }
 
     return (
@@ -33,6 +38,15 @@ export default function GetAll() {
                 </thead>
                 <tbody>
                 {
+                    secrets.length === 0
+                        ? (
+                            <tr>
+                                <td colSpan="4">No data available</td>
+                            </tr>
+                        )
+                        : null
+                }
+                {
                     secrets.map(secret => (
                         <>
                             <tr key={secret.id}>
@@ -43,9 +57,11 @@ export default function GetAll() {
                                 <td>*****</td>
                                 <td>
                                     {
-                                        secret.projects_id.length > 0
-                                            ? <span className="text-blue-500">GLOBAL</span>
-                                            : <span className="text-blue-500">DEVELOPER</span>
+                                        secret.project_id === null
+                                            ? <span className="text-red-500">GLOBAL</span>
+                                            : (
+                                                <span className="text-green-500">{getProject(secret.project_id).name}</span>
+                                            )
                                     }
                                 </td>
                             </tr>
