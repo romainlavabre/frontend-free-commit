@@ -9,6 +9,8 @@ import GetUser from "../view/user/GetUser";
 import UpdateUser from "../view/user/UpdateUser";
 import Secret from "../view/Secret";
 import CreateSecret from "../view/secret/CreateSecret";
+import UpdateSecret from "../view/secret/UpdateSecret";
+import GetSecret from "../view/secret/GetSecret";
 
 export default function Router() {
     return (
@@ -21,7 +23,9 @@ export default function Router() {
                 <Route exact path="/user/create" element={<CreateUser/>}/>
                 <Route exact path="/user/update/:id" element={<UpdateUser/>}/>
                 <Route exact path="/secret" element={<Secret/>}/>
+                <Route exact path="/secret/:id" element={<GetSecret/>}/>
                 <Route exact path="/secret/create" element={<CreateSecret/>}/>
+                <Route exact path="/secret/update/:id" element={<UpdateSecret/>}/>
             </Routes>
         </BrowserRouter>
     );
