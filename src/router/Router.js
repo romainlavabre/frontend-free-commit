@@ -12,6 +12,7 @@ import CreateSecret from "../view/secret/CreateSecret";
 import UpdateSecret from "../view/secret/UpdateSecret";
 import GetSecret from "../view/secret/GetSecret";
 import Credential from "../view/Credential";
+import CreateCredential from "../view/credential/CreateCredential";
 
 export default function Router() {
     return (
@@ -28,6 +29,7 @@ export default function Router() {
                 <Route exact path="/secret/create" element={<CreateSecret/>}/>
                 <Route exact path="/secret/update/:id" element={<UpdateSecret/>}/>
                 <Route exact path="/credential" element={<Credential/>}/>
+                <Route exact path="/credential/create" element={<CreateCredential/>}/>
             </Routes>
         </BrowserRouter>
     );

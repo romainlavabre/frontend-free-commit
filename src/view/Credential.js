@@ -3,6 +3,7 @@ import React from "react";
 import {useNavigate} from "react-router";
 import GetAll from "../component/credential/GetAll";
 import github from "../assets/img/github.png";
+import gitlab from "../assets/img/gitlab.svg";
 
 export default function Credential() {
     const navigate = useNavigate();
@@ -15,12 +16,10 @@ export default function Credential() {
                 </div>
                 <div className="w-full m-3">
                     <div className="flex justify-between mb-5">
-                        <button className="flex bg-gray-500 rounded py-2 px-10 text-dark text-2xl mx-5"
-                                disabled={true}
-                                onClick={() => navigate('/credential/create')}>
+                        <div className="flex w-full">
                             <img src={github} className="mx-3"/>
-                            Github
-                        </button>
+                            <img src={gitlab} className="mx-3"/>
+                        </div>
                         <button className="flex bg-ovh rounded py-2 px-10 text-dark"
                                 onClick={() => navigate('/credential/create')}>
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 20 20"
