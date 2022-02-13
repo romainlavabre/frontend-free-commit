@@ -2,7 +2,7 @@ import {useNavigate, useParams} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
 import React, {useEffect, useState} from "react";
 import api from "../../api/api";
-import {load} from "../../store/secret";
+import {load} from "../../store/credential";
 import mixin from "../../mixin/mixin";
 import {openAlert} from "../../store/util";
 import {useForm} from "react-hook-form";
@@ -11,53 +11,52 @@ export default function Update() {
     const {id} = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const secrets = useSelector(state => state.secret.secrets);
-    const projects = useSelector(state => state.project.projects);
-    const [secret, setUser] = useState(null);
+    const credentials = useSelector(state => state.credential.credentials);
+    const [credential, setUser] = useState(null);
     const {register, handleSubmit} = useForm();
 
     useEffect(async () => {
-        if (secrets.length === 0) {
-            const secrets = await api.secret.findAll();
-            dispatch(load(secrets));
+        if (credentials.length === 0) {
+            const credentials = await api.credential.findAll();
+            dispatch(load(credentials));
             return;
         }
 
-        loadSecret();
+        loadCredential();
     }, []);
 
     useEffect(() => {
-        loadSecret();
-    }, [secrets]);
+        loadCredential();
+    }, [credentials]);
 
-    const loadSecret = () => {
-        const secretFound = secrets.find(secret => secret.id == id);
+    const loadCredential = () => {
+        const credentialFound = credentials.find(credential => credential.id == id);
 
-        if (mixin.isNull(secretFound)) {
+        if (mixin.isNull(credentialFound)) {
             dispatch(openAlert({
                 type: 'warning',
-                title: 'Secret not found'
+                title: 'Credential not found'
             }));
 
-            navigate('/secret');
+            navigate('/credential');
         } else {
-            setUser(secretFound);
+            setUser(credentialFound);
         }
     }
 
     const onSubmit = async data => {
         for (let property in data) {
-            if (secret[property] == data[property]
-                || (secret[property] === null && data[property] === "")
-                || (property === 'value' && secret.value === undefined && data.value === '****')) {
+            if (credential[property] == data[property]
+                || (credential[property] === null && data[property] === "")
+                || (property === 'ssh_key' && credential.ssh_key === undefined && data.ssh_key === '****')) {
                 continue;
             }
 
-            const payload = {secret: {}};
-            payload.secret[property] = data[property];
+            const payload = {credential: {}};
+            payload.credential[property] = data[property];
 
             try {
-                await api.secret.update(secret.id, property.replace('_id', ''), payload);
+                await api.credential.update(credential.id, property.replace('_id', ''), payload);
             } catch (e) {
                 dispatch(openAlert({
                     type: 'error',
@@ -73,17 +72,17 @@ export default function Update() {
             title: 'Successfully updated'
         }));
 
-        navigate('/secret');
+        navigate('/credential');
     }
 
-    if (mixin.isNull(secret)) {
+    if (mixin.isNull(credential)) {
         return null;
     }
 
     return (
         <>
             <div className="bg-light p-10 mt-4">
-                <h4 className="text-center text-fairfair text-3xl my-5">{secret.name}</h4>
+                <h4 className="text-center text-fairfair text-3xl my-5">{credential.name}</h4>
 
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <table className="table table-auto">
@@ -93,38 +92,20 @@ export default function Update() {
                                 <input
                                     type="text"
                                     className="input-text w-full"
-                                    defaultValue={secret.name}
+                                    defaultValue={credential.name}
                                     pattern="[A-Z0-9-_]+"
                                     title="[A-Z0-9-_]+"
-                                    placeholder="CLIENT_SECRET" {...register("name")}
+                                    placeholder="NAME" {...register("name")}
                                 />
                             </td>
                         </tr>
                         <tr>
-                            <th>Value</th>
+                            <th>SSH Key</th>
                             <td>
                                 <textarea
                                     className="input-text w-full"
-                                    defaultValue="****" {...register("value")}
+                                    defaultValue="****" {...register("ssh_key")}
                                 />
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Scope</th>
-                            <td>
-                                <select
-                                    className="input-text w-full"
-                                    defaultValue={secret.project_id}
-                                    {...register("project_id")}
-                                >
-                                    <option className="text-red-500" value="">GLOBAL</option>
-                                    {
-                                        projects.map(project => (
-                                            <option className="text-green-500" key={project.id}
-                                                    value={project.id}>{project.name}</option>
-                                        ))
-                                    }
-                                </select>
                             </td>
                         </tr>
                     </table>
