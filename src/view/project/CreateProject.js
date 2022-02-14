@@ -1,9 +1,9 @@
-import Menu from "../../component/Menu";
-import React from "react";
 import {useNavigate} from "react-router";
-import Create from "../../component/user/Create";
+import Menu from "../../component/Menu";
+import Create from "../../component/project/Create";
+import React from "react";
 
-export default function CreateUser() {
+export default function CreateProject() {
     const navigate = useNavigate();
 
     return (
@@ -14,7 +14,7 @@ export default function CreateUser() {
                 </div>
                 <div className="w-full m-3">
                     <div className="flex justify-end">
-                        <button className="bg-gray-500 rounded py-2 px-10" onClick={() => navigate('/user')}>
+                        <button className="bg-gray-500 rounded py-2 px-10" onClick={() => navigate('/project')}>
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 20 20"
                                  fill="currentColor">
                                 <path fillRule="evenodd"
@@ -27,5 +27,5 @@ export default function CreateUser() {
                 </div>
             </div>
         </>
-    );
+    )
 }

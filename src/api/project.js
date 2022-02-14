@@ -13,6 +13,10 @@ const project = {
             return null;
         }
     },
+    async create(payload) {
+        const response = await axios.post(process.env.REACT_APP_API_URL + '/api/admin/projects', payload, this.getConfig());
+        return response.data;
+    },
     getConfig() {
         const accessToken = database.read(database.TABLE_AUTHENTICATION, 'access_token');
 
