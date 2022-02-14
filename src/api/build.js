@@ -13,6 +13,26 @@ const build = {
             return null;
         }
     },
+    async findById(id) {
+        try {
+            const response = await axios.get(process.env.REACT_APP_API_URL + `/api/developer/builds/${id}`, this.getConfig());
+
+            return response.data;
+        } catch (e) {
+            console.log(e)
+            return null;
+        }
+    },
+    async getOutput(executorId) {
+        try {
+            const response = await axios.get(process.env.REACT_APP_API_URL + `/api/developer/builds/output/${executorId}`, this.getConfig());
+
+            return response.data;
+        } catch (e) {
+            console.log(e)
+            return null;
+        }
+    },
     async getExecuteds() {
         try {
             const response = await axios.get(process.env.REACT_APP_API_URL + `/api/developer/builds/executeds`, this.getConfig());

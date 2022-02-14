@@ -3,9 +3,12 @@ import api from "../../../api/api";
 import {useDispatch, useSelector} from "react-redux";
 import PropTypes from "prop-types";
 import {openAlert} from "../../../store/util";
+import {useNavigate, useParams} from "react-router";
 
 export default function ExecutedBuild({projectScope}) {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const {id} = useParams();
     const [executed, setExecuted] = useState([]);
     const projects = useSelector(state => state.project.projects);
     const intervalRef = useRef();
@@ -55,6 +58,10 @@ export default function ExecutedBuild({projectScope}) {
         return projects.find(project => project.id === id);
     }
 
+    const openLog = executorId => {
+        navigate(`/project/${id}/build/${executorId}`);
+    }
+
     return (
         <>
             <div className="bg-light p-10 mt-4">
@@ -80,7 +87,8 @@ export default function ExecutedBuild({projectScope}) {
                     {
                         executed.map(executed => (
                             <tr>
-                                <td className="text-blue-500 hover:underline cursor-pointer">
+                                <td className="text-blue-500 hover:underline cursor-pointer"
+                                    onClick={() => openLog(executed.executor_id)}>
                                     #{executed.executor_id}
                                 </td>
                                 <td className="text-green-500">

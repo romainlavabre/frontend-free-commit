@@ -1,10 +1,11 @@
 import React, {useEffect, useRef, useState} from "react";
 import api from "../../../api/api";
-import {useParams} from "react-router";
+import {useNavigate, useParams} from "react-router";
 import dateFormatter from "../../../mixin/dateFormatter";
 
 export default function GetCompleteBuilds() {
     const {id} = useParams();
+    const navigate = useNavigate();
     const [builds, setBuilds] = useState([]);
     const intervalRef = useRef();
 
@@ -63,7 +64,8 @@ export default function GetCompleteBuilds() {
                     {
                         builds.map(build => (
                             <tr>
-                                <td className="text-blue-500 cursor-pointer hover:underline">
+                                <td className="text-blue-500 cursor-pointer hover:underline"
+                                    onClick={() => navigate(`/project/${id}/build/${build.id}`)}>
                                     #{build.id}
                                 </td>
                                 <td className={build.exit_code !== 0 ? 'text-red-500' : 'text-green-500'}>

@@ -12,7 +12,7 @@ export default function Create() {
     const projects = useSelector(state => state.project.projects);
     const {register, handleSubmit} = useForm();
 
-    const onSubmit = async (data) => {
+    const onSubmit = async data => {
         const payload = {
             secret: {
                 name: data.name,
@@ -48,7 +48,8 @@ export default function Create() {
                                 type="text" className="input-text w-full"
                                 pattern="[A-Z0-9-_]+"
                                 title="[A-Z0-9-_]+"
-                                placeholder="CLIENT_SECRET" {...register("name")}
+                                placeholder="CLIENT_SECRET"
+                                {...register("name")}
                             />
                         </div>
 
@@ -56,7 +57,8 @@ export default function Create() {
                             <label>Value</label>
                             <textarea
                                 className="input-text w-full"
-                                placeholder="Secret value" {...register("value")}
+                                placeholder="Secret value"
+                                {...register("value")}
                             />
                         </div>
 

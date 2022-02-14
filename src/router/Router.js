@@ -18,6 +18,7 @@ import UpdateCredential from "../view/credential/UpdateCredential";
 import CreateProject from "../view/project/CreateProject";
 import GetProject from "../view/project/GetProject";
 import UpdateProject from "../view/project/UpdateProject";
+import GetBuild from "../view/project/build/GetBuild";
 
 export default function Router() {
     return (
@@ -28,6 +29,7 @@ export default function Router() {
                 <Route exact path="/project/:id" element={<GetProject/>}/>
                 <Route exact path="/project/create" element={<CreateProject/>}/>
                 <Route exact path="/project/update/:id" element={<UpdateProject/>}/>
+                <Route exact path="/project/:id/build/:buildId" element={<GetBuild/>}/>
                 <Route exact path="/user" element={<User/>}/>
                 <Route exact path="/user/:id" element={<GetUser/>}/>
                 <Route exact path="/user/create" element={<CreateUser/>}/>
