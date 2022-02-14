@@ -62,6 +62,7 @@ export default function ExecutedBuild({projectScope}) {
 
                 <table className="table table-auto">
                     <tr>
+                        <th>Task</th>
                         <th>Project</th>
                         <td>Status</td>
                         <td>Kill</td>
@@ -79,7 +80,12 @@ export default function ExecutedBuild({projectScope}) {
                     {
                         executed.map(executed => (
                             <tr>
-                                <td className="text-green-500">{getProject(executed.project_id).name}</td>
+                                <td className="text-blue-500 hover:underline cursor-pointer">
+                                    #{executed.executor_id}
+                                </td>
+                                <td className="text-green-500">
+                                    {getProject(executed.project_id).name}
+                                </td>
                                 <td>
                                     <button disabled
                                             className="text-blue-500 animate-spin mx-5">

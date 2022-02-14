@@ -67,7 +67,7 @@ export default function GetCompleteBuilds() {
                                     #{build.id}
                                 </td>
                                 <td className={build.exit_code !== 0 ? 'text-red-500' : 'text-green-500'}>
-                                    {build.exit_code} ({build.exit_message})
+                                    {build.exit_code} ({build.exit_message !== null ? build.exit_message : 'success'})
                                 </td>
                                 <td>{dateFormatter(build.created_at)}</td>
                                 <td className="italic">{getMinutes(build)} mn</td>
