@@ -1,7 +1,7 @@
 import React from "react";
 import {useSelector} from "react-redux";
 import {useParams} from "react-router";
-import GetAllBuild from "./build/GetAll";
+import LaunchManually from "./build/LaunchManually";
 
 export default function GetOne() {
     const {id} = useParams();
@@ -19,6 +19,9 @@ export default function GetOne() {
     return (
         <>
             <div className="bg-light p-10 mt-4">
+                <div className="flex justify-end">
+                    <LaunchManually projectId={id}/>
+                </div>
                 <h4 className="text-center text-fairfair text-3xl my-5">{project.name}</h4>
 
                 <table className="table table-auto">
@@ -53,7 +56,6 @@ export default function GetOne() {
                     <tr>
                         <th>Developers</th>
                         <td>
-                            {console.log(project.developers_id)}
                             {
                                 project.developers_id.map(developerId => (
                                     <>
@@ -67,8 +69,6 @@ export default function GetOne() {
                         </td>
                     </tr>
                 </table>
-
-                <GetAllBuild/>
             </div>
         </>
     );

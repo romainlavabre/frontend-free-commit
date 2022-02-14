@@ -3,13 +3,16 @@ import Menu from "../../component/Menu";
 import React from "react";
 import GetOne from "../../component/project/GetOne";
 import useInitStore from "../../store/useInitStore";
+import GetAllBuild from "../../component/project/build/GetCompleteBuilds";
+import ExecutedBuild from "../../component/project/build/ExecutedBuild";
+import QueuedBuild from "../../component/project/build/QueuedBuild";
 
 export default function GetProject() {
     const {id} = useParams();
     const navigate = useNavigate();
 
     useInitStore();
-    
+
     return (
         <>
             <div className="flex flex-row">
@@ -41,6 +44,19 @@ export default function GetProject() {
                         </div>
                     </div>
                     <GetOne/>
+                </div>
+            </div>
+            <div className="flex flex-row">
+                <div className="grid-cols-6 m-3 w-full">
+                    <ExecutedBuild projectScope={id}/>
+                </div>
+                <div className="grid-cols-6 m-3 w-full">
+                    <QueuedBuild projectScope={id}/>
+                </div>
+            </div>
+            <div className="flex flex-row">
+                <div className="w-full m-3">
+                    <GetAllBuild/>
                 </div>
             </div>
         </>
