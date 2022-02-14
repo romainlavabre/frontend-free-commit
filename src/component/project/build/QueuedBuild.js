@@ -26,7 +26,7 @@ export default function QueuedBuild({projectScope}) {
         if (projectScope === null) {
             result = queued;
         } else {
-            result = queued.slice(queued => queued.project_id === projectScope);
+            result = queued.filter(queued => queued.project_id == projectScope);
         }
 
         setExecuted(result);
@@ -39,7 +39,7 @@ export default function QueuedBuild({projectScope}) {
     return (
         <>
             <div className="bg-light p-10 mt-4">
-                <h4 className="text-center text-fairfair text-3xl my-5">Queued execution</h4>
+                <h4 className="text-center text-fairfair text-3xl my-5">Queued tasks</h4>
 
                 <table className="table table-auto">
                     <tr>

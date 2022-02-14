@@ -1,10 +1,12 @@
 import {useSelector} from "react-redux";
 import {useNavigate} from "react-router";
 import LaunchManually from "./build/LaunchManually";
+import dateFormatter from "../../mixin/dateFormatter";
 
 export default function GetAll() {
     const navigate = useNavigate();
     const projects = useSelector(state => state.project.projects);
+
 
     const openProject = id => {
         navigate(`/project/${id}`)
@@ -42,8 +44,12 @@ export default function GetAll() {
                                     #{project.id}
                                 </td>
                                 <td>{project.name}</td>
-                                <td></td>
-                                <td></td>
+                                <td className={project.last_build.exit_code === 0 ? 'text-green-500' : 'text-red-500'}>
+                                    {project.last_build.exit_code} ({project.last_build.exit_message !== null ? project.last_build.exit_message : 'OK'})
+                                </td>
+                                <td>
+                                    {dateFormatter(project.last_build.created_at)}
+                                </td>
                                 <td>
                                     <LaunchManually key={project.id} projectId={project.id}/>
                                 </td>

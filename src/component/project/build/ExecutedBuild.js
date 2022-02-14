@@ -31,7 +31,7 @@ export default function ExecutedBuild({projectScope}) {
         if (projectScope === null) {
             result = executed;
         } else {
-            result = executed.slice(executed => executed.project_id === projectScope);
+            result = executed.filter(executed => executed.project_id == projectScope);
         }
 
         setExecuted(result);
