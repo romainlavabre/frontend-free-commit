@@ -2,11 +2,14 @@ import {useNavigate, useParams} from "react-router";
 import Menu from "../../component/Menu";
 import React from "react";
 import Update from "../../component/project/Update";
+import useInitStore from "../../store/useInitStore";
 
 export default function UpdateProject() {
     const {id} = useParams();
     const navigate = useNavigate();
 
+    useInitStore();
+    
     return (
         <>
             <div className="flex flex-row">

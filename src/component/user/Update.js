@@ -1,8 +1,7 @@
 import {useNavigate, useParams} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
-import React, {useEffect, useState} from "react";
+import React from "react";
 import api from "../../api/api";
-import {load} from "../../store/user";
 import mixin from "../../mixin/mixin";
 import {openAlert} from "../../store/util";
 import {useForm} from "react-hook-form";
@@ -11,39 +10,9 @@ export default function Update() {
     const {id} = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const users = useSelector(state => state.user.users);
+    const user = useSelector(state => state.user.users.find(user => user.id == id));
     const projects = useSelector(state => state.project.projects);
-    const [user, setUser] = useState(null);
     const {register, handleSubmit} = useForm();
-
-    useEffect(async () => {
-        if (users.length === 0) {
-            const users = await api.user.findAll();
-            dispatch(load(users));
-            return;
-        }
-
-        loadUser();
-    }, []);
-
-    useEffect(() => {
-        loadUser();
-    }, [users]);
-
-    const loadUser = () => {
-        const userFound = users.find(user => user.id == id);
-
-        if (mixin.isNull(userFound)) {
-            dispatch(openAlert({
-                type: 'warning',
-                title: 'User not found'
-            }));
-
-            navigate('/user');
-        } else {
-            setUser(userFound);
-        }
-    }
 
     const onSubmit = async data => {
         for (let property in data) {

@@ -1,23 +1,14 @@
-import {useEffect} from "react";
-import api from "../../api/api";
-import {useDispatch, useSelector} from "react-redux";
-import {load} from "../../store/user";
+import {useSelector} from "react-redux";
 import mixin from "../../mixin/mixin";
 import {useNavigate} from "react-router";
 
 export default function User() {
-    const dispatch = useDispatch();
     const navigate = useNavigate();
     const users = useSelector(state => state.user.users);
 
     const openUser = id => {
         navigate(`/user/${id}`);
     }
-
-    useEffect(async () => {
-        const users = await api.user.findAll();
-        dispatch(load(users));
-    }, []);
 
     return (
         <>

@@ -1,8 +1,7 @@
 import {useNavigate, useParams} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
-import React, {useEffect, useState} from "react";
+import React from "react";
 import api from "../../api/api";
-import {load} from "../../store/credential";
 import mixin from "../../mixin/mixin";
 import {openAlert} from "../../store/util";
 import {useForm} from "react-hook-form";
@@ -11,38 +10,8 @@ export default function Update() {
     const {id} = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const credentials = useSelector(state => state.credential.credentials);
-    const [credential, setUser] = useState(null);
+    const credential = useSelector(state => state.credential.credentials.find(credential => credential.id == id));
     const {register, handleSubmit} = useForm();
-
-    useEffect(async () => {
-        if (credentials.length === 0) {
-            const credentials = await api.credential.findAll();
-            dispatch(load(credentials));
-            return;
-        }
-
-        loadCredential();
-    }, []);
-
-    useEffect(() => {
-        loadCredential();
-    }, [credentials]);
-
-    const loadCredential = () => {
-        const credentialFound = credentials.find(credential => credential.id == id);
-
-        if (mixin.isNull(credentialFound)) {
-            dispatch(openAlert({
-                type: 'warning',
-                title: 'Credential not found'
-            }));
-
-            navigate('/credential');
-        } else {
-            setUser(credentialFound);
-        }
-    }
 
     const onSubmit = async data => {
         for (let property in data) {

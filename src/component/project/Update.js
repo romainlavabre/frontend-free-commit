@@ -22,9 +22,6 @@ export default function Update() {
                 continue;
             }
 
-            console.log(project[property])
-            console.log(data[property])
-
             const payload = {project: {}};
             payload.project[property] = data[property];
 

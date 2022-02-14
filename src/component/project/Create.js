@@ -1,11 +1,9 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useForm} from "react-hook-form";
 import api from "../../api/api";
-import {load} from "../../store/user";
 import {updateOne} from "../../store/project";
 import {openAlert} from "../../store/util";
 import mixin from "../../mixin/mixin";
-import {useEffect} from "react";
 import {useNavigate} from "react-router";
 
 export default function Create() {
@@ -45,11 +43,6 @@ export default function Create() {
         }
     }
 
-    useEffect(async () => {
-        const users = await api.user.findAll();
-
-        dispatch(load(users));
-    }, []);
 
     return (
         <>

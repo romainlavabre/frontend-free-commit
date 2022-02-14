@@ -2,11 +2,14 @@ import {useNavigate, useParams} from "react-router";
 import Menu from "../../component/Menu";
 import React from "react";
 import GetOne from "../../component/user/GetOne";
+import useInitStore from "../../store/useInitStore";
 
 export default function GetUser() {
     const navigate = useNavigate();
     const {id} = useParams();
 
+    useInitStore();
+    
     return (
         <>
             <div className="flex flex-row">

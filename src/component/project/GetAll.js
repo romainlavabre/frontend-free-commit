@@ -1,18 +1,9 @@
-import {useEffect} from "react";
-import api from "../../api/api";
-import {useDispatch, useSelector} from "react-redux";
-import {load} from "../../store/project";
+import {useSelector} from "react-redux";
 import {useNavigate} from "react-router";
 
 export default function GetAll() {
-    const dispatch = useDispatch();
     const navigate = useNavigate();
     const projects = useSelector(state => state.project.projects);
-
-    useEffect(async () => {
-        const projects = await api.project.findAll();
-        dispatch(load(projects));
-    }, []);
 
     const openProject = id => {
         navigate(`/project/${id}`)

@@ -1,19 +1,9 @@
-import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
-import api from "../../api/api";
-import {load} from "../../store/credential";
+import {useSelector} from "react-redux";
 import {useNavigate} from "react-router";
 
 export default function GetAll() {
-    const dispatch = useDispatch();
     const navigate = useNavigate();
     const credentials = useSelector(state => state.credential.credentials);
-
-    useEffect(async () => {
-        const credentials = await api.credential.findAll();
-
-        dispatch(load(credentials));
-    }, []);
 
     const openSecret = id => {
         navigate(`/credential/${id}`)

@@ -2,10 +2,13 @@ import Menu from "../../component/Menu";
 import React from "react";
 import {useNavigate} from "react-router";
 import Create from "../../component/secret/Create";
+import useInitStore from "../../store/useInitStore";
 
 export default function CreateSecret() {
     const navigate = useNavigate();
 
+    useInitStore();
+    
     return (
         <>
             <div className="flex flex-row">

@@ -1,47 +1,13 @@
-import React, {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import api from "../../api/api";
-import {load} from "../../store/secret";
-import {useNavigate, useParams} from "react-router";
-import {openAlert} from "../../store/util";
+import React from "react";
+import {useSelector} from "react-redux";
+import {useParams} from "react-router";
 import mixin from "../../mixin/mixin";
 
 export default function GetOne() {
     const {id} = useParams();
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const secrets = useSelector(state => state.secret.secrets);
+    const secret = useSelector(state => state.secret.secrets.find(secret => secret.id == id));
     const projects = useSelector(state => state.project.projects);
-    const [secret, setSecret] = useState(null);
 
-    useEffect(async () => {
-        if (secrets.length === 0) {
-            const secrets = await api.secret.findAll();
-            dispatch(load(secrets));
-            return;
-        }
-
-        loadSecret();
-    }, []);
-
-    useEffect(() => {
-        loadSecret();
-    }, [secrets]);
-
-    const loadSecret = () => {
-        const secretFound = secrets.find(secret => secret.id == id);
-
-        if (mixin.isNull(secretFound)) {
-            dispatch(openAlert({
-                type: 'warning',
-                title: 'Secret not found'
-            }));
-
-            navigate('/secret');
-        } else {
-            setSecret(secretFound);
-        }
-    }
 
     const getProject = id => {
         return projects.find(project => project.id == id);

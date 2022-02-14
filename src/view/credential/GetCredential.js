@@ -2,10 +2,13 @@ import {useNavigate, useParams} from "react-router";
 import Menu from "../../component/Menu";
 import React from "react";
 import GetOne from "../../component/credential/GetOne";
+import useInitStore from "../../store/useInitStore";
 
 export default function GetCredential() {
     const {id} = useParams();
     const navigate = useNavigate();
+
+    useInitStore();
 
     return (
         <>

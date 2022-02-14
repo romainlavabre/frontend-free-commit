@@ -1,8 +1,7 @@
 import {useNavigate, useParams} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
-import React, {useEffect, useState} from "react";
+import React from "react";
 import api from "../../api/api";
-import {load} from "../../store/secret";
 import mixin from "../../mixin/mixin";
 import {openAlert} from "../../store/util";
 import {useForm} from "react-hook-form";
@@ -11,39 +10,10 @@ export default function Update() {
     const {id} = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const secrets = useSelector(state => state.secret.secrets);
+    const secret = useSelector(state => state.secret.secrets.find(secret => secret.id == id));
     const projects = useSelector(state => state.project.projects);
-    const [secret, setSecret] = useState(null);
     const {register, handleSubmit} = useForm();
 
-    useEffect(async () => {
-        if (secrets.length === 0) {
-            const secrets = await api.secret.findAll();
-            dispatch(load(secrets));
-            return;
-        }
-
-        loadSecret();
-    }, []);
-
-    useEffect(() => {
-        loadSecret();
-    }, [secrets]);
-
-    const loadSecret = () => {
-        const secretFound = secrets.find(secret => secret.id == id);
-
-        if (mixin.isNull(secretFound)) {
-            dispatch(openAlert({
-                type: 'warning',
-                title: 'Secret not found'
-            }));
-
-            navigate('/secret');
-        } else {
-            setSecret(secretFound);
-        }
-    }
 
     const onSubmit = async data => {
         for (let property in data) {

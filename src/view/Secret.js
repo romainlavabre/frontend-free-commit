@@ -2,9 +2,12 @@ import Menu from "../component/Menu";
 import React from "react";
 import {useNavigate} from "react-router";
 import GetAll from "../component/secret/GetAll";
+import useInitStore from "../store/useInitStore";
 
 export default function Secret() {
     const navigate = useNavigate();
+
+    useInitStore();
 
     return (
         <>

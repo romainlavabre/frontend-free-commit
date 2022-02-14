@@ -1,47 +1,13 @@
-import React, {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import api from "../../api/api";
-import {load} from "../../store/user";
-import {useNavigate, useParams} from "react-router";
-import {openAlert} from "../../store/util";
+import React from "react";
+import {useSelector} from "react-redux";
+import {useParams} from "react-router";
 import mixin from "../../mixin/mixin";
 
 export default function GetOne() {
     const {id} = useParams();
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const users = useSelector(state => state.user.users);
+    const user = useSelector(state => state.user.users.find(user => user.id == id));
     const projects = useSelector(state => state.project.projects);
-    const [user, setUser] = useState(null);
 
-    useEffect(async () => {
-        if (users.length === 0) {
-            const users = await api.user.findAll();
-            dispatch(load(users));
-            return;
-        }
-
-        loadUser();
-    }, []);
-
-    useEffect(() => {
-        loadUser();
-    }, [users]);
-
-    const loadUser = () => {
-        const userFound = users.find(user => user.id == id);
-
-        if (mixin.isNull(userFound)) {
-            dispatch(openAlert({
-                type: 'warning',
-                title: 'User not found'
-            }));
-
-            navigate('/user');
-        } else {
-            setUser(userFound);
-        }
-    }
 
     const getProject = id => {
         return projects.find(project => project.id == id);

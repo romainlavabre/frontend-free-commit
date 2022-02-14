@@ -1,41 +1,20 @@
-import React, {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {useNavigate, useParams} from "react-router";
-import {openAlert} from "../../store/util";
+import React from "react";
+import {useSelector} from "react-redux";
+import {useParams} from "react-router";
+import GetAllBuild from "./build/GetAll";
 
 export default function GetOne() {
     const {id} = useParams();
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const projects = useSelector(state => state.project.projects);
+    const project = useSelector(state => state.project.projects.find(project => project.id == id));
     const users = useSelector(state => state.user.users);
-    const [project, setProject] = useState(null);
-
-    useEffect(() => {
-        const project = projects.find(project => project.id == id);
-
-        if (projects.length > 0 && project === undefined) {
-            dispatch(openAlert({
-                type: 'error',
-                title: 'Project not found'
-            }));
-            navigate('/project')
-        }
-
-        setProject(project);
-    }, [projects]);
 
     const getUser = id => {
         return users.find(user => user.id === id);
     }
 
-
     if (project === null) {
         return null;
     }
-
-    console.log(users);
-    console.log(projects)
 
     return (
         <>
@@ -88,6 +67,8 @@ export default function GetOne() {
                         </td>
                     </tr>
                 </table>
+
+                <GetAllBuild/>
             </div>
         </>
     );

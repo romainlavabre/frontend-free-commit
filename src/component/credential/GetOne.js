@@ -1,46 +1,12 @@
-import React, {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import api from "../../api/api";
-import {load} from "../../store/credential";
-import {useNavigate, useParams} from "react-router";
-import {openAlert} from "../../store/util";
+import React from "react";
+import {useSelector} from "react-redux";
+import {useParams} from "react-router";
 import mixin from "../../mixin/mixin";
 
 export default function GetOne() {
     const {id} = useParams();
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const credentials = useSelector(state => state.credential.credentials);
-    const [credential, setCredential] = useState(null);
+    const credential = useSelector(state => state.credential.credentials.find(credential => credential.id == id));
 
-    useEffect(async () => {
-        if (credentials.length === 0) {
-            const credentials = await api.credential.findAll();
-            dispatch(load(credentials));
-            return;
-        }
-
-        loadCredential();
-    }, []);
-
-    useEffect(() => {
-        loadCredential();
-    }, [credentials]);
-
-    const loadCredential = () => {
-        const credentialFound = credentials.find(credential => credential.id == id);
-
-        if (mixin.isNull(credentialFound)) {
-            dispatch(openAlert({
-                type: 'warning',
-                title: 'Secret not found'
-            }));
-
-            navigate('/credential');
-        } else {
-            setCredential(credentialFound);
-        }
-    }
 
     if (mixin.isNull(credential)) {
         return null;

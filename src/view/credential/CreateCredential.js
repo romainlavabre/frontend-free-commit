@@ -2,9 +2,12 @@ import Menu from "../../component/Menu";
 import React from "react";
 import {useNavigate} from "react-router";
 import Create from "../../component/credential/Create";
+import useInitStore from "../../store/useInitStore";
 
 export default function CreateCredential() {
     const navigate = useNavigate();
+
+    useInitStore();
 
     return (
         <>

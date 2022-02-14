@@ -2,10 +2,13 @@ import Menu from "../../component/Menu";
 import React from "react";
 import {useNavigate} from "react-router";
 import Create from "../../component/user/Create";
+import useInitStore from "../../store/useInitStore";
 
 export default function CreateUser() {
     const navigate = useNavigate();
 
+    useInitStore();
+    
     return (
         <>
             <div className="flex flex-row">

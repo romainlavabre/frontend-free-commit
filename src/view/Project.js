@@ -2,9 +2,12 @@ import Menu from "../component/Menu";
 import React from "react";
 import GetAll from "../component/project/GetAll";
 import {useNavigate} from "react-router";
+import useInitStore from "../store/useInitStore";
 
 export default function Project() {
     const navigate = useNavigate();
+
+    useInitStore();
 
     return (
         <>
