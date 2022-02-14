@@ -2,15 +2,21 @@ import {useEffect} from "react";
 import api from "../../api/api";
 import {useDispatch, useSelector} from "react-redux";
 import {load} from "../../store/project";
+import {useNavigate} from "react-router";
 
 export default function GetAll() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const projects = useSelector(state => state.project.projects);
 
     useEffect(async () => {
         const projects = await api.project.findAll();
         dispatch(load(projects));
     }, []);
+
+    const openProject = id => {
+        navigate(`/project/${id}`)
+    }
 
     return (
         <>
@@ -38,7 +44,11 @@ export default function GetAll() {
                     projects.map(project => (
                         <>
                             <tr key={project.id}>
-                                <td className="text-blue-500 hover:underline hover:cursor-pointer">#{project.id}</td>
+                                <td
+                                    className="text-blue-500 hover:underline hover:cursor-pointer"
+                                    onClick={() => openProject(project.id)}>
+                                    #{project.id}
+                                </td>
                                 <td>{project.name}</td>
                                 <td></td>
                                 <td></td>

@@ -16,6 +16,7 @@ import CreateCredential from "../view/credential/CreateCredential";
 import GetCredential from "../view/credential/GetCredential";
 import UpdateCredential from "../view/credential/UpdateCredential";
 import CreateProject from "../view/project/CreateProject";
+import GetProject from "../view/project/GetProject";
 
 export default function Router() {
     return (
@@ -23,6 +24,7 @@ export default function Router() {
             <Routes>
                 <Route exact path="/" element={<Login/>}/>
                 <Route exact path="/project" element={<Project/>}/>
+                <Route exact path="/project/:id" element={<GetProject/>}/>
                 <Route exact path="/project/create" element={<CreateProject/>}/>
                 <Route exact path="/user" element={<User/>}/>
                 <Route exact path="/user/:id" element={<GetUser/>}/>
