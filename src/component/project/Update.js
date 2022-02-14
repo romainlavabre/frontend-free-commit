@@ -5,21 +5,28 @@ import api from "../../api/api";
 import mixin from "../../mixin/mixin";
 import {openAlert} from "../../store/util";
 import {useForm} from "react-hook-form";
+import {updateOne} from "../../store/project";
 
 export default function Update() {
     const {id} = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const project = useSelector(state => state.project.projects.find(project => project.id == id));
+    const project = useSelector(state => state.project.projects.find(project => project !== undefined && project.id == id));
     const users = useSelector(state => state.user.users);
+    const credentials = useSelector(state => state.credential.credentials);
     const {register, handleSubmit} = useForm();
 
 
     const onSubmit = async data => {
         for (let property in data) {
+            if (data[property] === 'null') {
+                data[property] = null;
+            }
+
             if (project[property] == data[property]
                 || (project[property] === null && data[property] === "")) {
                 continue;
+
             }
 
             const payload = {project: {}};
@@ -35,14 +42,18 @@ export default function Update() {
 
                 return;
             }
+
         }
+
+        const reloadedProject = await api.project.findById(id);
+        dispatch(updateOne(reloadedProject));
 
         dispatch(openAlert({
             type: 'success',
             title: 'Successfully updated'
         }));
 
-        navigate('/project');
+        navigate(`/project/${id}`);
     }
 
     if (mixin.isNull(project)) {
@@ -161,6 +172,22 @@ export default function Update() {
                                 {
                                     users.map(user => (
                                         <option key={user.id} value={parseInt(user.id)}>{user.username}</option>
+                                    ))
+                                }
+                            </select>
+                        </div>
+
+                        <div className="input-group">
+                            <label>Repository credential</label>
+                            <select
+                                className="input-select w-full"
+                                defaultValue={project.repository_credential_id}
+                                {...register("repository_credential_id")}
+                            >
+                                <option value={"null"}>This repository is public</option>
+                                {
+                                    credentials.map(credential => (
+                                        <option key={credential.id} value={credential.id}>{credential.name}</option>
                                     ))
                                 }
                             </select>

@@ -13,6 +13,16 @@ const project = {
             return null;
         }
     },
+    async findById(id) {
+        try {
+            const response = await axios.get(process.env.REACT_APP_API_URL + `/api/developer/projects/${id}`, this.getConfig());
+
+            return response.data;
+        } catch (e) {
+            console.log(e)
+            return null;
+        }
+    },
     async create(payload) {
         const response = await axios.post(process.env.REACT_APP_API_URL + '/api/admin/projects', payload, this.getConfig());
         return response.data;

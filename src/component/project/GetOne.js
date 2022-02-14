@@ -7,9 +7,14 @@ export default function GetOne() {
     const {id} = useParams();
     const project = useSelector(state => state.project.projects.find(project => project.id == id));
     const users = useSelector(state => state.user.users);
+    const credentials = useSelector(state => state.credential.credentials);
 
     const getUser = id => {
         return users.find(user => user.id === id);
+    }
+
+    const getCredential = id => {
+        return credentials.find(credential => credential.id === id);
     }
 
     if (project === null) {
@@ -27,7 +32,7 @@ export default function GetOne() {
                 <table className="table table-auto">
                     <tr>
                         <th>Name</th>
-                        <td>{project.name}</td>
+                        <td className="text-fairfair">{project.name}</td>
                     </tr>
                     <tr>
                         <th>Description</th>
@@ -35,15 +40,15 @@ export default function GetOne() {
                     </tr>
                     <tr>
                         <th>Repository</th>
-                        <td>{project.repository}</td>
+                        <td className="text-ovh">{project.repository}</td>
                     </tr>
                     <tr>
                         <th>Branch</th>
-                        <td>{project.branch}</td>
+                        <td className="text-orange-500">{project.branch}</td>
                     </tr>
                     <tr>
                         <th>Deployment file path</th>
-                        <td>{project.spec_file_path}</td>
+                        <td className="text-indigo-400">{project.spec_file_path}</td>
                     </tr>
                     <tr>
                         <th>Keep number build</th>
@@ -57,6 +62,11 @@ export default function GetOne() {
                         <th>Developers</th>
                         <td>
                             {
+                                project.developers_id.length === 0
+                                    ? 'Nobody'
+                                    : null
+                            }
+                            {
                                 project.developers_id.map(developerId => (
                                     <>
                                         <span key={developerId} className="text-green-500">
@@ -65,6 +75,16 @@ export default function GetOne() {
                                         <br/>
                                     </>
                                 ))
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Repository credential</th>
+                        <td className="text-blue-500">
+                            {
+                                project.repository_credential_id === null
+                                    ? 'This repository is public'
+                                    : getCredential(project.repository_credential_id).name
                             }
                         </td>
                     </tr>

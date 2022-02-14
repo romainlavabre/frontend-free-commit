@@ -10,14 +10,25 @@ export const project = createSlice({
     reducers: {
         load: (state, action) => {
             state.projects = action.payload;
+
+            state.projects.sort((p1, p2) => {
+                return p1.id > p2.id
+                    ? -1
+                    : 1;
+            });
         },
-        updateOne: ({state, action}) => {
-            const index = state.projects.findIndex(project => project.id === action.payload.id);
+        updateOne: (state, action) => {
+            const result = state.projects.filter(project => project.id !== action.payload.id);
 
-            if (index !== -1)
-                delete state.projects[index];
+            result.push(action.payload);
 
-            state.projects.push(action.payload);
+            result.sort((p1, p2) => {
+                return p1.id > p2.id
+                    ? -1
+                    : 1;
+            });
+
+            state.projects = [...result];
         }
     }
 })
