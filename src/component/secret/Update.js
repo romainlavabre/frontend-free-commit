@@ -13,7 +13,7 @@ export default function Update() {
     const navigate = useNavigate();
     const secrets = useSelector(state => state.secret.secrets);
     const projects = useSelector(state => state.project.projects);
-    const [secret, setUser] = useState(null);
+    const [secret, setSecret] = useState(null);
     const {register, handleSubmit} = useForm();
 
     useEffect(async () => {
@@ -41,7 +41,7 @@ export default function Update() {
 
             navigate('/secret');
         } else {
-            setUser(secretFound);
+            setSecret(secretFound);
         }
     }
 

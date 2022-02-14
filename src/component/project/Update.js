@@ -1,59 +1,62 @@
+import {useNavigate, useParams} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
-import {useForm} from "react-hook-form";
+import React from "react";
 import api from "../../api/api";
-import {load} from "../../store/user";
-import {updateOne} from "../../store/project";
-import {openAlert} from "../../store/util";
 import mixin from "../../mixin/mixin";
-import {useEffect} from "react";
-import {useNavigate} from "react-router";
+import {openAlert} from "../../store/util";
+import {useForm} from "react-hook-form";
 
-export default function Create() {
+export default function Update() {
+    const {id} = useParams();
     const dispatch = useDispatch();
-    const {register, handleSubmit} = useForm();
-    const users = useSelector(state => state.user.users);
     const navigate = useNavigate();
+    const project = useSelector(state => state.project.projects.find(project => project.id == id));
+    const users = useSelector(state => state.user.users);
+    const {register, handleSubmit} = useForm();
 
-    const onSubmit = async (data) => {
-        const payload = {
-            project: {
-                name: data.name,
-                description: data.description,
-                repository: data.repository,
-                keep_number_build: data.keepNumberBuild,
-                branch: data.branch,
-                spec_file_path: data.specFilePath,
-                allow_concurrent_execution: data.allowConcurrentExecution,
-                developers_id: data.developers,
-                secrets_id: data.secrets
+
+    const onSubmit = async data => {
+        for (let property in data) {
+            if (project[property] == data[property]
+                || (project[property] === null && data[property] === "")) {
+                continue;
             }
-        };
 
-        try {
-            const project = await api.project.create(payload);
-            dispatch(updateOne(project));
-            dispatch(openAlert({
-                type: 'success',
-                title: 'Successfully created'
-            }));
-            navigate(`/project`);
-        } catch (e) {
-            dispatch(openAlert({
-                type: 'error',
-                title: mixin.mapErrorMessage(e)
-            }));
+            console.log(project[property])
+            console.log(data[property])
+
+            const payload = {project: {}};
+            payload.project[property] = data[property];
+
+            try {
+                await api.project.update(project.id, property.replace('_id', ''), payload);
+            } catch (e) {
+                dispatch(openAlert({
+                    type: 'error',
+                    title: mixin.mapErrorMessage(e)
+                }));
+
+                return;
+            }
         }
+
+        dispatch(openAlert({
+            type: 'success',
+            title: 'Successfully updated'
+        }));
+
+        navigate('/project');
     }
 
-    useEffect(async () => {
-        const users = await api.user.findAll();
-
-        dispatch(load(users));
-    }, []);
+    if (mixin.isNull(project)) {
+        return null;
+    }
 
     return (
         <>
             <div className="bg-light p-10 mt-4">
+                <h4 className="text-center text-fairfair text-3xl my-5">{project.name}</h4>
+
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="grid grid-cols-2 gap-4">
                         <div className="input-group">
@@ -62,6 +65,7 @@ export default function Create() {
                                 type="text"
                                 className="input-text w-full"
                                 placeholder="Name"
+                                defaultValue={project.name}
                                 {...register("name")}
                             />
                         </div>
@@ -72,6 +76,7 @@ export default function Create() {
                                 type="repository"
                                 className="input-text w-full"
                                 placeholder="Repository"
+                                defaultValue={project.repository}
                                 {...register("repository")}
                             />
                         </div>
@@ -81,6 +86,7 @@ export default function Create() {
                             <textarea
                                 className="input-text w-full"
                                 placeholder="Description"
+                                defaultValue={project.description}
                                 {...register("description")}
                             />
                         </div>
@@ -91,6 +97,7 @@ export default function Create() {
                                 type="text"
                                 className="input-text w-full"
                                 placeholder="Branch"
+                                defaultValue={project.branch}
                                 {...register("branch")}
                             />
                         </div>
@@ -101,7 +108,8 @@ export default function Create() {
                                 type="number"
                                 className="input-text w-full"
                                 placeholder="Number build to keep"
-                                {...register("keepNumberBuild")}
+                                defaultValue={project.keep_number_build}
+                                {...register("keep_number_build")}
                             />
                         </div>
 
@@ -117,7 +125,8 @@ export default function Create() {
                                 type="text"
                                 className="input-text w-full"
                                 placeholder="Deployment spec file path"
-                                {...register("specFilePath")}
+                                defaultValue={project.spec_file_path}
+                                {...register("spec_file_path")}
                             />
                         </div>
 
@@ -126,10 +135,11 @@ export default function Create() {
                                 type="checkbox"
                                 id="allowConcurrentExecution"
                                 className="input-checkbox"
-                                {...register("allowConcurrentExecution")}
+                                defaultValue={project.allow_concurrent_execution}
+                                {...register("allow_concurrent_execution")}
                             />
                             <label
-                                for="allowConcurrentExecution"
+                                htmlFor="allowConcurrentExecution"
                                 className="text-orange-400"
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 inline mx-2"
@@ -148,11 +158,12 @@ export default function Create() {
                             <select
                                 className="input-select w-full"
                                 multiple
-                                {...register("developers")}
+                                defaultValue={project.developers_id}
+                                {...register("developers_id")}
                             >
                                 {
                                     users.map(user => (
-                                        <option key={user.id} value={user.id}>{user.username}</option>
+                                        <option key={user.id} value={parseInt(user.id)}>{user.username}</option>
                                     ))
                                 }
                             </select>

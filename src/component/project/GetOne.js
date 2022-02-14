@@ -69,7 +69,7 @@ export default function GetOne() {
                     </tr>
                     <tr>
                         <th>Allow concurrent execution</th>
-                        <td>{project.allow_concurrent_execution}</td>
+                        <td>{project.allow_concurrent_execution ? 'Yes' : 'No'}</td>
                     </tr>
                     <tr>
                         <th>Developers</th>
