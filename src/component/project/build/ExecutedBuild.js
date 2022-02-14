@@ -13,10 +13,9 @@ export default function ExecutedBuild({projectScope}) {
     useEffect(() => {
         fetchExecuted();
 
-        const interval = setInterval(() => {
+        intervalRef.current = setInterval(() => {
             fetchExecuted();
         }, 5000);
-        intervalRef.current = interval;
     }, []);
 
     useEffect(() => () => clearInterval(intervalRef.current), []);
@@ -83,7 +82,7 @@ export default function ExecutedBuild({projectScope}) {
                                 <td className="text-green-500">{getProject(executed.project_id).name}</td>
                                 <td>
                                     <button disabled
-                                            className="text-blue-500 hover:text-blue-600 animate-spin mx-5">
+                                            className="text-blue-500 animate-spin mx-5">
                                         <svg xmlns=" http://www.w3.org/2000/svg"
                                              className="h-8 w-8" fill="none"
                                              viewBox="0 0 24 24"

@@ -11,10 +11,9 @@ export default function QueuedBuild({projectScope}) {
     useEffect(() => {
         fetchExecuted();
 
-        const interval = setInterval(() => {
+        intervalRef.current = setInterval(() => {
             fetchExecuted();
         }, 5000);
-        intervalRef.current = interval;
     }, []);
 
     useEffect(() => () => clearInterval(intervalRef.current), []);

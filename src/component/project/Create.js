@@ -10,6 +10,7 @@ export default function Create() {
     const dispatch = useDispatch();
     const {register, handleSubmit} = useForm();
     const users = useSelector(state => state.user.users);
+    const credentials = useSelector(state => state.credential.credentials);
     const navigate = useNavigate();
 
     const onSubmit = async (data) => {
@@ -23,7 +24,8 @@ export default function Create() {
                 spec_file_path: data.specFilePath,
                 allow_concurrent_execution: data.allowConcurrentExecution,
                 developers_id: data.developers,
-                secrets_id: data.secrets
+                secrets_id: data.secrets,
+                repository_credential_id: data.repositoryCredentialId
             }
         };
 
@@ -146,6 +148,21 @@ export default function Create() {
                                 {
                                     users.map(user => (
                                         <option key={user.id} value={user.id}>{user.username}</option>
+                                    ))
+                                }
+                            </select>
+                        </div>
+
+                        <div className="input-group">
+                            <label>Repository credential</label>
+                            <select
+                                className="input-select w-full"
+                                {...register("repositoryCredentialId")}
+                            >
+                                <option value={null}>This repository is public</option>
+                                {
+                                    credentials.map(credential => (
+                                        <option key={credential.id} value={credential.id}>{credential.name}</option>
                                     ))
                                 }
                             </select>
