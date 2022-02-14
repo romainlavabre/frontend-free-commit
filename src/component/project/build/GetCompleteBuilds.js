@@ -49,7 +49,7 @@ export default function GetCompleteBuilds() {
                         <th>Ref</th>
                         <th>Status</th>
                         <th>Date</th>
-                        <th>Time</th>
+                        <th>Duration</th>
                     </tr>
 
                     {

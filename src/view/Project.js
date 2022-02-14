@@ -3,6 +3,8 @@ import React from "react";
 import GetAll from "../component/project/GetAll";
 import {useNavigate} from "react-router";
 import useInitStore from "../store/useInitStore";
+import ExecutedBuild from "../component/project/build/ExecutedBuild";
+import QueuedBuild from "../component/project/build/QueuedBuild";
 
 export default function Project() {
     const navigate = useNavigate();
@@ -27,6 +29,14 @@ export default function Project() {
                         </button>
                     </div>
                     <GetAll/>
+                </div>
+            </div>
+            <div className="flex flex-row">
+                <div className="grid-cols-6 m-3 w-full">
+                    <QueuedBuild projectScope={null}/>
+                </div>
+                <div className="grid-cols-6 m-3 w-full">
+                    <ExecutedBuild projectScope={null}/>
                 </div>
             </div>
         </>

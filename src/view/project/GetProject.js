@@ -48,10 +48,10 @@ export default function GetProject() {
             </div>
             <div className="flex flex-row">
                 <div className="grid-cols-6 m-3 w-full">
-                    <ExecutedBuild projectScope={id}/>
+                    <QueuedBuild projectScope={id}/>
                 </div>
                 <div className="grid-cols-6 m-3 w-full">
-                    <QueuedBuild projectScope={id}/>
+                    <ExecutedBuild projectScope={id}/>
                 </div>
             </div>
             <div className="flex flex-row">

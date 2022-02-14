@@ -49,3 +49,8 @@ body {
 .table {
     @apply border border-dark w-full text-center bg-light
 }
+
+.shadow-inner {
+    box-shadow: inset 4px 4px 10px 5px rgb(167, 165, 165);
+    @apply w-full
+}

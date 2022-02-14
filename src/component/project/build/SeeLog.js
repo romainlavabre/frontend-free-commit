@@ -20,6 +20,7 @@ export default function SeeLog() {
             setLogs(build.output);
             setDynamic(false);
         } else {
+            fetchLog();
             intervalRef.current = setInterval(() => {
                 fetchLog();
             }, 3000);
@@ -85,16 +86,19 @@ export default function SeeLog() {
                         )
                         : 'Build complete'
                 }
-                <div className="border-2 border-fairfair px-2 overflow-y-scroll scroll-bottom text-2xl"
-                     style={{maxHeight: '700px'}}>
+                <div
+                    className=" border-2 border-fairfair px-3 overflow-y-scroll text-2xl shadow-inner shadow-color-white"
+                    style={{maxHeight: '700px'}}>
 
                     <div className="log" dangerouslySetInnerHTML={{
                         __html: logs.split('\n').join('<br/>')
                     }}>
 
                     </div>
+
                 </div>
             </div>
         </>
-    );
+    )
+        ;
 }

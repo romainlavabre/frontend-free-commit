@@ -20,7 +20,7 @@ export default function GetBuild() {
                     <div className="flex justify-end">
                         <div className="flex justify-end">
                             <button className="bg-gray-500 rounded py-2 px-10"
-                                    onClick={() => navigate(`/project/${id}`)}>
+                                    onClick={() => navigate(id !== 'undefined' ? `/project/${id}` : '/project')}>
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 20 20"
                                      fill="currentColor">
                                     <path fillRule="evenodd"

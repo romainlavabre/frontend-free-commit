@@ -55,7 +55,11 @@ export default function ExecutedBuild({projectScope}) {
     }
 
     const getProject = id => {
-        return projects.find(project => project.id === id);
+        const project = projects.find(project => project.id === id);
+
+        return project !== undefined
+            ? project
+            : {name: 'Unknow'}
     }
 
     const openLog = executorId => {
