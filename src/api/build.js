@@ -64,14 +64,7 @@ const build = {
         }
     },
     async launch(projectId) {
-        try {
-            const response = await axios.post(process.env.REACT_APP_API_URL + `/api/developer/builds/${projectId}`, {}, this.getConfig());
-
-            return response.status === 201;
-        } catch (e) {
-            console.log(e)
-            return null;
-        }
+        return await axios.post(process.env.REACT_APP_API_URL + `/api/developer/builds/${projectId}`, {}, this.getConfig());
     },
     getConfig() {
         const accessToken = database.read(database.TABLE_AUTHENTICATION, 'access_token');

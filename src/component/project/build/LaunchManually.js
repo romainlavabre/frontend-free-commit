@@ -2,26 +2,24 @@ import PropTypes from "prop-types";
 import api from "../../../api/api";
 import {useDispatch} from "react-redux";
 import {openAlert} from "../../../store/util";
+import mapErrorMessage from "../../../mixin/mapErrorMessage";
 
 export default function LaunchManually({projectId}) {
     const dispatch = useDispatch();
 
     const onClick = async () => {
-        const isSuccess = await api.build.launch(projectId);
-
-        if (isSuccess) {
+        try {
+            await api.build.launch(projectId);
             dispatch(openAlert({
                 type: 'success',
                 title: 'Build launched'
             }));
-
-            return;
+        } catch (e) {
+            dispatch(openAlert({
+                type: 'error',
+                title: mapErrorMessage(e)
+            }));
         }
-
-        dispatch(openAlert({
-            type: 'error',
-            title: 'An error occurred'
-        }));
     }
     return (
         <>

@@ -51,7 +51,7 @@ function Alert() {
     return (
         <div className={'flex justify-end'}>
             <div
-                className={background + ' border-t-4 ' + border + ' rounded-b ' + text9 + ' px-4 py-3 shadow-md fixed w-80 '}
+                className={background + ' border-t-4 ' + border + ' rounded-b ' + text9 + ' px-4 py-3 shadow-md fixed w-96  m-10'}
                 role="alert">
                 <div className={'flex'}>
                     <div className={'py-1'}>
