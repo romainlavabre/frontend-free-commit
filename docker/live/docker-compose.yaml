@@ -1,0 +1,17 @@
+version: '3.2'
+
+services:
+    free-commit-client:
+        image: romainlavabre/free-commit-client
+        environment:
+            REACT_APP_API_URL: ${FREE_COMMIT_API_URL}
+        networks:
+            - free-commit-client
+        restart: always
+        container_name: free-commit-client
+
+
+networks:
+    free-commit-client:
+        name: free-commit-client
+
