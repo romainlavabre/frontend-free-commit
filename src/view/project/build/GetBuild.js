@@ -3,6 +3,7 @@ import Menu from "../../../component/Menu";
 import React from "react";
 import useInitStore from "../../../store/useInitStore";
 import SeeLog from "../../../component/project/build/SeeLog";
+import GetOne from "../../../component/project/build/GetOne";
 
 export default function GetBuild() {
     const {id} = useParams();
@@ -31,6 +32,7 @@ export default function GetBuild() {
                         </div>
                     </div>
                     <SeeLog/>
+                    <GetOne/>
                 </div>
             </div>
         </>
