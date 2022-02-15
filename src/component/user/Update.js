@@ -58,36 +58,56 @@ export default function Update() {
                         <tr>
                             <th>Username</th>
                             <td>
-                                <input type="text" className="input-text w-full"
-                                       defaultValue={user.username} {...register("username")}/>
+                                <input
+                                    type="text"
+                                    className="input-text w-full"
+                                    defaultValue={user.username}
+                                    {...register("username")}
+                                />
                             </td>
                         </tr>
                         <tr>
                             <th>Password</th>
                             <td>
-                                <input type="password" className="input-text w-full"
-                                       defaultValue="****" {...register("password")}/>
+                                <input
+                                    type="password"
+                                    className="input-text w-full"
+                                    defaultValue="****"
+                                    {...register("password")}
+                                />
                             </td>
                         </tr>
                         <tr>
                             <th>Email</th>
                             <td>
-                                <input type="text" className="input-text w-full"
-                                       defaultValue={user.email} {...register("email")}/>
+                                <input
+                                    type="text"
+                                    className="input-text w-full"
+                                    defaultValue={user.email}
+                                    {...register("email")}
+                                />
                             </td>
                         </tr>
                         <tr>
                             <th>Github username</th>
                             <td>
-                                <input type="text" className="input-text w-full"
-                                       defaultValue={user.github_username} {...register("github_username")}/>
+                                <input
+                                    type="text"
+                                    className="input-text w-full"
+                                    defaultValue={user.github_username}
+                                    {...register("github_username")}
+                                />
                             </td>
                         </tr>
                         <tr>
                             <th>Roles</th>
                             <td>
-                                <select className="input-text w-full" defaultValue={user.roles}
-                                        multiple {...register("roles")}>
+                                <select
+                                    className="input-text w-full"
+                                    defaultValue={user.roles}
+                                    multiple
+                                    {...register("roles")}
+                                >
                                     <option value="ROLE_ADMIN">ADMIN</option>
                                     <option value="ROLE_DEVELOPER">DEVELOPER</option>
                                 </select>
@@ -96,8 +116,11 @@ export default function Update() {
                         <tr>
                             <th>Projects</th>
                             <td className="text-green-500">
-                                <select className="input-text w-full" defaultValue={user.projects_id}
-                                        multiple {...register("projects_id")}>
+                                <select
+                                    className="input-text w-full"
+                                    defaultValue={user.projects_id}
+                                    multiple
+                                    {...register("projects_id")}>
                                     {
                                         projects.map(project => (
                                             <option key={project.id} value={project.id}>{project.name}</option>

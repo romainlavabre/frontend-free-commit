@@ -2,6 +2,7 @@ import React from "react";
 import {useSelector} from "react-redux";
 import {useParams} from "react-router";
 import LaunchManually from "./build/LaunchManually";
+import ReloadSignatureKey from "./ReloadSignatureKey";
 
 export default function GetOne() {
     const {id} = useParams();
@@ -86,6 +87,17 @@ export default function GetOne() {
                                     ? 'This repository is public'
                                     : getCredential(project.repository_credential_id).name
                             }
+                        </td>
+                    </tr>
+                    <tr>
+                        <th className="flex justify-center border-none">
+                            <ReloadSignatureKey projectId={id}/>
+                            Webhook Secret key
+                        </th>
+                        <td>
+                            <span className="mx-4">
+                            {project.signature_key}
+                            </span>
                         </td>
                     </tr>
                 </table>
