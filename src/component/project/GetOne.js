@@ -89,6 +89,10 @@ export default function GetOne() {
                             }
                         </td>
                     </tr>
+                </table>
+
+                <h4 className="text-center text-fairfair text-3xl my-5">Webhook</h4>
+                <table className="table table-auto">
                     <tr>
                         <th className="flex justify-center border-none">
                             <ReloadSignatureKey projectId={id}/>
@@ -97,6 +101,30 @@ export default function GetOne() {
                         <td>
                             <span className="mx-4">
                             {project.signature_key}
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Webhook URL</th>
+                        <td>
+                            <span className="text-orange-400">
+                                URL
+                            </span>
+                            /api/guest/webhooks/build/{id}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th className="flex justify-center text-red-500 border-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                 stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                            </svg>
+                            Webhook Accept
+                        </th>
+                        <td>
+                            <span className="text-orange-400">
+                                application/json
                             </span>
                         </td>
                     </tr>
