@@ -1,16 +1,30 @@
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router";
 import LaunchManually from "./build/LaunchManually";
 import dateFormatter from "../../mixin/dateFormatter";
+import {useEffect, useRef} from "react";
+import api from "../../api/api";
+import {load} from "../../store/project";
 
 export default function GetAll() {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const projects = useSelector(state => state.project.projects);
+    const intervalRef = useRef(null);
 
 
     const openProject = id => {
         navigate(`/project/${id}`)
     }
+
+    useEffect(() => {
+        intervalRef.current = setInterval(async () => {
+            const projects = await api.project.findAll();
+            dispatch(load(projects));
+        }, 10000);
+    }, [])
+
+    useEffect(() => () => clearInterval(intervalRef.current), []);
 
     return (
         <>
