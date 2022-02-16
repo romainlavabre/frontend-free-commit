@@ -51,6 +51,6 @@ body {
 }
 
 .shadow-inner {
-    box-shadow: inset 4px 4px 10px 5px rgb(167, 165, 165);
+    box-shadow: inset 4px 4px 5px 2px rgb(132, 132, 132);
     @apply w-full
 }

@@ -1,4 +1,4 @@
-import {useNavigate, useParams} from "react-router";
+import {useParams} from "react-router";
 import React, {useEffect, useRef, useState} from "react";
 import api from "../../../api/api";
 import isNull from "../../../mixin/isNull";
@@ -7,7 +7,6 @@ import {openAlert} from "../../../store/util";
 
 export default function SeeLog() {
     const {buildId, id} = useParams();
-    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [logs, setLogs] = useState('');
     const [isDynamic, setDynamic] = useState(true);
@@ -87,7 +86,7 @@ export default function SeeLog() {
                         : 'Build complete'
                 }
                 <div
-                    className=" border-2 border-fairfair px-3 overflow-y-scroll text-2xl shadow-inner shadow-color-white"
+                    className="border-2 border-fairfair px-3 overflow-y-scroll text-2xl shadow-inner shadow-color-white bg-console"
                     style={{maxHeight: '700px'}}>
 
                     <div className="log" dangerouslySetInnerHTML={{
