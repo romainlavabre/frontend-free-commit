@@ -4,9 +4,11 @@ import {useDispatch} from "react-redux";
 import {updateOne} from "../../store/user";
 import {openAlert} from "../../store/util";
 import mixin from "../../mixin/mixin";
+import {useNavigate} from "react-router";
 
 export default function Create() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const {register, handleSubmit} = useForm();
 
     const onSubmit = async (data) => {
@@ -27,6 +29,7 @@ export default function Create() {
                 type: 'success',
                 title: 'Successfully created'
             }));
+            navigate(`/user`);
         } catch (e) {
             dispatch(openAlert({
                 type: 'error',
