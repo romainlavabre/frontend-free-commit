@@ -10,14 +10,25 @@ export const secret = createSlice({
     reducers: {
         load: (state, action) => {
             state.secrets = action.payload;
+
+            state.secrets.sort((p1, p2) => {
+                return p1.id > p2.id
+                    ? -1
+                    : 1;
+            });
         },
         updateOne: (state, action) => {
-            const index = state.secrets.findIndex(secret => secret.id === action.payload.id);
+            const result = state.secrets.filter(secret => secret.id !== action.payload.id);
 
-            if (index !== -1)
-                delete state.secrets[index];
+            result.push(action.payload);
 
-            state.secrets.push(action.payload);
+            result.sort((p1, p2) => {
+                return p1.id > p2.id
+                    ? -1
+                    : 1;
+            });
+
+            state.secrets = [...result];
         }
     }
 })

@@ -5,6 +5,7 @@ import api from "../../api/api";
 import mixin from "../../mixin/mixin";
 import {openAlert} from "../../store/util";
 import {useForm} from "react-hook-form";
+import {updateOne} from "../../store/user";
 
 export default function Update() {
     const {id} = useParams();
@@ -26,6 +27,8 @@ export default function Update() {
 
             try {
                 await api.user.update(user.id, property.replace('_id', ''), payload);
+                const userReloaded = await api.user.findById(user.id);
+                dispatch(updateOne(userReloaded));
             } catch (e) {
                 dispatch(openAlert({
                     type: 'error',

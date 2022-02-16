@@ -5,6 +5,7 @@ import api from "../../api/api";
 import mixin from "../../mixin/mixin";
 import {openAlert} from "../../store/util";
 import {useForm} from "react-hook-form";
+import {updateOne} from "../../store/secret";
 
 export default function Update() {
     const {id} = useParams();
@@ -28,6 +29,8 @@ export default function Update() {
 
             try {
                 await api.secret.update(secret.id, property.replace('_id', ''), payload);
+                const secretReloaded = await api.secret.findById(secret.id);
+                dispatch(updateOne(secretReloaded));
             } catch (e) {
                 dispatch(openAlert({
                     type: 'error',

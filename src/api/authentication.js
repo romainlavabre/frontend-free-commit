@@ -1,9 +1,10 @@
 import axios from "axios";
+import getEnv from "../mixin/getEnv";
 
 const authentication = {
     async authenticate(username, password) {
         try {
-            const response = await axios.post(process.env.REACT_APP_API_URL + `/api/auth`, {
+            const response = await axios.post(getEnv('REACT_APP_API_URL') + `/api/auth`, {
                 "auth": {
                     username,
                     password
@@ -12,6 +13,7 @@ const authentication = {
 
             return response.data;
         } catch (e) {
+            console.log(e);
             return null;
         }
 

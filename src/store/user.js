@@ -10,14 +10,25 @@ export const user = createSlice({
     reducers: {
         load: (state, action) => {
             state.users = action.payload;
+
+            state.users.sort((p1, p2) => {
+                return p1.id > p2.id
+                    ? -1
+                    : 1;
+            });
         },
         updateOne: (state, action) => {
-            const index = state.users.findIndex(user => user.id === action.payload.id);
+            const result = state.users.filter(user => user.id !== action.payload.id);
 
-            if (index !== -1)
-                delete state.users[index];
+            result.push(action.payload);
 
-            state.users.push(action.payload);
+            result.sort((p1, p2) => {
+                return p1.id > p2.id
+                    ? -1
+                    : 1;
+            });
+
+            state.users = [...result];
         }
     }
 })

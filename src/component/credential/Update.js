@@ -5,6 +5,7 @@ import api from "../../api/api";
 import mixin from "../../mixin/mixin";
 import {openAlert} from "../../store/util";
 import {useForm} from "react-hook-form";
+import {updateOne} from "../../store/credential";
 
 export default function Update() {
     const {id} = useParams();
@@ -26,6 +27,8 @@ export default function Update() {
 
             try {
                 await api.credential.update(credential.id, property.replace('_id', ''), payload);
+                const credentialReloaded = await api.credential.findById(credential.id);
+                dispatch(updateOne(credentialReloaded));
             } catch (e) {
                 dispatch(openAlert({
                     type: 'error',

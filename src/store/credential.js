@@ -10,14 +10,25 @@ export const credential = createSlice({
     reducers: {
         load: (state, action) => {
             state.credentials = action.payload;
+
+            state.credentials.sort((p1, p2) => {
+                return p1.id > p2.id
+                    ? -1
+                    : 1;
+            });
         },
         updateOne: (state, action) => {
-            const index = state.credentials.findIndex(credential => credential.id === action.payload.id);
+            const result = state.credentials.filter(credential => credential.id !== action.payload.id);
 
-            if (index !== -1)
-                delete state.credentials[index];
+            result.push(action.payload);
 
-            state.credentials.push(action.payload);
+            result.sort((p1, p2) => {
+                return p1.id > p2.id
+                    ? -1
+                    : 1;
+            });
+
+            state.credentials = [...result];
         }
     }
 })
