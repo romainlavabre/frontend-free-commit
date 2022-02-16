@@ -18,11 +18,17 @@ export default function GetAll() {
     }
 
     useEffect(() => {
+        fetchProjects();
+
         intervalRef.current = setInterval(async () => {
-            const projects = await api.project.findAll();
-            dispatch(load(projects));
+            fetchProjects();
         }, 10000);
-    }, [])
+    }, []);
+
+    const fetchProjects = async () => {
+        const projects = await api.project.findAll();
+        dispatch(load(projects));
+    }
 
     useEffect(() => () => clearInterval(intervalRef.current), []);
 
