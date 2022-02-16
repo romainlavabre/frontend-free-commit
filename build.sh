@@ -7,4 +7,4 @@ docker login
 docker push romainlavabre/free-commit-client:"$1"
 docker push romainlavabre/free-commit-client:latest
 
-#git tag -a "$1" -m "$1" && git push --tags
+git tag -a "$1" -m "$1" && git push --tags

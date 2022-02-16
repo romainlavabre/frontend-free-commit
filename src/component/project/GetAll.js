@@ -44,12 +44,27 @@ export default function GetAll() {
                                     #{project.id}
                                 </td>
                                 <td>{project.name}</td>
-                                <td className={project.last_build.exit_code === 0 ? 'text-green-500' : 'text-red-500'}>
-                                    {project.last_build.exit_code} ({project.last_build.exit_message !== null ? project.last_build.exit_message : 'OK'})
-                                </td>
-                                <td>
-                                    {dateFormatter(project.last_build.created_at)}
-                                </td>
+                                {
+                                    project.last_build.exit_code === null
+                                        ? (
+                                            <>
+                                                <td>
+                                                </td>
+                                                <td>
+                                                </td>
+                                            </>
+                                        )
+                                        : (
+                                            <>
+                                                <td className={project.last_build.exit_code === 0 ? 'text-green-500' : 'text-red-500'}>
+                                                    {project.last_build.exit_code} ({project.last_build.exit_message !== null ? project.last_build.exit_message : 'OK'})
+                                                </td>
+                                                <td>
+                                                    {dateFormatter(project.last_build.created_at)}
+                                                </td>
+                                            </>
+                                        )
+                                }
                                 <td>
                                     <LaunchManually key={project.id} projectId={project.id}/>
                                 </td>

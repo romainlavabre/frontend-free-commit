@@ -25,7 +25,7 @@ export default function Create() {
                 allow_concurrent_execution: data.allowConcurrentExecution,
                 developers_id: data.developers,
                 secrets_id: data.secrets,
-                repository_credential_id: data.repositoryCredentialId
+                repository_credential_id: data.repositoryCredentialId == 0 ? null : data.repositoryCredentialId
             }
         };
 
@@ -159,7 +159,7 @@ export default function Create() {
                                 className="input-select w-full"
                                 {...register("repositoryCredentialId")}
                             >
-                                <option value={null}>This repository is public</option>
+                                <option value={0}>This repository is public</option>
                                 {
                                     credentials.map(credential => (
                                         <option key={credential.id} value={credential.id}>{credential.name}</option>
