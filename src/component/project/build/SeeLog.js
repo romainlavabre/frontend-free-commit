@@ -86,8 +86,8 @@ export default function SeeLog() {
                         : 'Build complete'
                 }
                 <div
-                    className="border-2 border-fairfair px-3 overflow-y-scroll text-2xl shadow-inner shadow-color-white bg-console"
-                    style={{maxHeight: '700px'}}>
+                    className="border-2 border-fairfair px-3 overflow-y-scroll text-xl shadow-inner shadow-color-white bg-console"
+                    style={{maxHeight: '600px'}}>
 
                     <div className="log" dangerouslySetInnerHTML={{
                         __html: logs.split('\n').join('<br/>')
