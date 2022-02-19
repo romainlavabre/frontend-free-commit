@@ -136,8 +136,11 @@ export default function Pagination({row, columns, fetch, name}) {
     const fetchConfig = () => {
         const newConfig = database.read(database.TABLE_PAGINATION, name);
 
-        setConfig(newConfig);
+        if (newConfig !== null && typeof newConfig === 'object') {
+            setConfig(newConfig);
+        }
     }
+
 
     return (
         <>

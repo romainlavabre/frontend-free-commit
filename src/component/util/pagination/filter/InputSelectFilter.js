@@ -13,11 +13,11 @@ export default function InputSelectFilter({onChange, column, options}) {
     return (
         <div className="input-group">
             <select
-                className="input-select"
+                className="input-select w-full"
                 placeholder="Rechercher"
                 {...register(column)}
             >
-                <option value="">Rechercher</option>
+                <option value="">Search</option>
                 {
                     options.map((option) => (
                         <option key={option.value}

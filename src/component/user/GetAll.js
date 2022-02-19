@@ -1,6 +1,8 @@
 import {useSelector} from "react-redux";
-import mixin from "../../mixin/mixin";
 import {useNavigate} from "react-router";
+import Pagination from "../util/pagination/Pagination";
+import getEnv from "../../mixin/getEnv";
+import database from "../../database/database";
 
 export default function User() {
     const navigate = useNavigate();
@@ -13,46 +15,88 @@ export default function User() {
     return (
         <>
             <h4 className="font-bold">Users</h4>
-            <table className="table table-auto">
-                <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Granted</th>
-                </tr>
-                </thead>
-                <tbody>
-                {
-                    users.length === 0
-                        ? (
-                            <tr>
-                                <td colSpan="4">No data available</td>
-                            </tr>
-                        )
-                        : null
-                }
-                {
-                    users.map(user => (
-                        <>
-                            <tr key={user.id}>
-                                <td className="text-blue-500 hover:underline hover:cursor-pointer"
-                                    onClick={() => openUser(user.id)}>#{user.id}</td>
-                                <td>{user.username}</td>
-                                <td>{mixin.isNull(user.email) || user.email.length === 0 ? 'TODO' : user.email}</td>
-                                <td>
-                                    {
-                                        user.roles.includes("ROLE_ADMIN")
-                                            ? <span className="text-red-500">ADMIN</span>
-                                            : <span className="text-blue-500">DEVELOPER</span>
-                                    }
-                                </td>
-                            </tr>
-                        </>
-                    ))
-                }
-                </tbody>
-            </table>
+
+            <Pagination
+                columns={[
+                    {
+                        key: "Id",
+                        value: "developer_id",
+                        searchInput: true,
+                        comparator: "eq",
+                        computedValue: data => {
+                            return (
+                                <span className="text-blue-500">
+                                    #{data.developer_id}
+                                </span>
+                            )
+                        },
+                        primary: true
+                    },
+                    {
+                        key: "Username",
+                        value: "user_username",
+                        searchInput: true,
+                        comparator: "contains"
+                    },
+                    {
+                        key: "Email",
+                        value: "developer_email",
+                        searchInput: true,
+                        comparator: "contains"
+                    },
+                    {
+                        key: "Granted",
+                        value: "user_role",
+                        searchSelect: [
+                            {
+                                name: "ADMIN",
+                                value: "ROLE_ADMIN",
+                                comparator: "eq",
+                            },
+                            {
+                                name: "DEVELOPER",
+                                value: "ROLE_DEVELOPER",
+                                comparator: "eq",
+                            }
+                        ],
+                        computedValue: data => {
+                            if (data.user_role === "ROLE_ADMIN") {
+                                return (
+                                    <span className="text-red-500">
+                                        ADMIN
+                                    </span>
+                                );
+                            }
+
+                            if (data.user_role === "ROLE_DEVELOPER") {
+                                return (
+                                    <span className="text-blue-500">
+                                        DEVELOPER
+                                    </span>
+                                );
+                            }
+                        }
+                    }
+                ]}
+
+                fetch={{
+                    url: getEnv('REACT_APP_API_URL') + "/api/developer/paginations/developer",
+                    options: {
+                        headers: {
+                            Authorization: `Bearer ${database.read(database.TABLE_AUTHENTICATION, "access_token")}`
+                        }
+                    },
+                    interval: 20000
+                }}
+
+                row={{
+                    onClick: data => {
+                        navigate(`/user/${data.developer_id}`);
+                    }
+                }}
+
+                name={"user"}
+            />
         </>
     );
 }

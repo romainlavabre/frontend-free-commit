@@ -14,7 +14,7 @@ export default function InputTextFilter({onChange, column}) {
         <div className="input-group">
             <input
                 type="text"
-                placeholder="Rechercher"
+                placeholder="Search"
                 className="input-text w-full"
                 {...register(column)}
             />

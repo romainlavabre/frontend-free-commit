@@ -18,7 +18,10 @@ export default function Row({data, columns, config, name}) {
 
     const fetchConfig = () => {
         const newConfig = database.read(database.TABLE_PAGINATION, name);
-        setPaginationConfig(newConfig);
+
+        if (newConfig !== null && typeof newConfig === 'object') {
+            setPaginationConfig(newConfig);
+        }
     }
 
     const getClass = () => {
