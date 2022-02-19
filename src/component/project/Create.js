@@ -5,15 +5,18 @@ import {updateOne} from "../../store/project";
 import {openAlert} from "../../store/util";
 import mixin from "../../mixin/mixin";
 import {useNavigate} from "react-router";
+import {useEffect, useState} from "react";
 
 export default function Create() {
     const dispatch = useDispatch();
-    const {register, handleSubmit} = useForm();
+    const {register, handleSubmit, reset} = useForm();
     const users = useSelector(state => state.user.users);
     const credentials = useSelector(state => state.credential.credentials);
+    const projects = useSelector(state => state.project.projects);
+    const [model, setModel] = useState(null);
     const navigate = useNavigate();
 
-    const onSubmit = async (data) => {
+    const onSubmit = async data => {
         const payload = {
             project: {
                 name: data.name,
@@ -45,10 +48,38 @@ export default function Create() {
         }
     }
 
+    useEffect(() => {
+        reset({
+            name: model !== null ? model.name : null,
+            description: model !== null ? model.description : null,
+            repository: model !== null ? model.repository : null,
+            branch: model !== null ? model.branch : null,
+            specFilePath: model !== null ? model.spec_file_path : null,
+            keepNumberBuild: model !== null ? model.keep_number_build : null,
+            repositoryCredentialId: model !== null ? model.repository_credential_id : 0,
+            developers: model !== null ? model.developers_id : [],
+            allowConcurrentExecution: model !== null ? model.allow_concurrent_execution : null
+        })
+    }, [model])
+
 
     return (
         <>
             <div className="bg-light p-10 mt-4">
+                <div className="input-group">
+                    <label>By model</label>
+                    <select
+                        className="input-select"
+                        onChange={(e) => setModel(e.target.value !== "" ? projects.find(project => project.id == e.target.value) : null)}>
+                        <option></option>
+                        {
+                            projects.map(project => (
+                                <option key={project.id} value={project.id}>{project.name}</option>
+                            ))
+                        }
+                    </select>
+                </div>
+
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="grid grid-cols-2 gap-4">
                         <div className="input-group">
