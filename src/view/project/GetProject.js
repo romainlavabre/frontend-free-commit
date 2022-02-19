@@ -6,6 +6,7 @@ import useInitStore from "../../store/useInitStore";
 import GetAllBuild from "../../component/project/build/GetCompleteBuilds";
 import ExecutedBuild from "../../component/project/build/ExecutedBuild";
 import QueuedBuild from "../../component/project/build/QueuedBuild";
+import Delete from "../../component/project/Delete";
 
 export default function GetProject() {
     const {id} = useParams();
@@ -57,6 +58,11 @@ export default function GetProject() {
             <div className="flex flex-row">
                 <div className="w-full m-3">
                     <GetAllBuild/>
+                </div>
+            </div>
+            <div className="flex flex-row">
+                <div className="w-full m-3">
+                    <Delete id={id}/>
                 </div>
             </div>
         </>
