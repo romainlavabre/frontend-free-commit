@@ -1,7 +1,7 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useForm} from "react-hook-form";
 import api from "../../api/api";
-import {updateOne} from "../../store/user";
+import {updateOne} from "../../store/secret";
 import {openAlert} from "../../store/util";
 import mixin from "../../mixin/mixin";
 import {useNavigate} from "react-router";
@@ -22,8 +22,8 @@ export default function Create() {
         };
 
         try {
-            const developer = await api.secret.create(payload);
-            dispatch(updateOne(developer));
+            const secret = await api.secret.create(payload);
+            dispatch(updateOne(secret));
             dispatch(openAlert({
                 type: 'success',
                 title: 'Successfully created'
