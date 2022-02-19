@@ -3,6 +3,7 @@ import Menu from "../../component/Menu";
 import React from "react";
 import GetOne from "../../component/credential/GetOne";
 import useInitStore from "../../store/useInitStore";
+import Delete from "../../component/credential/Delete";
 
 export default function GetCredential() {
     const {id} = useParams();
@@ -40,6 +41,11 @@ export default function GetCredential() {
                     </div>
 
                     <GetOne/>
+                </div>
+            </div>
+            <div className="flex flex-row">
+                <div className="w-full m-3">
+                    <Delete id={id}/>
                 </div>
             </div>
         </>

@@ -29,11 +29,22 @@ export const credential = createSlice({
             });
 
             state.credentials = [...result];
+        },
+        remove: (state, action) => {
+            const result = state.credentials.filter(credential => credential.id !== action.payload.id);
+
+            result.sort((p1, p2) => {
+                return p1.id > p2.id
+                    ? -1
+                    : 1;
+            });
+
+            state.credentials = [...result];
         }
     }
 })
 
 // Action creators are generated for each case reducer function
-export const {load, updateOne} = credential.actions;
+export const {load, updateOne, remove} = credential.actions;
 
 export default credential.reducer;
