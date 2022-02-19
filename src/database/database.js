@@ -1,5 +1,6 @@
 export default {
     TABLE_AUTHENTICATION: 'authentication',
+    TABLE_PAGINATION: 'pagination',
     read(table, key) {
         const current = this.getCurrent(table);
 

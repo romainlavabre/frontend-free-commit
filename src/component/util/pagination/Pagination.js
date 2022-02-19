@@ -9,24 +9,33 @@ import InputTextFilter from "./filter/InputTextFilter";
 import InputSelectFilter from "./filter/InputSelectFilter";
 import ButtonFilter from "./filter/ButtonFilter";
 import ButtonSortFilter from "./filter/ButtonSortFilter";
+import Config from "./Config";
+import database from "../../../database/database";
 
 export default function Pagination({row, columns, fetch, name}) {
     const [items, setItems] = useState([]);
-    const [filters, setFilters] = useState({
+    const [filters, setFilters, filtersRef] = useStateRef({
         button: [],
         input: {},
         page: 1,
         sortBy: null,
         orderBy: 'DESC',
-        perPage: 8
+        perPage: 9,
+        ignoreColumns: []
     });
     const [metadata, setMetadata] = useState({});
     const [loading, setLoading] = useState(false);
     const [lastFetchVersion, setLastFetchVersion, lastFetchVersionRef] = useStateRef(null);
     const lastFetch = useRef(null);
     const interval = useRef(null);
+    const [config, setConfig] = useState({
+        numberLineByPage: 9,
+        isSaveFilters: false,
+        hiddenColumn: []
+    });
 
     useLayoutEffect(() => {
+        fetchConfig();
 
         setFilters(getDefaultFilters(columns, filters));
 
@@ -46,11 +55,33 @@ export default function Pagination({row, columns, fetch, name}) {
         return () => clearInterval(interval.current);
     }, []);
 
+    useEffect(() => {
+        filters.perPage = config.numberLineByPage;
+        setFilters({...filters});
+    }, [config]);
+
+    useEffect(() => {
+        const fetchVersion = mixin.uuid();
+        setLastFetchVersion(fetchVersion);
+
+        setTimeout(() => {
+            if (fetchVersion === lastFetchVersionRef.current) {
+                fetchData();
+            }
+        }, 150);
+    }, [filters]);
+
+    useEffect(() => {
+        document.addEventListener('PAGINATION_CONFIG_UPDATED', fetchConfig);
+
+        return () => document.removeEventListener('PAGINATION_CONFIG_UPDATED', fetchConfig);
+    }, []);
+
     const onInputTextChange = (name, value) => {
         filters.input[name] = value;
         setFilters({...filters});
-    }
 
+    }
     const onInputSelectChange = (name, value) => {
         filters.input[name] = value;
         setFilters({...filters});
@@ -68,6 +99,7 @@ export default function Pagination({row, columns, fetch, name}) {
             filters.button.splice(indexInArray, 1);
         } else {
             filters.button.push(name);
+
         }
 
         setFilters({...filters});
@@ -75,22 +107,10 @@ export default function Pagination({row, columns, fetch, name}) {
 
     const onPageChange = (page) => {
         filters.page = page;
-
         setFilters({...filters});
         metadata.current_page = page;
         setMetadata({...metadata});
     }
-
-    useEffect(() => {
-        const fetchVersion = mixin.uuid();
-        setLastFetchVersion(fetchVersion);
-
-        setTimeout(() => {
-            if (fetchVersion === lastFetchVersionRef.current) {
-                fetchData();
-            }
-        }, 150);
-    }, [filters]);
 
 
     const fetchData = () => {
@@ -98,7 +118,7 @@ export default function Pagination({row, columns, fetch, name}) {
         const fetchVersion = lastFetchVersion;
 
         lastFetch.current = new Date();
-        axios.get(fetch.url + getComputedQueryString(filters, columns, fetch), fetch.options)
+        axios.get(fetch.url + getComputedQueryString(filtersRef.current, columns, fetch), fetch.options)
             .then(response => {
 
                 if (lastFetchVersion === fetchVersion) {
@@ -111,6 +131,12 @@ export default function Pagination({row, columns, fetch, name}) {
             })
             .catch(ignored => {
             });
+    }
+
+    const fetchConfig = () => {
+        const newConfig = database.read(database.TABLE_PAGINATION, name);
+
+        setConfig(newConfig);
     }
 
     return (
@@ -140,54 +166,62 @@ export default function Pagination({row, columns, fetch, name}) {
                                 <thead className="bg-ovh">
                                 <tr>
                                     {
-                                        columns.map((column, index) => (
-                                            <th key={index} scope="col"
-                                                className="px-6 py-4 font-bold border-y border-dark">
-                                                <div className="flex justify-center">
-                                                    {column.key}
+                                        columns.map((column, index) => {
+                                            if (config.hiddenColumn.includes(column.key)) return;
 
-                                                    {
-                                                        column.primary !== true
-                                                            ? null
-                                                            : (
-                                                                <ButtonSortFilter
-                                                                    onClick={onButtonSortClicked}
-                                                                    defaultOrder='DESC'
-                                                                />
-                                                            )
-                                                    }
-                                                </div>
-                                            </th>
-                                        ))
+                                            return (
+                                                <th key={index} scope="col"
+                                                    className="px-6 py-4 font-bold border-y border-dark">
+                                                    <div className="flex justify-center">
+                                                        {column.key}
+
+                                                        {
+                                                            column.primary !== true
+                                                                ? null
+                                                                : (
+                                                                    <ButtonSortFilter
+                                                                        onClick={onButtonSortClicked}
+                                                                        defaultOrder='DESC'
+                                                                    />
+                                                                )
+                                                        }
+                                                    </div>
+                                                </th>
+                                            )
+                                        })
                                     }
                                 </tr>
                                 <tr>
                                     {
-                                        columns.map((column, index) => (
-                                            <th key={index} scope="col"
-                                                className="px-6 py-4 font-bold border-y border-dark">
-                                                {
-                                                    column.searchInput === true && typeof column.value === 'string'
-                                                        ?
-                                                        <InputTextFilter
-                                                            onChange={onInputTextChange}
-                                                            column={column.value}
-                                                        />
-                                                        : null
-                                                }
+                                        columns.map((column, index) => {
+                                            if (config.hiddenColumn.includes(column.key)) return;
 
-                                                {
-                                                    typeof column.searchSelect === 'object'
-                                                        ?
-                                                        <InputSelectFilter
-                                                            onChange={onInputSelectChange}
-                                                            column={column.value}
-                                                            options={column.searchSelect}
-                                                        />
-                                                        : null
-                                                }
-                                            </th>
-                                        ))
+                                            return (
+                                                <th key={index} scope="col"
+                                                    className="px-6 py-4 font-bold border-y border-dark">
+                                                    {
+                                                        column.searchInput === true && typeof column.value === 'string'
+                                                            ?
+                                                            <InputTextFilter
+                                                                onChange={onInputTextChange}
+                                                                column={column.value}
+                                                            />
+                                                            : null
+                                                    }
+
+                                                    {
+                                                        typeof column.searchSelect === 'object'
+                                                            ?
+                                                            <InputSelectFilter
+                                                                onChange={onInputSelectChange}
+                                                                column={column.value}
+                                                                options={column.searchSelect}
+                                                            />
+                                                            : null
+                                                    }
+                                                </th>
+                                            )
+                                        })
                                     }
                                 </tr>
                                 </thead>
@@ -195,7 +229,7 @@ export default function Pagination({row, columns, fetch, name}) {
                                 {
                                     items.length > 0
                                         ? items.map((item, index) => (
-                                            <Row key={index} data={item} columns={columns} config={row}/>
+                                            <Row key={index} data={item} columns={columns} config={row} name={name}/>
                                         ))
                                         : (
                                             <tr>
@@ -214,7 +248,12 @@ export default function Pagination({row, columns, fetch, name}) {
                                 }
                                 </tbody>
                             </table>
-                            <Footer metadata={metadata} changePage={(page) => onPageChange(page)}/>
+                            <div className="flex justify-between">
+                                <Config name={name} columns={columns}/>
+                                <div className="">
+                                    <Footer metadata={metadata} changePage={(page) => onPageChange(page)}/>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -267,7 +306,7 @@ function getComputedQueryString(filters, columns, fetch) {
 
         const column = columns.find(column => column.value === key);
 
-        if (column === undefined || value === null || value.length === 0) {
+        if (column === undefined || value === undefined || value === null || value.length === 0) {
             continue;
         }
 
@@ -284,7 +323,7 @@ function getComputedQueryString(filters, columns, fetch) {
 
     queryString.push(`page=${filters.page}`);
     queryString.push(`orderBy=${filters.orderBy}`);
-    queryString.push(`pre_page=${filters.perPage}`);
+    queryString.push(`per_page=${filters.perPage}`);
 
     if (filters.sortBy !== null) {
         queryString.push(`sortBy=${filters.sortBy}`);
