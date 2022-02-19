@@ -4,6 +4,16 @@ import getEnv from "../mixin/getEnv";
 
 
 const project = {
+    async pagination() {
+        try {
+            const response = await axios.get(getEnv('REACT_APP_API_URL') + '/api/developer/paginations/project', this.getConfig());
+
+            return response.data;
+        } catch (e) {
+            console.log(e)
+            return null;
+        }
+    },
     async findAll() {
         try {
             const response = await axios.get(getEnv('REACT_APP_API_URL') + '/api/developer/projects', this.getConfig());
