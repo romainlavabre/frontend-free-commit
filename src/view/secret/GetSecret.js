@@ -3,13 +3,14 @@ import Menu from "../../component/Menu";
 import React from "react";
 import GetOne from "../../component/secret/GetOne";
 import useInitStore from "../../store/useInitStore";
+import Delete from "../../component/secret/Delete";
 
 export default function GetSecret() {
     const {id} = useParams();
     const navigate = useNavigate();
 
     useInitStore();
-    
+
     return (
         <>
             <div className="flex flex-row">
@@ -40,6 +41,11 @@ export default function GetSecret() {
                     </div>
 
                     <GetOne/>
+                </div>
+            </div>
+            <div className="flex flex-row">
+                <div className="w-full m-3">
+                    <Delete id={id}/>
                 </div>
             </div>
         </>

@@ -29,11 +29,22 @@ export const secret = createSlice({
             });
 
             state.secrets = [...result];
+        },
+        remove: (state, action) => {
+            const result = state.secrets.filter(secret => secret.id !== action.payload.id);
+
+            result.sort((p1, p2) => {
+                return p1.id > p2.id
+                    ? -1
+                    : 1;
+            });
+
+            state.secrets = [...result];
         }
     }
 })
 
 // Action creators are generated for each case reducer function
-export const {load, updateOne} = secret.actions;
+export const {load, updateOne, remove} = secret.actions;
 
 export default secret.reducer;

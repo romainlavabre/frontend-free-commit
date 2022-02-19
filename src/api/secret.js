@@ -31,6 +31,9 @@ const secret = {
     async update(id, property, payload) {
         await axios.patch(getEnv('REACT_APP_API_URL') + `/api/admin/secrets/${id}/${property}`, payload, this.getConfig());
     },
+    async delete(id) {
+        await axios.delete(getEnv('REACT_APP_API_URL') + `/api/admin/secrets/${id}`, this.getConfig());
+    },
     getConfig() {
         const accessToken = database.read(database.TABLE_AUTHENTICATION, 'access_token');
 

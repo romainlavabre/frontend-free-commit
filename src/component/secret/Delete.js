@@ -10,11 +10,11 @@ import {useNavigate} from "react-router";
 export default function Delete({id}) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const project = useSelector(state => state.project.projects.find(project => project.id == id));
+    const secret = useSelector(state => state.secret.secrets.find(secret => secret.id == id));
 
     const confirmDeletion = () => {
         dispatch(openConfirm({
-            title: "You will delete this project",
+            title: "You will delete this secret",
             callback: [
                 async (isDelete) => {
                     if (!isDelete) {
@@ -22,15 +22,15 @@ export default function Delete({id}) {
                     }
 
                     try {
-                        await api.project.delete(id);
+                        await api.secret.delete(id);
 
                         dispatch(openAlert({
                             type: 'success',
-                            title: 'Project deleted'
+                            title: 'Secret deleted'
                         }));
 
-                        navigate('/project');
-                        dispatch(remove(project));
+                        navigate('/secret');
+                        dispatch(remove(secret))
                     } catch (e) {
                         dispatch(openAlert({
                             type: 'error',
@@ -49,7 +49,7 @@ export default function Delete({id}) {
             <button
                 className="bg-red-600 p-2 rounded"
                 onClick={() => confirmDeletion()}>
-                Delete project
+                Delete secret
             </button>
         </div>
     );
