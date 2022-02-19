@@ -13,13 +13,7 @@ export default function Create() {
 
     const onSubmit = async (data) => {
         const payload = {
-            developer: {
-                username: data.username,
-                password: data.password,
-                github_username: data.githubUsername,
-                email: data.email,
-                roles: data.roles
-            }
+            developer: data
         };
 
         try {
@@ -64,7 +58,7 @@ export default function Create() {
                         <div className="input-group">
                             <label>Github Username</label>
                             <input type="text" className="input-text w-full"
-                                   placeholder="Github Username" {...register("githubUsername")}/>
+                                   placeholder="Github Username" {...register("github_username")}/>
                         </div>
 
                         <div className="input-group">
@@ -75,6 +69,12 @@ export default function Create() {
                                 <option value="ROLE_ADMIN">ADMIN</option>
                                 <option value="ROLE_DEVELOPER">DEVELOPER</option>
                             </select>
+                        </div>
+
+                        <div className="input-group">
+                            <label>Gitlab Username</label>
+                            <input type="text" className="input-text w-full"
+                                   placeholder="Gitlab Username" {...register("gitlab_username")}/>
                         </div>
                     </div>
 

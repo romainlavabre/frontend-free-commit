@@ -103,6 +103,17 @@ export default function Update() {
                             </td>
                         </tr>
                         <tr>
+                            <th>Gitlab username</th>
+                            <td>
+                                <input
+                                    type="text"
+                                    className="input-text w-full"
+                                    defaultValue={user.gitlab_username}
+                                    {...register("gitlab_username")}
+                                />
+                            </td>
+                        </tr>
+                        <tr>
                             <th>Roles</th>
                             <td>
                                 <select

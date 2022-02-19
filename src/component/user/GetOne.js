@@ -42,6 +42,12 @@ export default function GetOne() {
                         </td>
                     </tr>
                     <tr>
+                        <th>Gitlab username</th>
+                        <td className="text-yellow-600">
+                            {!mixin.isNull(user.gitlab_username) ? user.gitlab_username : 'TODO'}
+                        </td>
+                    </tr>
+                    <tr>
                         <th>Roles</th>
                         <td>
                             {
