@@ -1,5 +1,8 @@
 import {useSelector} from "react-redux";
 import {useNavigate} from "react-router";
+import Pagination from "../util/pagination/Pagination";
+import getEnv from "../../mixin/getEnv";
+import database from "../../database/database";
 
 export default function GetAll() {
     const navigate = useNavigate();
@@ -17,17 +20,82 @@ export default function GetAll() {
     return (
         <>
             <h4 className="font-bold">Secrets</h4>
-            <table className="table table-auto">
-                <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Value</th>
-                    <th>Scope</th>
-                </tr>
-                </thead>
-                <tbody>
-                {
+            <Pagination
+                name={"secret"}
+
+                row={{
+                    onClick: data => {
+                        navigate(`/secret/${data.secret_id}`)
+                    }
+                }}
+
+                columns={[
+                    {
+                        key: "Id",
+                        value: "secret_id",
+                        searchInput: true,
+                        comparator: "eq",
+                        primary: true,
+                        computedValue: data => {
+                            return (
+                                <span className="text-blue-500">
+                                    #{data.secret_id}
+                                </span>
+                            )
+                        }
+                    },
+                    {
+                        key: "Name",
+                        value: "secret_name",
+                        searchInput: true,
+                        comparator: "contains"
+                    },
+                    {
+                        key: "Scope",
+                        value: "project_name",
+                        searchInput: true,
+                        comparator: "contains",
+                        computedValue: data => {
+                            if (data.project_name === null) {
+                                return (
+                                    <span className="text-red-500">
+                                        GLOBAL
+                                    </span>
+                                );
+                            } else {
+                                return (
+                                    <span className="text-green-500">
+                                        {data.project_name}
+                                    </span>
+                                );
+                            }
+                        }
+                    }
+                ]}
+
+                fetch={{
+                    url: getEnv("REACT_APP_API_URL") + '/api/developer/paginations/secret',
+                    options: {
+                        headers: {
+                            Authorization: `Bearer ${database.read(database.TABLE_AUTHENTICATION, "access_token")}`
+                        }
+                    },
+                    interval: 20000
+                }}
+            />
+
+            {/**
+             <table className="table table-auto">
+             <thead>
+             <tr>
+             <th>Id</th>
+             <th>Name</th>
+             <th>Value</th>
+             <th>Scope</th>
+             </tr>
+             </thead>
+             <tbody>
+             {
                     secrets.length === 0
                         ? (
                             <tr>
@@ -36,7 +104,7 @@ export default function GetAll() {
                         )
                         : null
                 }
-                {
+             {
                     secrets.map(secret => (
                         <>
                             <tr key={secret.id}>
@@ -58,8 +126,9 @@ export default function GetAll() {
                         </>
                     ))
                 }
-                </tbody>
-            </table>
+             </tbody>
+             </table>
+             **/}
         </>
     );
 }
