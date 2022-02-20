@@ -79,16 +79,19 @@ export default function Pagination({row, columns, fetch, name}) {
 
     const onInputTextChange = (name, value) => {
         filters.input[name] = value;
+        filters.page = 1;
         setFilters({...filters});
 
     }
     const onInputSelectChange = (name, value) => {
         filters.input[name] = value;
+        filters.page = 1;
         setFilters({...filters});
     }
 
     const onButtonSortClicked = orderBy => {
         filters.orderBy = orderBy;
+        filters.page = 1;
         setFilters({...filters});
     }
 
@@ -99,9 +102,9 @@ export default function Pagination({row, columns, fetch, name}) {
             filters.button.splice(indexInArray, 1);
         } else {
             filters.button.push(name);
-
         }
 
+        filters.page = 1;
         setFilters({...filters});
     }
 
