@@ -11,6 +11,7 @@ import ButtonFilter from "./filter/ButtonFilter";
 import ButtonSortFilter from "./filter/ButtonSortFilter";
 import Config from "./Config";
 import database from "../../../database/database";
+import isNull from "../../../mixin/isNull";
 
 export default function Pagination({row, columns, fetch, name}) {
     const [items, setItems] = useState([]);
@@ -31,7 +32,8 @@ export default function Pagination({row, columns, fetch, name}) {
     const [config, setConfig] = useState({
         numberLineByPage: 9,
         isSaveFilters: false,
-        hiddenColumn: []
+        hiddenColumn: [],
+        filters: null
     });
 
     useLayoutEffect(() => {
@@ -56,7 +58,13 @@ export default function Pagination({row, columns, fetch, name}) {
     }, []);
 
     useEffect(() => {
-        filters.perPage = config.numberLineByPage;
+        if (config.isSaveFilters && !isNull(config.filters)) {
+            setFilters(config.filters);
+            return;
+        } else {
+            filters.perPage = config.numberLineByPage;
+        }
+
         setFilters({...filters});
     }, [config]);
 
@@ -67,6 +75,11 @@ export default function Pagination({row, columns, fetch, name}) {
         setTimeout(() => {
             if (fetchVersion === lastFetchVersionRef.current) {
                 fetchData();
+
+                if (config.isSaveFilters) {
+                    config.filters = filters;
+                    database.write(database.TABLE_PAGINATION, name, config);
+                }
             }
         }, 150);
     }, [filters]);

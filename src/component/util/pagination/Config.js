@@ -51,16 +51,18 @@ export default function Config({name, columns}) {
                             </div>
                             <div className="flex justify-center">
                                 <form onSubmit={handleSubmit(onSubmit)}>
-                                    <div className="input-group">
-                                        <input
-                                            id="save_filter"
-                                            className="input-checkbox"
-                                            type="checkbox"
-                                            defaultValue={config.isSaveFilters}
-                                            {...register('isSaveFilters')}
-                                        />
-                                        <label htmlFor="save_filter">Save filters</label>
-                                    </div>
+                                    {/**
+                                     <div className="input-group">
+                                     <input
+                                     id="save_filter"
+                                     className="input-checkbox"
+                                     type="checkbox"
+                                     defaultValue={config.isSaveFilters}
+                                     {...register('isSaveFilters')}
+                                     />
+                                     <label htmlFor="save_filter">Save filters</label>
+                                     </div>
+                                     **/}
 
                                     <div className="input-group justify-center">
                                         <label className="font-bold">Number line by page</label>

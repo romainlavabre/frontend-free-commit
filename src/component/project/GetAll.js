@@ -66,6 +66,10 @@ export default function GetAll() {
                         searchInput: true,
                         comparator: 'eq',
                         computedValue: (data) => {
+                            if (data.build_last_exit_code === null) {
+                                return null;
+                            }
+
                             return (
                                 <span className={data.build_last_exit_code === 0 ? "text-green-500" : "text-red-5000"}>
                                 {data.build_last_exit_code} ({data.build_last_exit_message !== null ? data.build_last_exit_message : 'OK'})
@@ -79,6 +83,10 @@ export default function GetAll() {
                         searchInput: true,
                         comparator: 'contains',
                         computedValue: (data) => {
+                            if (data.build_last_created_at === null) {
+                                return null;
+                            }
+
                             return dateFormatter(data.build_last_created_at)
                         }
                     },
