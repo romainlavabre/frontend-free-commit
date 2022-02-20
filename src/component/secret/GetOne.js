@@ -36,13 +36,16 @@ export default function GetOne() {
                         <th>Projects</th>
                         <td>
                             {
-                                secret.project_id === null || getProject(secret.project_id) === undefined
+                                secret.projects_id.length === 0
                                     ? (
-                                        <span className="text-red-500">GLOBAL</span>
+                                        <span className="text-red-500">PUBLIC</span>
                                     )
-                                    : (
-                                        <span className="text-green-500">{getProject(secret.project_id).name}</span>
-                                    )
+                                    : secret.projects_id.map(id => (
+                                        <div key={id.toString()}>
+                                            <span className="text-green-500">{getProject(id).name}</span>
+                                            <br/>
+                                        </div>
+                                    ))
                             }
                         </td>
                     </tr>

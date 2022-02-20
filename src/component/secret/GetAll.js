@@ -5,7 +5,7 @@ import database from "../../database/database";
 
 export default function GetAll() {
     const navigate = useNavigate();
-    
+
     return (
         <>
             <h4 className="font-bold">Secrets</h4>
@@ -41,20 +41,20 @@ export default function GetAll() {
                     },
                     {
                         key: "Scope",
-                        value: "project_name",
+                        value: "secret_scope",
                         searchInput: true,
                         comparator: "contains",
                         computedValue: data => {
-                            if (data.project_name === null) {
+                            if (data.secret_scope === "PUBLIC") {
                                 return (
                                     <span className="text-red-500">
-                                        GLOBAL
+                                        PUBLIC
                                     </span>
                                 );
                             } else {
                                 return (
                                     <span className="text-green-500">
-                                        {data.project_name}
+                                        PRIVATE
                                     </span>
                                 );
                             }

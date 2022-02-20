@@ -14,11 +14,7 @@ export default function Create() {
 
     const onSubmit = async data => {
         const payload = {
-            secret: {
-                name: data.name,
-                value: data.value,
-                project_id: data.projectId
-            }
+            secret: data
         };
 
         try {
@@ -72,9 +68,10 @@ export default function Create() {
                             </label>
                             <select
                                 className="input-select w-full"
-                                {...register("projectId")}
+                                multiple
+                                {...register("projects_id")}
                             >
-                                <option value="">GLOBAL</option>
+                                <option value="">PUBLIC</option>
                                 {
                                     projects.map(project => (
                                         <option key={project.id} value={project.id}>{project.name}</option>

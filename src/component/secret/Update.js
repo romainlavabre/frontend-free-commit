@@ -88,10 +88,11 @@ export default function Update() {
                             <td>
                                 <select
                                     className="input-text w-full"
-                                    defaultValue={secret.project_id}
-                                    {...register("project_id")}
+                                    defaultValue={secret.projects_id}
+                                    multiple
+                                    {...register("projects_id")}
                                 >
-                                    <option className="text-red-500" value="">GLOBAL</option>
+                                    <option className="text-red-500" value="">PUBLIC</option>
                                     {
                                         projects.map(project => (
                                             <option className="text-green-500" key={project.id}
