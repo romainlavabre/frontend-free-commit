@@ -7,6 +7,7 @@ import Pagination from "../util/pagination/Pagination";
 import getEnv from "../../mixin/getEnv";
 import database from "../../database/database";
 import dateFormatter from "../../mixin/dateFormatter";
+import LaunchManually from "./build/LaunchManually";
 
 export default function GetAll() {
     const navigate = useNavigate();
@@ -90,7 +91,14 @@ export default function GetAll() {
                             return dateFormatter(data.build_last_created_at)
                         }
                     },
-
+                    {
+                        key: "Launch",
+                        computedValue: data => {
+                            return (
+                                <LaunchManually projectId={data.project_id}/>
+                            )
+                        }
+                    }
                 ]}
                 row={{
                     onClick: data => {
