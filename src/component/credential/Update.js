@@ -58,6 +58,7 @@ export default function Update() {
 
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <table className="table table-auto">
+                        <tbody>
                         <tr>
                             <th>Name</th>
                             <td>
@@ -80,6 +81,7 @@ export default function Update() {
                                 />
                             </td>
                         </tr>
+                        </tbody>
                     </table>
 
                     <div className="form-submit">

@@ -72,6 +72,7 @@ export default function ExecutedBuild({projectScope}) {
                 <h4 className="text-center text-fairfair text-3xl my-5">Current execution</h4>
 
                 <table className="table table-auto">
+                    <tbody>
                     <tr>
                         <th>Task</th>
                         <th>Project</th>
@@ -124,6 +125,7 @@ export default function ExecutedBuild({projectScope}) {
                             </tr>
                         ))
                     }
+                    </tbody>
                 </table>
             </div>
         </>

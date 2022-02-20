@@ -23,6 +23,7 @@ export default function GetOne() {
                 <h4 className="text-center text-fairfair text-3xl my-5">{user.username}</h4>
 
                 <table className="table table-auto">
+                    <tbody>
                     <tr>
                         <th>Username</th>
                         <td>{user.username}</td>
@@ -51,12 +52,12 @@ export default function GetOne() {
                         <th>Roles</th>
                         <td>
                             {
-                                user.roles.map(role => (
-                                    <>
+                                user.roles.map((role, index) => (
+                                    <div key={index.toString()}>
                                     <span
                                         className={role === 'ROLE_ADMIN' ? 'text-red-500' : 'text-blue-500'}>{role}</span>
                                         <br/>
-                                    </>
+                                    </div>
                                 ))
                             }
                         </td>
@@ -68,14 +69,15 @@ export default function GetOne() {
                                 user.projects_id.length === 0
                                     ? 'TODO'
                                     : user.projects_id.map(id => (
-                                        <>
+                                        <div key={id.toString()}>
                                             <span>{getProject(id).name}</span>
                                             <br/>
-                                        </>
+                                        </div>
                                     ))
                             }
                         </td>
                     </tr>
+                    </tbody>
                 </table>
             </div>
         </>

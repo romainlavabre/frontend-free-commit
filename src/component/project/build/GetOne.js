@@ -36,6 +36,7 @@ export default function GetOne() {
                 <h4 className="text-center text-fairfair text-3xl my-5">{project.name}</h4>
 
                 <table className="table table-auto">
+                    <tbody>
                     <tr>
                         <th>Ref</th>
                         <td className="text-blue-500">#{build.id}</td>
@@ -60,6 +61,7 @@ export default function GetOne() {
                         <th>Duration</th>
                         <td className="italic">{getMinutes()} minutes</td>
                     </tr>
+                    </tbody>
                 </table>
             </div>
         </>

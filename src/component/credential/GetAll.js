@@ -32,15 +32,13 @@ export default function GetAll() {
                 }
                 {
                     credentials.map(credential => (
-                        <>
-                            <tr key={credential.id}>
-                                <td className="text-blue-500 hover:underline hover:cursor-pointer"
-                                    onClick={() => openSecret(credential.id)}>#{credential.id}
-                                </td>
-                                <td>{credential.name}</td>
-                                <td>*****</td>
-                            </tr>
-                        </>
+                        <tr key={credential.id.toString()}>
+                            <td className="text-blue-500 hover:underline hover:cursor-pointer"
+                                onClick={() => openSecret(credential.id)}>#{credential.id}
+                            </td>
+                            <td>{credential.name}</td>
+                            <td>*****</td>
+                        </tr>
                     ))
                 }
                 </tbody>

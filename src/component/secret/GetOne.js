@@ -23,6 +23,7 @@ export default function GetOne() {
                 <h4 className="text-center text-fairfair text-3xl my-5">{secret.secretname}</h4>
 
                 <table className="table table-auto">
+                    <tbody>
                     <tr>
                         <th>Name</th>
                         <td>{secret.name}</td>
@@ -45,6 +46,7 @@ export default function GetOne() {
                             }
                         </td>
                     </tr>
+                    </tbody>
                 </table>
             </div>
         </>

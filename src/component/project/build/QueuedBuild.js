@@ -42,6 +42,7 @@ export default function QueuedBuild({projectScope}) {
                 <h4 className="text-center text-fairfair text-3xl my-5">Queued tasks</h4>
 
                 <table className="table table-auto">
+                    <tbody>
                     <tr>
                         <th>Task</th>
                         <th>Project</th>
@@ -66,6 +67,7 @@ export default function QueuedBuild({projectScope}) {
                             </tr>
                         ))
                     }
+                    </tbody>
                 </table>
             </div>
         </>

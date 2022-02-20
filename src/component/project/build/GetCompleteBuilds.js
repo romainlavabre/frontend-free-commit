@@ -45,6 +45,7 @@ export default function GetCompleteBuilds() {
                 <h4 className="text-center text-fairfair text-3xl my-5">Completed builds</h4>
 
                 <table className="table table-auto">
+                    <tbody>
                     <tr>
                         <th>Ref</th>
                         <th>Status</th>
@@ -76,6 +77,7 @@ export default function GetCompleteBuilds() {
                             </tr>
                         ))
                     }
+                    </tbody>
                 </table>
             </div>
         </>

@@ -31,6 +31,7 @@ export default function GetOne() {
                 <h4 className="text-center text-fairfair text-3xl my-5">{project.name}</h4>
 
                 <table className="table table-auto">
+                    <tbody>
                     <tr>
                         <th>Name</th>
                         <td className="text-fairfair">{project.name}</td>
@@ -69,12 +70,12 @@ export default function GetOne() {
                             }
                             {
                                 project.developers_id.map(developerId => (
-                                    <>
+                                    <div key={developerId.toString()}>
                                         <span key={developerId} className="text-green-500">
                                             {getUser(developerId).username}
                                         </span>
                                         <br/>
-                                    </>
+                                    </div>
                                 ))
                             }
                         </td>
@@ -89,10 +90,12 @@ export default function GetOne() {
                             }
                         </td>
                     </tr>
+                    </tbody>
                 </table>
 
                 <h4 className="text-center text-fairfair text-3xl my-5">Webhook</h4>
                 <table className="table table-auto">
+                    <tbody>
                     <tr>
                         <th className="flex justify-center border-none">
                             <ReloadSignatureKey projectId={id}/>
@@ -128,6 +131,7 @@ export default function GetOne() {
                             </span>
                         </td>
                     </tr>
+                    </tbody>
                 </table>
             </div>
         </>
