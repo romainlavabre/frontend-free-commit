@@ -6,7 +6,7 @@ export default function Footer({metadata, changePage}) {
         <>
             <div className="flex justify-between mt-5">
                 <div className="italic">
-                    Show from {metadata.from} to {metadata.to} on {metadata.total} lines
+                    From {metadata.from} to {metadata.to} on {metadata.total} lines
                 </div>
                 <div className="flex justify-center">
                     <nav aria-label="Page navigation example">

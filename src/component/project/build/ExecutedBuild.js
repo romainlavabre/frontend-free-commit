@@ -69,7 +69,7 @@ export default function ExecutedBuild({projectScope}) {
     return (
         <>
             <div className="bg-light p-10 mt-4">
-                <h4 className="text-center text-fairfair text-3xl my-5">Current execution</h4>
+                <h4 className="text-center text-ovh text-3xl my-5">Current execution</h4>
 
                 <table className="table table-auto">
                     <tbody>
