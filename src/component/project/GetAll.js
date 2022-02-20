@@ -1,8 +1,5 @@
-import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router";
-import React, {useEffect, useRef} from "react";
-import api from "../../api/api";
-import {load} from "../../store/project";
+import React from "react";
 import Pagination from "../util/pagination/Pagination";
 import getEnv from "../../mixin/getEnv";
 import database from "../../database/database";
@@ -11,28 +8,6 @@ import LaunchManually from "./build/LaunchManually";
 
 export default function GetAll() {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const projects = useSelector(state => state.project.projects);
-    const intervalRef = useRef(null);
-
-    const openProject = id => {
-        navigate(`/project/${id}`)
-    }
-
-    useEffect(() => {
-        fetchProjects();
-
-        intervalRef.current = setInterval(async () => {
-            fetchProjects();
-        }, 10000);
-    }, []);
-
-    const fetchProjects = async () => {
-        const projects = await api.project.findAll();
-        dispatch(load(projects));
-    }
-
-    useEffect(() => () => clearInterval(intervalRef.current), []);
 
     return (
         <>

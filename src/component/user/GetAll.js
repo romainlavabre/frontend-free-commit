@@ -1,4 +1,3 @@
-import {useSelector} from "react-redux";
 import {useNavigate} from "react-router";
 import Pagination from "../util/pagination/Pagination";
 import getEnv from "../../mixin/getEnv";
@@ -6,11 +5,6 @@ import database from "../../database/database";
 
 export default function User() {
     const navigate = useNavigate();
-    const users = useSelector(state => state.user.users);
-
-    const openUser = id => {
-        navigate(`/user/${id}`);
-    }
 
     return (
         <>

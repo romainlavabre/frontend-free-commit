@@ -1,4 +1,3 @@
-import {useSelector} from "react-redux";
 import {useNavigate} from "react-router";
 import Pagination from "../util/pagination/Pagination";
 import getEnv from "../../mixin/getEnv";
@@ -6,17 +5,7 @@ import database from "../../database/database";
 
 export default function GetAll() {
     const navigate = useNavigate();
-    const secrets = useSelector(state => state.secret.secrets);
-    const projects = useSelector(state => state.project.projects);
-
-    const openSecret = id => {
-        navigate(`/secret/${id}`)
-    }
-
-    const getProject = id => {
-        return projects.find(project => project.id === id);
-    }
-
+    
     return (
         <>
             <h4 className="font-bold">Secrets</h4>
