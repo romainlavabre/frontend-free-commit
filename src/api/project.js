@@ -6,7 +6,7 @@ import getEnv from "../mixin/getEnv";
 const project = {
     async pagination() {
         try {
-            const response = await axios.get(getEnv('REACT_APP_API_URL') + '/api/developer/paginations/project', this.getConfig());
+            const response = await axios.get(getEnv('REACT_APP_API_URL') + '/developer/paginations/project', this.getConfig());
 
             return response.data;
         } catch (e) {
@@ -16,7 +16,7 @@ const project = {
     },
     async findAll() {
         try {
-            const response = await axios.get(getEnv('REACT_APP_API_URL') + '/api/developer/projects', this.getConfig());
+            const response = await axios.get(getEnv('REACT_APP_API_URL') + '/developer/projects', this.getConfig());
 
             return response.data;
         } catch (e) {
@@ -26,7 +26,7 @@ const project = {
     },
     async findById(id) {
         try {
-            const response = await axios.get(getEnv('REACT_APP_API_URL') + `/api/developer/projects/${id}`, this.getConfig());
+            const response = await axios.get(getEnv('REACT_APP_API_URL') + `/developer/projects/${id}`, this.getConfig());
 
             return response.data;
         } catch (e) {
@@ -35,14 +35,14 @@ const project = {
         }
     },
     async create(payload) {
-        const response = await axios.post(getEnv('REACT_APP_API_URL') + '/api/admin/projects', payload, this.getConfig());
+        const response = await axios.post(getEnv('REACT_APP_API_URL') + '/admin/projects', payload, this.getConfig());
         return response.data;
     },
     async update(id, property, payload) {
-        await axios.patch(getEnv('REACT_APP_API_URL') + `/api/admin/projects/${id}/${property}`, payload, this.getConfig());
+        await axios.patch(getEnv('REACT_APP_API_URL') + `/admin/projects/${id}/${property}`, payload, this.getConfig());
     },
     async delete(id) {
-        await axios.delete(getEnv('REACT_APP_API_URL') + `/api/admin/projects/${id}`, this.getConfig());
+        await axios.delete(getEnv('REACT_APP_API_URL') + `/admin/projects/${id}`, this.getConfig());
     },
     getConfig() {
         const accessToken = database.read(database.TABLE_AUTHENTICATION, 'access_token');

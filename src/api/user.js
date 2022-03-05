@@ -6,7 +6,7 @@ import getEnv from "../mixin/getEnv";
 const project = {
     async findAll() {
         try {
-            const response = await axios.get(getEnv('REACT_APP_API_URL') + '/api/developer/developers', this.getConfig());
+            const response = await axios.get(getEnv('REACT_APP_API_URL') + '/developer/developers', this.getConfig());
 
             return response.data;
         } catch (e) {
@@ -16,7 +16,7 @@ const project = {
     },
     async findById(id) {
         try {
-            const response = await axios.get(getEnv('REACT_APP_API_URL') + `/api/developer/developers/${id}`, this.getConfig());
+            const response = await axios.get(getEnv('REACT_APP_API_URL') + `/developer/developers/${id}`, this.getConfig());
 
             return response.data;
         } catch (e) {
@@ -25,11 +25,11 @@ const project = {
         }
     },
     async create(payload) {
-        const response = await axios.post(getEnv('REACT_APP_API_URL') + '/api/admin/developers', payload, this.getConfig());
+        const response = await axios.post(getEnv('REACT_APP_API_URL') + '/admin/developers', payload, this.getConfig());
         return response.data;
     },
     async update(id, property, payload) {
-        await axios.patch(getEnv('REACT_APP_API_URL') + `/api/admin/developers/${id}/${property}`, payload, this.getConfig());
+        await axios.patch(getEnv('REACT_APP_API_URL') + `/admin/developers/${id}/${property}`, payload, this.getConfig());
     },
     getConfig() {
         const accessToken = database.read(database.TABLE_AUTHENTICATION, 'access_token');
