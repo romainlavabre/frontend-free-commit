@@ -19,6 +19,7 @@ import CreateProject from "../view/project/CreateProject";
 import GetProject from "../view/project/GetProject";
 import UpdateProject from "../view/project/UpdateProject";
 import GetBuild from "../view/project/build/GetBuild";
+import Config from "../view/Config";
 
 export default function Router() {
     return (
@@ -42,6 +43,7 @@ export default function Router() {
                 <Route exact path="/credential/:id" element={<GetCredential/>}/>
                 <Route exact path="/credential/create" element={<CreateCredential/>}/>
                 <Route exact path="/credential/update/:id" element={<UpdateCredential/>}/>
+                <Route exact path="/config" element={<Config/>}/>
             </Routes>
         </BrowserRouter>
     );

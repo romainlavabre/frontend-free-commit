@@ -4,6 +4,7 @@ import user from "./user";
 import secret from "./secret";
 import credential from "./credential";
 import build from "./build";
+import config from "./config";
 
 const api = {
     authentication,
@@ -11,7 +12,8 @@ const api = {
     user,
     secret,
     credential,
-    build
+    build,
+    config
 };
 
 export default api;
