@@ -63,7 +63,7 @@ export default function GetAll() {
                 ]}
 
                 fetch={{
-                    url: getEnv("REACT_APP_API_URL") + '/api/developer/paginations/secret',
+                    url: getEnv("REACT_APP_API_URL") + '/developer/paginations/secret',
                     options: {
                         headers: {
                             Authorization: `Bearer ${database.read(database.TABLE_AUTHENTICATION, "access_token")}`
