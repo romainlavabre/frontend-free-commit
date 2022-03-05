@@ -18,6 +18,7 @@ export default function Update() {
 
 
     const onSubmit = async data => {
+        console.log(data)
         for (let property in data) {
             if (data[property] === 'null') {
                 data[property] = null;
@@ -143,7 +144,7 @@ export default function Update() {
                                 type="checkbox"
                                 id="allowConcurrentExecution"
                                 className="input-checkbox"
-                                defaultValue={project.allow_concurrent_execution}
+                                defaultChecked={project.allow_concurrent_execution}
                                 {...register("allow_concurrent_execution")}
                             />
                             <label
