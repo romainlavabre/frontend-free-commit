@@ -310,7 +310,7 @@ function getComputedQueryString(filters, columns, fetch) {
         columns.forEach(column => {
             if (typeof column.searchButton === 'object') {
                 column.searchButton.forEach(localButton => {
-                    const buttonId = `${column.key}-${localButton.name}-${localButton.value}`;
+                    const buttonId = `${column.value}-${localButton.name}-${localButton.value}`;
 
                     if (buttonId === value) {
                         queryString.push(`${column.value}${encodeURIComponent('[')}${localButton.comparator}${encodeURIComponent(']')}=${encodeURIComponent(localButton.value)}`);
