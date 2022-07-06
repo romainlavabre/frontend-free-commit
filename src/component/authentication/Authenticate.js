@@ -6,6 +6,7 @@ import database from "../../database/database";
 import mixin from "../../mixin/mixin";
 import {useNavigate} from "react-router";
 import {useForm} from "react-hook-form";
+import logo from "../../assets/img/logo/logo_transparent.png";
 
 export default function Authenticate() {
 
@@ -36,6 +37,9 @@ export default function Authenticate() {
         <>
             <div className={'flex justify-center'}>
                 <div className={'mt-20 w-100  shadow-fairfair p-5 text-center text-xl bg-light'}>
+                    <div className="flex justify-center">
+                        <img src={logo} className="w-56"/>
+                    </div>
                     <h4 className={'font-bold p-5 text-fairfair my-5'}>Authentification</h4>
 
                     <form onSubmit={handleSubmit(onSubmit)}>

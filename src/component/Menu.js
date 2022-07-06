@@ -1,5 +1,6 @@
 import React from "react";
 import {useLocation, useNavigate} from "react-router";
+import logo from "../assets/img/logo/logo_transparent.png";
 
 export default function Menu() {
     const location = useLocation();
@@ -89,8 +90,8 @@ export default function Menu() {
         <>
             <div className="flex text-lg">
                 <ul className="text-gray-900 text-white">
-                    <li className="flex px-6 py-5 bg-light">
-
+                    <li className="flex px-6 py-5 bg-light justify-center">
+                        <img src={logo} className="w-32"/>
                     </li>
                     {
                         items.map((item, index) => (

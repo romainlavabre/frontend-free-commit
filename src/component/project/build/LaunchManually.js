@@ -7,7 +7,9 @@ import mapErrorMessage from "../../../mixin/mapErrorMessage";
 export default function LaunchManually({projectId}) {
     const dispatch = useDispatch();
 
-    const onClick = async () => {
+    const onClick = async e => {
+        e.stopPropagation();
+
         try {
             await api.build.launch(projectId);
             dispatch(openAlert({
@@ -23,7 +25,7 @@ export default function LaunchManually({projectId}) {
     }
     return (
         <>
-            <button className="text-green-500 hover:text-green-600" onClick={() => onClick()}>
+            <button className="text-green-500 hover:text-green-600" onClick={e => onClick(e)}>
                 <svg xmlns="http://www.w3.org/2000/svg"
                      className="h-8 w-8" fill="none"
                      viewBox="0 0 24 24"

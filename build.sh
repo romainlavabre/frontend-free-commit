@@ -2,6 +2,7 @@
 
 docker build -t romainlavabre/free-commit-client:"$1" -t romainlavabre/free-commit-client:latest -f ./docker/live/Dockerfile .
 
+docker logout
 docker login
 
 docker push romainlavabre/free-commit-client:"$1"
