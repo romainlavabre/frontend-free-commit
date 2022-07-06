@@ -62,7 +62,7 @@ export default function QueuedBuild({projectScope}) {
                             <tr>
                                 <td className="text-gray-400 animate-pulse cursor-wait">#{queued.executor_id}</td>
                                 <td className="text-green-500">
-                                    {getProject(queued.project_id).name}
+                                    {getProject(queued.project_id)?.name}
                                 </td>
                             </tr>
                         ))
