@@ -84,6 +84,17 @@ export default function Update() {
                             </td>
                         </tr>
                         <tr>
+                            <th>Escape char (separate by ",")</th>
+                            <td>
+                                <input
+                                    className="input-text w-full"
+                                    defaultValue={secret.escape_char}
+                                    placeholder="/,+,..."
+                                    {...register("escape_char")}
+                                />
+                            </td>
+                        </tr>
+                        <tr>
                             <th>Scope</th>
                             <td>
                                 <select
