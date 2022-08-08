@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import React, {useEffect, useRef, useState} from "react";
 import api from "../../../api/api";
 import {useSelector} from "react-redux";
+import isNull from "../../../mixin/isNull";
 
 export default function QueuedBuild({projectScope}) {
     const [queued, setExecuted] = useState([]);
@@ -47,25 +48,21 @@ export default function QueuedBuild({projectScope}) {
                         <th>Task</th>
                         <th>Project</th>
                     </tr>
-
                     {
-                        queued.length === 0
-                            ? (
+                        !isNull(queued) && queued.length > 0
+                            ? queued.map(queued => (
+                                <tr>
+                                    <td className="text-gray-400 animate-pulse cursor-wait">#{queued.executor_id}</td>
+                                    <td className="text-green-500">
+                                        {getProject(queued.project_id)?.name}
+                                    </td>
+                                </tr>
+                            ))
+                            : (
                                 <tr>
                                     <td colSpan="2">No data available</td>
                                 </tr>
                             )
-                            : null
-                    }
-                    {
-                        queued.map(queued => (
-                            <tr>
-                                <td className="text-gray-400 animate-pulse cursor-wait">#{queued.executor_id}</td>
-                                <td className="text-green-500">
-                                    {getProject(queued.project_id)?.name}
-                                </td>
-                            </tr>
-                        ))
                     }
                     </tbody>
                 </table>
