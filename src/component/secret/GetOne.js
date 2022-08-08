@@ -33,6 +33,10 @@ export default function GetOne() {
                         <td>******</td>
                     </tr>
                     <tr>
+                        <th>Escape char</th>
+                        <td>{secret.escape_char}</td>
+                    </tr>
+                    <tr>
                         <th>Projects</th>
                         <td>
                             {
