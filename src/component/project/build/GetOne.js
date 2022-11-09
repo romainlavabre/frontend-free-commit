@@ -3,6 +3,7 @@ import React, {useEffect, useState} from "react";
 import api from "../../../api/api";
 import {useSelector} from "react-redux";
 import dateFormatter from "../../../mixin/dateFormatter";
+import isNull from "../../../mixin/isNull.js";
 
 export default function GetOne() {
     const {buildId} = useParams();
@@ -26,7 +27,7 @@ export default function GetOne() {
         return diffMins;
     }
 
-    if (build === null || project === null) {
+    if (isNull(build) || isNull(project)) {
         return null;
     }
 

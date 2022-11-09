@@ -3,6 +3,7 @@ import {useSelector} from "react-redux";
 import {useParams} from "react-router";
 import LaunchManually from "./build/LaunchManually";
 import ReloadSignatureKey from "./ReloadSignatureKey";
+import isNull from "../../mixin/isNull.js";
 
 export default function GetOne() {
     const {id} = useParams();
@@ -18,7 +19,7 @@ export default function GetOne() {
         return credentials.find(credential => credential.id === id);
     }
 
-    if (project === null) {
+    if (isNull(project)) {
         return null;
     }
 
