@@ -3,13 +3,14 @@ import Menu from "../../component/Menu";
 import React from "react";
 import Update from "../../component/secret/Update";
 import useInitStore from "../../store/useInitStore";
+import useAxiosConfig from "../../use/useAxiosConfig";
 
 export default function UpdateSecret() {
     const {id} = useParams();
     const navigate = useNavigate();
-
+    useAxiosConfig();
     useInitStore();
-    
+
     return (
         <>
             <div className="flex flex-row">

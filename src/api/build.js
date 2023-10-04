@@ -54,9 +54,19 @@ const build = {
             return null;
         }
     },
-    async kill(executorId) {
+    async killExecuted(executorId) {
         try {
-            const response = await axios.delete(getEnv('REACT_APP_API_URL') + `/developer/builds/kill/${executorId}`, this.getConfig());
+            const response = await axios.delete(getEnv('REACT_APP_API_URL') + `/developer/builds/kill/executed/${executorId}`, this.getConfig());
+
+            return response.status === 204;
+        } catch (e) {
+            console.log(e)
+            return null;
+        }
+    },
+    async killQueued(executorId) {
+        try {
+            const response = await axios.delete(getEnv('REACT_APP_API_URL') + `/developer/builds/kill/queued/${executorId}`, this.getConfig());
 
             return response.status === 204;
         } catch (e) {

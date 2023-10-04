@@ -1,56 +1,80 @@
+@import "badge.css";
+@import "form.css";
+@import "scrollbar.css";
+@import "button.css";
+@import "table.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
 body {
-    background-color: #333;
-    color: #ffffff;
+    background-color: #131722;
+    color: #AEB1BA;
     height: 100%;
-    @apply text-lg
+    @apply text-gray-300;
 }
 
-.table th {
-    @apply border border-dark py-2
+fieldset {
+    border: 2px solid #50535E;
+    @apply w-full rounded-lg px-3 p-2;
 }
 
-.table td {
-    @apply border border-dark py-1
+legend {
+    @apply text-center px-5 py-2 ;
 }
 
-.input-group {
-    @apply mt-5
+hr {
+    @apply border-gray-600;
 }
 
-.input-group > .input-checkbox {
-    @apply form-check-inline
+.modal {
+    background-color: #1f2937;
 }
 
-.input-text {
-    @apply block rounded-sm p-1 flex justify-center bg-gray-500 text-center
+.link {
+    @apply text-blue cursor-pointer hover:text-blue-600;
 }
 
-.input-checkbox {
-    @apply form-check-input appearance-none h-5 w-5 border rounded-sm bg-white transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer
+.text-default {
+    color: #131722;
 }
 
-.input-select {
-    @apply input-text
+.bg-default {
+    background-color: #131722;
 }
 
-.form-submit {
-    @apply flex flex-row justify-end mt-5
+.bg-gray {
+    background: #1E222D;
 }
 
-.input-error {
-    @apply text-red-500 text-sm flex justify-start
+.border-default {
+    border-color: #50535E;
 }
 
-.table {
-    @apply border border-dark w-full text-center bg-light
+.text-green {
+    color: #4cae50;
 }
 
-.shadow-inner {
-    box-shadow: inset 4px 4px 5px 2px rgb(132, 132, 132);
-    @apply w-full
+.text-red {
+    color: #EF5350;
+}
+
+.text-blue {
+    color: #1976D2;
+}
+
+.text-yellow {
+    color: #F0E835;
+}
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                                     supported by Chrome and Opera */
 }

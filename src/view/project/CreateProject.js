@@ -3,12 +3,13 @@ import Menu from "../../component/Menu";
 import Create from "../../component/project/Create";
 import React from "react";
 import useInitStore from "../../store/useInitStore";
+import useAxiosConfig from "../../use/useAxiosConfig";
 
 export default function CreateProject() {
     const navigate = useNavigate();
-
+    useAxiosConfig();
     useInitStore();
-    
+
     return (
         <>
             <div className="flex flex-row">

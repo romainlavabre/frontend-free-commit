@@ -4,11 +4,12 @@ import React from "react";
 import GetOne from "../../component/credential/GetOne";
 import useInitStore from "../../store/useInitStore";
 import Delete from "../../component/credential/Delete";
+import useAxiosConfig from "../../use/useAxiosConfig";
 
 export default function GetCredential() {
     const {id} = useParams();
     const navigate = useNavigate();
-
+    useAxiosConfig();
     useInitStore();
 
     return (

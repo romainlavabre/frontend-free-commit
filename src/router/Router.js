@@ -20,30 +20,33 @@ import GetProject from "../view/project/GetProject";
 import UpdateProject from "../view/project/UpdateProject";
 import GetBuild from "../view/project/build/GetBuild";
 import Config from "../view/Config";
+import Menu from "../component/Menu";
 
 export default function Router() {
     return (
         <BrowserRouter>
             <Routes>
                 <Route exact path="/" element={<Login/>}/>
-                <Route exact path="/project" element={<Project/>}/>
-                <Route exact path="/project/:id" element={<GetProject/>}/>
-                <Route exact path="/project/create" element={<CreateProject/>}/>
-                <Route exact path="/project/update/:id" element={<UpdateProject/>}/>
-                <Route exact path="/project/:id/build/:buildId" element={<GetBuild/>}/>
-                <Route exact path="/user" element={<User/>}/>
-                <Route exact path="/user/:id" element={<GetUser/>}/>
-                <Route exact path="/user/create" element={<CreateUser/>}/>
-                <Route exact path="/user/update/:id" element={<UpdateUser/>}/>
-                <Route exact path="/secret" element={<Secret/>}/>
-                <Route exact path="/secret/:id" element={<GetSecret/>}/>
-                <Route exact path="/secret/create" element={<CreateSecret/>}/>
-                <Route exact path="/secret/update/:id" element={<UpdateSecret/>}/>
-                <Route exact path="/credential" element={<Credential/>}/>
-                <Route exact path="/credential/:id" element={<GetCredential/>}/>
-                <Route exact path="/credential/create" element={<CreateCredential/>}/>
-                <Route exact path="/credential/update/:id" element={<UpdateCredential/>}/>
-                <Route exact path="/config" element={<Config/>}/>
+                <Route element={<Menu/>}>
+                    <Route exact path="/project" element={<Project/>}/>
+                    <Route exact path="/project/:id" element={<GetProject/>}/>
+                    <Route exact path="/project/create" element={<CreateProject/>}/>
+                    <Route exact path="/project/update/:id" element={<UpdateProject/>}/>
+                    <Route exact path="/project/:id/build/:buildId" element={<GetBuild/>}/>
+                    <Route exact path="/user" element={<User/>}/>
+                    <Route exact path="/user/:id" element={<GetUser/>}/>
+                    <Route exact path="/user/create" element={<CreateUser/>}/>
+                    <Route exact path="/user/update/:id" element={<UpdateUser/>}/>
+                    <Route exact path="/secret" element={<Secret/>}/>
+                    <Route exact path="/secret/:id" element={<GetSecret/>}/>
+                    <Route exact path="/secret/create" element={<CreateSecret/>}/>
+                    <Route exact path="/secret/update/:id" element={<UpdateSecret/>}/>
+                    <Route exact path="/credential" element={<Credential/>}/>
+                    <Route exact path="/credential/:id" element={<GetCredential/>}/>
+                    <Route exact path="/credential/create" element={<CreateCredential/>}/>
+                    <Route exact path="/credential/update/:id" element={<UpdateCredential/>}/>
+                    <Route exact path="/config" element={<Config/>}/>
+                </Route>
             </Routes>
         </BrowserRouter>
     );

@@ -1,13 +1,13 @@
 import Menu from "../component/Menu";
 import React from "react";
-import {useNavigate} from "react-router";
 import useInitStore from "../store/useInitStore";
 import CheckEmail from "./config/CheckEmail";
+import useAxiosConfig from "../use/useAxiosConfig";
 
 export default function Config() {
-    const navigate = useNavigate();
-
+    useAxiosConfig();
     useInitStore();
+
     return (
         <>
             <div className="flex flex-row">

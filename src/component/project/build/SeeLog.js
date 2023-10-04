@@ -1,7 +1,7 @@
 import {useParams} from "react-router";
 import React, {useEffect, useRef, useState} from "react";
 import api from "../../../api/api";
-import isNull from "../../../mixin/isNull";
+import isNull from "../../../mixin/global/isNull";
 import {useDispatch} from "react-redux";
 import {openAlert} from "../../../store/util";
 

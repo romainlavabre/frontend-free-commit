@@ -3,11 +3,13 @@ import React from "react";
 import GetAll from "../component/user/GetAll";
 import {useNavigate} from "react-router";
 import useInitStore from "../store/useInitStore";
+import useAxiosConfig from "../use/useAxiosConfig";
 
 export default function User() {
     const navigate = useNavigate();
-
+    useAxiosConfig();
     useInitStore();
+
     return (
         <>
             <div className="flex flex-row">

@@ -4,11 +4,12 @@ import React from "react";
 import GetOne from "../../component/secret/GetOne";
 import useInitStore from "../../store/useInitStore";
 import Delete from "../../component/secret/Delete";
+import useAxiosConfig from "../../use/useAxiosConfig";
 
 export default function GetSecret() {
     const {id} = useParams();
     const navigate = useNavigate();
-
+    useAxiosConfig();
     useInitStore();
 
     return (

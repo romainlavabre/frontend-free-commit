@@ -17,9 +17,6 @@ export default function GetProject() {
     return (
         <>
             <div className="flex flex-row">
-                <div className="">
-                    <Menu/>
-                </div>
                 <div className="w-full m-3">
                     <div className="flex justify-end">
                         <div className="flex justify-end">

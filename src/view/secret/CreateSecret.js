@@ -3,12 +3,13 @@ import React from "react";
 import {useNavigate} from "react-router";
 import Create from "../../component/secret/Create";
 import useInitStore from "../../store/useInitStore";
+import useAxiosConfig from "../../use/useAxiosConfig";
 
 export default function CreateSecret() {
     const navigate = useNavigate();
-
+    useAxiosConfig();
     useInitStore();
-    
+
     return (
         <>
             <div className="flex flex-row">

@@ -3,13 +3,14 @@ import Menu from "../../component/Menu";
 import React from "react";
 import GetOne from "../../component/user/GetOne";
 import useInitStore from "../../store/useInitStore";
+import useAxiosConfig from "../../use/useAxiosConfig";
 
 export default function GetUser() {
     const navigate = useNavigate();
     const {id} = useParams();
-
+    useAxiosConfig();
     useInitStore();
-    
+
     return (
         <>
             <div className="flex flex-row">

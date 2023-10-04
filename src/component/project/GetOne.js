@@ -3,7 +3,7 @@ import {useSelector} from "react-redux";
 import {useParams} from "react-router";
 import LaunchManually from "./build/LaunchManually";
 import ReloadSignatureKey from "./ReloadSignatureKey";
-import isNull from "../../mixin/isNull.js";
+import isNull from "../../mixin/global/isNull.js";
 
 export default function GetOne() {
     const {id} = useParams();

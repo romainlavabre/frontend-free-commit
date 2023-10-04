@@ -4,11 +4,12 @@ import React from "react";
 import useInitStore from "../../../store/useInitStore";
 import SeeLog from "../../../component/project/build/SeeLog";
 import GetOne from "../../../component/project/build/GetOne";
+import useAxiosConfig from "../../../use/useAxiosConfig";
 
 export default function GetBuild() {
     const {id} = useParams();
     const navigate = useNavigate();
-
+    useAxiosConfig();
     useInitStore();
 
     return (

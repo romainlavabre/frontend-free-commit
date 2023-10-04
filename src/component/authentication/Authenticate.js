@@ -35,8 +35,8 @@ export default function Authenticate() {
 
     return (
         <>
-            <div className={'flex justify-center'}>
-                <div className={'mt-20 w-100  shadow-fairfair p-5 text-center text-xl bg-light'}>
+            <div className="flex justify-center">
+                <div className="mt-20 w-100  shadow-fairfair p-5 text-center text-xl bg-gray-700/20">
                     <div className="flex justify-center">
                         <img src={logo} className="w-56"/>
                     </div>

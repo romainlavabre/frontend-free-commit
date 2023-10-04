@@ -5,10 +5,11 @@ import GetAll from "../component/credential/GetAll";
 import github from "../assets/img/github.png";
 import gitlab from "../assets/img/gitlab.svg";
 import useInitStore from "../store/useInitStore";
+import useAxiosConfig from "../use/useAxiosConfig";
 
 export default function Credential() {
     const navigate = useNavigate();
-
+    useAxiosConfig();
     useInitStore();
 
     return (

@@ -4,11 +4,12 @@ import {useForm} from "react-hook-form";
 import api from "../../api/api";
 import {useDispatch} from "react-redux";
 import {openAlert} from "../../store/util";
+import useAxiosConfig from "../../use/useAxiosConfig";
 
 export default function CheckEmail() {
     const {register, handleSubmit} = useForm();
     const dispatch = useDispatch();
-
+    useAxiosConfig();
     useInitStore();
 
     const submit = data => {

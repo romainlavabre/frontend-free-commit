@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    .button-green {
+        color: #4cae50;
+        background: rgba(76, 174, 80, 0.1);
+        @apply inline-flex items-center px-3 py-1 rounded text-center flex justify-center text-base font-medium whitespace-nowrap my-auto my-auto mx-1 !important;
+        min-width: 8rem;
+    }
+
+    .button-red {
+        color: #B32826;
+        background: rgba(179, 40, 38, 0.1);
+        @apply inline-flex items-center px-3 py-1 rounded text-center flex justify-center text-base font-medium bg-red-500/20 text-red-500/80 font-bold whitespace-nowrap mx-1 !important;
+        min-width: 8rem;
+    }
+
+    .button-orange {
+        @apply inline-flex items-center px-3 py-1 rounded text-center flex justify-center text-base font-medium bg-orange-500/10 text-orange-500/80 font-bold whitespace-nowrap my-auto mx-1 !important;
+        min-width: 8rem;
+    }
+
+    .button-yellow {
+        color: #F0E835;
+        background: rgba(240, 232, 53, 0.1);
+        @apply inline-flex items-center px-3 py-1 rounded text-center flex justify-center text-base font-medium font-bold whitespace-nowrap my-auto mx-1 !important;
+        min-width: 8rem;
+    }
+
+    .button-blue {
+        color: #2196F3;
+        background: rgba(33, 150, 243, 0.1);
+        @apply inline-flex items-center px-3 py-1 rounded text-center flex justify-center text-base font-medium font-bold whitespace-nowrap my-auto mx-1 !important;
+        min-width: 8rem;
+    }
+
+    .button-gray {
+        @apply inline-flex items-center px-3 py-1 rounded text-center flex justify-center text-base font-medium bg-gray-800 text-gray-400 font-bold whitespace-nowrap my-auto mx-1 !important;
+        min-width: 8rem;
+    }
+
+    .button-green:disabled,
+    .button-blue:disabled,
+    .button-red:disabled,
+    .button-yellow:disabled,
+    .button-orange:disabled
+    .button-gray:disabled {
+        @apply bg-gray-600 text-gray-800 !important;
+    }
+}
+

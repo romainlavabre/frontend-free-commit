@@ -2,8 +2,8 @@ import {useParams} from "react-router";
 import React, {useEffect, useState} from "react";
 import api from "../../../api/api";
 import {useSelector} from "react-redux";
-import dateFormatter from "../../../mixin/dateFormatter";
-import isNull from "../../../mixin/isNull.js";
+import dateFormatter from "../../../mixin/global/dateFormatter";
+import isNull from "../../../mixin/global/isNull.js";
 
 export default function GetOne() {
     const {buildId} = useParams();

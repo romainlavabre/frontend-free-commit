@@ -4,6 +4,9 @@ import {useDispatch, useSelector} from "react-redux";
 import PropTypes from "prop-types";
 import {openAlert} from "../../../store/util";
 import {useNavigate, useParams} from "react-router";
+import CloseIcon from "../../util/icon/CloseIcon";
+import isNull from "../../../mixin/global/isNull";
+import ExecutedTime from "./executed/ExecutedTime";
 
 export default function ExecutedBuild({projectScope}) {
     const dispatch = useDispatch();
@@ -26,19 +29,13 @@ export default function ExecutedBuild({projectScope}) {
     const fetchExecuted = async () => {
         const executed = await api.build.getExecuteds();
 
-        let result = [];
+        if (isNull(executed)) return;
 
-        if (projectScope === null) {
-            result = executed;
-        } else {
-            result = executed.filter(executed => executed.project_id == projectScope);
-        }
-
-        setExecuted(result);
+        setExecuted(executed);
     }
 
     const kill = async executorId => {
-        const isSuccess = api.build.kill(executorId);
+        const isSuccess = await api.build.killExecuted(executorId);
 
         if (isSuccess) {
             dispatch(openAlert({
@@ -54,21 +51,13 @@ export default function ExecutedBuild({projectScope}) {
         }));
     }
 
-    const getProject = id => {
-        const project = projects.find(project => project.id === id);
-
-        return project !== undefined
-            ? project
-            : {name: 'Unknow'}
-    }
-
     const openLog = executorId => {
         navigate(`/project/${id}/build/${executorId}`);
     }
 
     return (
         <>
-            <div className="bg-light p-10 mt-4">
+            <div className="bg-light">
                 <h4 className="text-center text-ovh text-3xl my-5">Current execution</h4>
 
                 <table className="table table-auto">
@@ -76,7 +65,7 @@ export default function ExecutedBuild({projectScope}) {
                     <tr>
                         <th>Task</th>
                         <th>Project</th>
-                        <td>Status</td>
+                        <td>Time</td>
                         <td>Kill</td>
                     </tr>
 
@@ -91,35 +80,21 @@ export default function ExecutedBuild({projectScope}) {
                     }
                     {
                         executed.map(executed => (
-                            <tr>
+                            <tr key={executed.executor_id}>
                                 <td className="text-blue-500 hover:underline cursor-pointer"
                                     onClick={() => openLog(executed.executor_id)}>
                                     #{executed.executor_id}
                                 </td>
                                 <td className="text-green-500">
-                                    {getProject(executed.project_id).name}
+                                    {executed.project_name}
                                 </td>
                                 <td>
-                                    <button disabled
-                                            className="text-blue-500 animate-spin mx-5">
-                                        <svg xmlns=" http://www.w3.org/2000/svg"
-                                             className="h-8 w-8" fill="none"
-                                             viewBox="0 0 24 24"
-                                             stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                                                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
-                                        </svg>
-                                    </button>
+                                    <ExecutedTime at={executed.at}/>
                                 </td>
                                 <td>
-                                    <button className="text-red-500 hover:text-red-600 mx-5"
+                                    <button className="badge-red-square"
                                             onClick={() => kill(executed.executor_id)}>
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 20 20"
-                                             fill="currentColor">
-                                            <path fillRule="evenodd"
-                                                  d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                                                  clipRule="evenodd"/>
-                                        </svg>
+                                        <CloseIcon size={6}/>
                                     </button>
                                 </td>
                             </tr>

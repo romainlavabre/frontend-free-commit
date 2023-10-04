@@ -3,10 +3,11 @@ import React from "react";
 import {useNavigate} from "react-router";
 import Create from "../../component/credential/Create";
 import useInitStore from "../../store/useInitStore";
+import useAxiosConfig from "../../use/useAxiosConfig";
 
 export default function CreateCredential() {
     const navigate = useNavigate();
-
+    useAxiosConfig();
     useInitStore();
 
     return (

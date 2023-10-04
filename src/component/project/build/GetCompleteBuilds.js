@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
 import api from "../../../api/api";
 import {useNavigate, useParams} from "react-router";
-import dateFormatter from "../../../mixin/dateFormatter";
+import dateFormatter from "../../../mixin/global/dateFormatter";
 
 export default function GetCompleteBuilds() {
     const {id} = useParams();

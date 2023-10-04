@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    table {
+        @apply w-full text-center;
+    }
+
+    tr {
+        @apply py-36;
+    }
+
+    table tr {
+        @apply border border-2 border-gray-700;
+    }
+}

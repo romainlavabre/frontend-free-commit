@@ -4,7 +4,7 @@ import {load as loadSecret} from "./secret";
 import {load as loadCredential} from "./credential";
 import {useDispatch, useSelector} from "react-redux";
 import api from "../api/api";
-import isNull from "../mixin/isNull";
+import isNull from "../mixin/global/isNull";
 import {useEffect} from "react";
 
 export default function useInitStore() {
