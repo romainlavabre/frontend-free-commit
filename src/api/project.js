@@ -4,9 +4,9 @@ import getEnv from "../mixin/getEnv";
 
 
 const project = {
-    async pagination() {
+    async pagination(perPage = 10) {
         try {
-            const response = await axios.get(getEnv('REACT_APP_API_URL') + '/developer/paginations/project', this.getConfig());
+            const response = await axios.get(getEnv('REACT_APP_API_URL') + `/api/developer/paginations/project?per_page=${perPage}`, this.getConfig());
 
             return response.data;
         } catch (e) {

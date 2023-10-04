@@ -2,25 +2,34 @@ import {useNavigate} from "react-router";
 import Pagination from "../util/pagination/Pagination";
 import getEnv from "../../mixin/getEnv";
 import database from "../../database/database";
+import React from "react";
+import PlusIcon from "../util/icon/PlusIcon";
 
 export default function GetAll() {
     const navigate = useNavigate();
 
     return (
         <>
-            <h4 className="font-bold">Secrets</h4>
+            <div className="flex justify-between">
+                <div>
+                    <h4 className="text-3xl">Secrets</h4>
+                </div>
+                <div>
+                    <button className="badge-green-square" onClick={() => navigate('/secret/create')}>
+                        <PlusIcon size={8}/>
+                    </button>
+                </div>
+            </div>
             <Pagination
                 name={"secret"}
-
                 row={{
                     onClick: data => {
                         navigate(`/secret/${data.secret_id}`)
                     }
                 }}
-
                 columns={[
                     {
-                        key: "Id",
+                        key: "ID",
                         value: "secret_id",
                         searchInput: true,
                         comparator: "eq",
@@ -34,13 +43,13 @@ export default function GetAll() {
                         }
                     },
                     {
-                        key: "Name",
+                        key: "NAME",
                         value: "secret_name",
                         searchInput: true,
                         comparator: "contains"
                     },
                     {
-                        key: "Scope",
+                        key: "SCOPE",
                         value: "secret_scope",
                         searchInput: true,
                         comparator: "contains",
@@ -61,9 +70,8 @@ export default function GetAll() {
                         }
                     }
                 ]}
-
                 fetch={{
-                    url: getEnv("REACT_APP_API_URL") + '/developer/paginations/secret',
+                    url: getEnv("REACT_APP_API_URL") + '/api/developer/paginations/secret',
                     options: {
                         headers: {
                             Authorization: `Bearer ${database.read(database.TABLE_AUTHENTICATION, "access_token")}`
@@ -72,52 +80,6 @@ export default function GetAll() {
                     interval: 20000
                 }}
             />
-
-            {/**
-             <table className="table table-auto">
-             <thead>
-             <tr>
-             <th>Id</th>
-             <th>Name</th>
-             <th>Value</th>
-             <th>Scope</th>
-             </tr>
-             </thead>
-             <tbody>
-             {
-                    secrets.length === 0
-                        ? (
-                            <tr>
-                                <td colSpan="4">No data available</td>
-                            </tr>
-                        )
-                        : null
-                }
-             {
-                    secrets.map(secret => (
-                        <>
-                            <tr key={secret.id}>
-                                <td className="text-blue-500 hover:underline hover:cursor-pointer"
-                                    onClick={() => openSecret(secret.id)}>#{secret.id}
-                                </td>
-                                <td>{secret.name}</td>
-                                <td>*****</td>
-                                <td>
-                                    {
-                                        secret.project_id === null
-                                            ? <span className="text-red-500">GLOBAL</span>
-                                            : (
-                                                <span className="text-green-500">{getProject(secret.project_id).name}</span>
-                                            )
-                                    }
-                                </td>
-                            </tr>
-                        </>
-                    ))
-                }
-             </tbody>
-             </table>
-             **/}
         </>
     );
 }

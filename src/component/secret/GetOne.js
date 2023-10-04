@@ -1,61 +1,95 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
-import {useParams} from "react-router";
-import mixin from "../../mixin/mixin";
+import {useNavigate, useParams} from "react-router";
+import EditIcon from "../util/icon/EditIcon";
+import BackIcon from "../util/icon/BackIcon";
+import UpdateEntity from "../util/form/UpdateEntity";
+import isNull from "../../mixin/global/isNull";
+import api from "../../api/api";
+import useApi from "../../api/auto/useApi";
 
 export default function GetOne() {
+    const {findOneBy} = useApi();
+    const navigate = useNavigate();
     const {id} = useParams();
-    const secret = useSelector(state => state.secret.secrets.find(secret => secret.id == id));
-    const projects = useSelector(state => state.project.projects);
+    const secret = useSelector(state => state.api?.api?.secrets?.values[id]);
+    const [projects, setProjects] = useState();
 
+    useEffect(() => {
+        findOneBy("api", "secrets", "id", id, "developer");
 
-    const getProject = id => {
-        return projects.find(project => project.id == id);
-    }
+        const fetchProject = async () => {
+            setProjects((await api.project.pagination(100000)).data);
+        }
 
-    if (mixin.isNull(secret)) {
-        return null;
-    }
+        fetchProject();
+    }, []);
+
+    if (isNull(projects)) return null;
 
     return (
-        <>
-            <div className="bg-light p-10 mt-4">
-                <h4 className="text-center text-fairfair text-3xl my-5">{secret.secretname}</h4>
-
-                <table className="table table-auto">
-                    <tbody>
-                    <tr>
-                        <th>Name</th>
-                        <td>{secret.name}</td>
-                    </tr>
-                    <tr>
-                        <th>Value</th>
-                        <td>******</td>
-                    </tr>
-                    <tr>
-                        <th>Escape char</th>
-                        <td>{secret.escape_char}</td>
-                    </tr>
-                    <tr>
-                        <th>Projects</th>
-                        <td>
-                            {
-                                secret.projects_id.length === 0
-                                    ? (
-                                        <span className="text-red-500">PUBLIC</span>
-                                    )
-                                    : secret.projects_id.map(id => (
-                                        <div key={id.toString()}>
-                                            <span className="text-green-500">{getProject(id).name}</span>
-                                            <br/>
-                                        </div>
-                                    ))
-                            }
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+        <div>
+            <div className="flex justify-between">
+                <div>
+                    <h4 className="text-center text-3xl">{secret?.name}</h4>
+                </div>
+                <div>
+                    <button
+                        className="badge-orange-square"
+                        onClick={() => navigate(`/secret/update/${id}`)}
+                    >
+                        <EditIcon size={8}/>
+                    </button>
+                    <button className="badge-blue-square ml-3" onClick={() => navigate(`/secret`)}>
+                        <BackIcon size={8}/>
+                    </button>
+                </div>
             </div>
-        </>
+            <hr className="my-5 w-8/12 mx-auto"/>
+            <div className="grid grid-cols-2 gap-4">
+                <div className="col-span-1">
+                    <UpdateEntity
+                        subject="secrets"
+                        id={id}
+                        service="api"
+                        role="admin"
+                        fields={[
+                            {
+                                title: "Name",
+                                name: "name",
+                                type: "text",
+                                disabled: true
+                            },
+                            {
+                                title: "Escape char",
+                                name: "escape_char",
+                                type: "text",
+                                disabled: true
+                            }
+                        ]}
+                    />
+                </div>
+                <div className="col-span-1">
+                    <UpdateEntity
+                        subject="secrets"
+                        id={id}
+                        service="api"
+                        role="admin"
+                        fields={[
+                            {
+                                title: "Project",
+                                name: "projects_id",
+                                type: "array",
+                                items: projects,
+                                key: "project_id",
+                                value: "project_name",
+                                multiple: true,
+                                disabled: true
+                            }
+                        ]}
+                    />
+                </div>
+            </div>
+        </div>
     );
 }
