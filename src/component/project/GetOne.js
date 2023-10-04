@@ -1,139 +1,149 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {useSelector} from "react-redux";
-import {useParams} from "react-router";
+import {useNavigate, useParams} from "react-router";
 import LaunchManually from "./build/LaunchManually";
-import ReloadSignatureKey from "./ReloadSignatureKey";
 import isNull from "../../mixin/global/isNull.js";
+import EditIcon from "../util/icon/EditIcon";
+import BackIcon from "../util/icon/BackIcon";
+import Delete from "./Delete";
+import useApi from "../../api/auto/useApi";
+import UpdateEntity from "../util/form/UpdateEntity";
+import Webhook from "./webhook/Webhook";
+import GetCompleteBuilds from "./build/GetCompleteBuilds";
 
 export default function GetOne() {
+    const navigate = useNavigate();
+    const {findOneBy, findAll} = useApi();
     const {id} = useParams();
-    const project = useSelector(state => state.project.projects.find(project => project.id == id));
-    const users = useSelector(state => state.user.users);
-    const credentials = useSelector(state => state.credential.credentials);
+    const project = useSelector(state => state.api?.api?.projects?.values[id]);
+    const developers = useSelector(state => state.api?.api?.developers?.values?.filter(user => !isNull(user)));
+    const credentials = useSelector(state => state.api?.api?.credentials?.values?.filter(credential => !isNull(credential)));
 
-    const getUser = id => {
-        return users.find(user => user.id === id);
-    }
+    useEffect(() => {
+        findOneBy("api", "projects", "id", id, "developer");
+        findAll("api", "credentials", "developer");
+        findAll("api", "developers", "developer");
+    }, []);
 
-    const getCredential = id => {
-        return credentials.find(credential => credential.id === id);
-    }
 
-    if (isNull(project)) {
-        return null;
-    }
+    if (isNull(project) || isNull(credentials) || isNull(developers)) return null;
 
     return (
         <>
-            <div className="bg-light p-10 mt-4">
-                <div className="flex justify-end">
+            <div className="flex justify-between mb-3">
+                <h4 className="text-center text-fairfair text-3xl">{project?.name}</h4>
+
+                <div>
                     <LaunchManually projectId={id}/>
+                    <button
+                        className="badge-orange-square ml-3"
+                        onClick={() => navigate(`/project/update/${id}`)}
+                        title="update"
+                    >
+                        <EditIcon size={8}/>
+                    </button>
+                    <Delete id={id}/>
+                    <button
+                        className="badge-blue-square ml-5"
+                        onClick={() => navigate('/project')}
+                        title="back"
+                    >
+                        <BackIcon size={8}/>
+                    </button>
                 </div>
-                <h4 className="text-center text-fairfair text-3xl my-5">{project.name}</h4>
-
-                <table className="table table-auto">
-                    <tbody>
-                    <tr>
-                        <th>Name</th>
-                        <td className="text-fairfair">{project.name}</td>
-                    </tr>
-                    <tr>
-                        <th>Description</th>
-                        <td>{project.description}</td>
-                    </tr>
-                    <tr>
-                        <th>Repository</th>
-                        <td className="text-ovh">{project.repository}</td>
-                    </tr>
-                    <tr>
-                        <th>Branch</th>
-                        <td className="text-orange-500">{project.branch}</td>
-                    </tr>
-                    <tr>
-                        <th>Deployment file path</th>
-                        <td className="text-indigo-400">{project.spec_file_path}</td>
-                    </tr>
-                    <tr>
-                        <th>Keep number build</th>
-                        <td>{project.keep_number_build}</td>
-                    </tr>
-                    <tr>
-                        <th>Allow concurrent execution</th>
-                        <td>{project.allow_concurrent_execution ? 'Yes' : 'No'}</td>
-                    </tr>
-                    <tr>
-                        <th>Developers</th>
-                        <td>
+            </div>
+            <hr className="my-5 w-8/12 mx-auto"/>
+            <div className="grid grid-cols-2 gap-4">
+                <div className="col-span-1">
+                    <UpdateEntity
+                        service="api"
+                        subject="projects"
+                        role="admin"
+                        id={id}
+                        fields={[
                             {
-                                project.developers_id.length === 0
-                                    ? 'Nobody'
-                                    : null
-                            }
+                                title: "Name",
+                                name: "name",
+                                type: "text",
+                                disabled: true
+                            },
                             {
-                                project.developers_id.map(developerId => (
-                                    <div key={developerId.toString()}>
-                                        <span key={developerId} className="text-green-500">
-                                            {getUser(developerId).username}
-                                        </span>
-                                        <br/>
-                                    </div>
-                                ))
-                            }
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Repository credential</th>
-                        <td className="text-blue-500">
+                                title: "Description",
+                                name: "description",
+                                type: "long-text",
+                                disabled: true
+                            },
                             {
-                                project.repository_credential_id === null
-                                    ? 'This repository is public'
-                                    : getCredential(project.repository_credential_id).name
+                                title: "Number build to keep",
+                                name: "keep_number_build",
+                                type: "number",
+                                disabled: true
+                            },
+                            {
+                                title: "Allow concurrent execution",
+                                name: "allow_concurrent_execution",
+                                type: "boolean",
+                                disabled: true
+                            },
+                            {
+                                title: "Repository credential",
+                                name: "repository_credential_id",
+                                type: "array",
+                                items: credentials,
+                                key: "id",
+                                value: "name",
+                                disabled: true
                             }
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-
-                <h4 className="text-center text-fairfair text-3xl my-5">Webhook</h4>
-                <table className="table table-auto">
-                    <tbody>
-                    <tr>
-                        <th className="flex justify-center border-none">
-                            <ReloadSignatureKey projectId={id}/>
-                            Webhook Secret key
-                        </th>
-                        <td>
-                            <span className="mx-4">
-                            {project.signature_key}
-                            </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Webhook URL</th>
-                        <td>
-                            <span className="text-orange-400">
-                                URL
-                            </span>
-                            /api/guest/webhooks/build/{id}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th className="flex justify-center text-red-500 border-none">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                                 stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                                      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
-                            </svg>
-                            Webhook Accept
-                        </th>
-                        <td>
-                            <span className="text-orange-400">
-                                application/json
-                            </span>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                        ]}
+                    />
+                </div>
+                <div className="col-span-1">
+                    <UpdateEntity
+                        service="api"
+                        subject="projects"
+                        role="admin"
+                        id={id}
+                        fields={[
+                            {
+                                title: "Repository",
+                                name: "repository",
+                                type: "text",
+                                disabled: true
+                            },
+                            {
+                                title: "Branch",
+                                name: "branch",
+                                type: "text",
+                                disabled: true
+                            },
+                            {
+                                title: "Deployment file path (Start to project root /)",
+                                name: "spec_file_path",
+                                type: "text",
+                                disabled: true
+                            },
+                            {
+                                title: "Allowed developers",
+                                name: "developers_id",
+                                type: "array",
+                                items: developers,
+                                key: "id",
+                                value: "username",
+                                multiple: true,
+                                disabled: true
+                            }
+                        ]}
+                    />
+                </div>
+            </div>
+            <hr className="my-5 w-8/12 mx-auto"/>
+            <div className="grid grid-cols-2 gap-4">
+                <div className="col-span-1">
+                    <Webhook/>
+                </div>
+                <div className="col-span-1">
+                    <GetCompleteBuilds/>
+                </div>
             </div>
         </>
     );

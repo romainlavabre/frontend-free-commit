@@ -3,9 +3,10 @@ import {useDispatch, useSelector} from "react-redux";
 import React from "react";
 import {openAlert, openConfirm} from "../../store/util";
 import {remove} from "../../store/secret";
-import api from "../../api/api";
 import mapErrorMessage from "../../mixin/mapErrorMessage";
 import {useNavigate} from "react-router";
+import TrashIcon from "../util/icon/TrashIcon";
+import api from "../../api/api";
 
 export default function Delete({id}) {
     const dispatch = useDispatch();
@@ -17,9 +18,7 @@ export default function Delete({id}) {
             title: "You will delete this project",
             callback: [
                 async (isDelete) => {
-                    if (!isDelete) {
-                        return;
-                    }
+                    if (!isDelete) return;
 
                     try {
                         await api.project.delete(id);
@@ -43,15 +42,12 @@ export default function Delete({id}) {
     }
 
     return (
-        <div className="bg-light p-10 mt-4">
-            <h4 className="text-red-500 font-bold text-center text-3xl">Danger Zone</h4>
 
-            <button
-                className="bg-red-600 p-2 rounded"
-                onClick={() => confirmDeletion()}>
-                Delete project
-            </button>
-        </div>
+        <button
+            className="badge-red-square ml-5"
+            onClick={() => confirmDeletion()}>
+            <TrashIcon size={8}/>
+        </button>
     );
 }
 

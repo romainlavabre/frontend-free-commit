@@ -1,13 +1,11 @@
 import React from "react";
 import GetAll from "../component/project/GetAll";
-import useInitStore from "../store/useInitStore";
 import ExecutedBuild from "../component/project/build/ExecutedBuild";
 import QueuedBuild from "../component/project/build/QueuedBuild";
 import useAxiosConfig from "../use/useAxiosConfig";
 
 export default function Project() {
     useAxiosConfig();
-    useInitStore();
 
     return (
         <>

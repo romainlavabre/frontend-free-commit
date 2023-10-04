@@ -19,6 +19,8 @@
 
 .input-number {
     @apply input-text;
+    background: #131722;
+    border-color: #50535E;
 }
 
 .input-checkbox {
