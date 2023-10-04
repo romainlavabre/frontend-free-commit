@@ -1,12 +1,11 @@
-import {useNavigate, useParams} from "react-router";
 import Menu from "../../component/Menu";
 import React from "react";
-import Update from "../../component/user/Update";
+import {useNavigate} from "react-router";
+import Create from "../../component/developer/Create";
 import useInitStore from "../../store/useInitStore";
 import useAxiosConfig from "../../use/useAxiosConfig";
 
-export default function UpdateUser() {
-    const {id} = useParams();
+export default function CreateUser() {
     const navigate = useNavigate();
     useAxiosConfig();
     useInitStore();
@@ -19,7 +18,7 @@ export default function UpdateUser() {
                 </div>
                 <div className="w-full m-3">
                     <div className="flex justify-end">
-                        <button className="bg-gray-500 rounded py-2 px-10" onClick={() => navigate(`/user/${id}`)}>
+                        <button className="bg-gray-500 rounded py-2 px-10" onClick={() => navigate('/developer')}>
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 20 20"
                                  fill="currentColor">
                                 <path fillRule="evenodd"
@@ -28,7 +27,7 @@ export default function UpdateUser() {
                             </svg>
                         </button>
                     </div>
-                    <Update/>
+                    <Create/>
                 </div>
             </div>
         </>

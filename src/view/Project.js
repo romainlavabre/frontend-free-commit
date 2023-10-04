@@ -12,7 +12,7 @@ export default function Project() {
             <div className="w-full">
                 <GetAll/>
             </div>
-            <hr/>
+            <hr className="my-5 w-8/12 mx-auto"/>
             <div className="flex">
                 <div className="w-full mr-1">
                     <QueuedBuild projectScope={null}/>

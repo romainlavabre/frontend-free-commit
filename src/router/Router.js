@@ -3,10 +3,10 @@ import {Route, Routes} from "react-router";
 import React from "react";
 import Login from "../view/Login";
 import Project from "../view/Project";
-import User from "../view/User";
-import CreateUser from "../view/user/CreateUser";
-import GetUser from "../view/user/GetUser";
-import UpdateUser from "../view/user/UpdateUser";
+import Developer from "../view/Developer";
+import CreateUser from "../view/developer/CreateUser";
+import GetDeveloper from "../view/developer/GetDeveloper";
+import UpdateDeveloper from "../view/developer/UpdateDeveloper";
 import Secret from "../view/Secret";
 import CreateSecret from "../view/secret/CreateSecret";
 import UpdateSecret from "../view/secret/UpdateSecret";
@@ -33,10 +33,10 @@ export default function Router() {
                     <Route exact path="/project/create" element={<CreateProject/>}/>
                     <Route exact path="/project/update/:id" element={<UpdateProject/>}/>
                     <Route exact path="/project/:id/build/:buildId" element={<GetBuild/>}/>
-                    <Route exact path="/user" element={<User/>}/>
-                    <Route exact path="/user/:id" element={<GetUser/>}/>
-                    <Route exact path="/user/create" element={<CreateUser/>}/>
-                    <Route exact path="/user/update/:id" element={<UpdateUser/>}/>
+                    <Route exact path="/developer" element={<Developer/>}/>
+                    <Route exact path="/developer/:id" element={<GetDeveloper/>}/>
+                    <Route exact path="/developer/create" element={<CreateUser/>}/>
+                    <Route exact path="/developer/update/:id" element={<UpdateDeveloper/>}/>
                     <Route exact path="/secret" element={<Secret/>}/>
                     <Route exact path="/secret/:id" element={<GetSecret/>}/>
                     <Route exact path="/secret/create" element={<CreateSecret/>}/>

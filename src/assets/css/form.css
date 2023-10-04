@@ -29,6 +29,8 @@
 
 .input-select {
     @apply input-text py-5 w-48 h-8;
+    background: #131722;
+    border-color: #50535E;
 }
 
 .form-submit {

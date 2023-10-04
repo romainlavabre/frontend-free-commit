@@ -25,8 +25,8 @@ export default function Menu() {
         {
             icon: <UserGroupIcon size={5}/>,
             name: "Users",
-            active: location.pathname.startsWith('/user'),
-            route: '/user'
+            active: location.pathname.startsWith('/developer'),
+            route: '/developer'
         },
         {
             icon: <KeyIcon size={5}/>,
