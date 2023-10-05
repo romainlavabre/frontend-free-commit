@@ -77,7 +77,13 @@ export default function GetOne() {
                                     }
                                 ],
                                 disabled: true
-                            }
+                            },
+                            {
+                                title: "Enabled",
+                                name: "enabled",
+                                type: "boolean",
+                                disabled: true
+                            },
                         ]}
                     />
                 </div>

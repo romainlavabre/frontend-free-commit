@@ -68,7 +68,12 @@ export default function Update() {
                                         value: "ROLE_DEVELOPER"
                                     }
                                 ]
-                            }
+                            },
+                            {
+                                title: "Enabled",
+                                name: "enabled",
+                                type: "boolean"
+                            },
                         ]}
                     />
                 </div>
