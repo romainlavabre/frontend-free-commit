@@ -1,6 +1,6 @@
 import React from "react";
 import {Outlet, useLocation, useNavigate} from "react-router";
-import logo from "../assets/img/logo/logo_transparent.png";
+import logo from "../assets/img/logo/logo-light-2.png";
 import PowerIcon from "./util/icon/PowerIcon";
 import CogIcon from "./util/icon/CogIcon";
 import KeyIcon from "./util/icon/KeyIcon";

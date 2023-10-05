@@ -7,7 +7,7 @@ const config = {
     async checkEmail(email) {
         try {
             const response = await axios.post(
-                getEnv('REACT_APP_API_URL') + `/admin/config/mail/test/${email}`, null, this.getConfig()
+                getEnv('REACT_APP_API_URL') + `/api/admin/config/mail/test/${email}`, null, this.getConfig()
             );
 
             return response.data;

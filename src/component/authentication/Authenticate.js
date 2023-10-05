@@ -6,7 +6,7 @@ import database from "../../database/database";
 import mixin from "../../mixin/mixin";
 import {useNavigate} from "react-router";
 import {useForm} from "react-hook-form";
-import logo from "../../assets/img/logo/logo_transparent.png";
+import logo from "../../assets/img/logo/logo-light.png";
 
 export default function Authenticate() {
 
