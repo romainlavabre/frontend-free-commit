@@ -6,6 +6,7 @@ import database from "../../database/database";
 import {addOrOverwrite, remove} from "../../store/api";
 import useAlert from "../../use/useAlert";
 import enums from "../../enum/enums";
+import getEnv from "../../mixin/getEnv";
 
 let inProgress = [];
 
@@ -43,7 +44,7 @@ export default function useApi() {
 
         try {
             const response = await axios.get(
-                process.env.REACT_APP_API_URL + `/${service}/${role}/${subjectApi}/${prop === "id" ? value : `by/${prop.replace(new RegExp('_id$'), '')}/${value}`}`,
+                getEnv('REACT_APP_API_URL') + `/${service}/${role}/${subjectApi}/${prop === "id" ? value : `by/${prop.replace(new RegExp('_id$'), '')}/${value}`}`,
                 role !== "guest"
                     ? {
                         headers: {
@@ -103,7 +104,7 @@ export default function useApi() {
 
         try {
             const response = await axios.get(
-                process.env.REACT_APP_API_URL + `/${service}/${role}/${subjectApi}`,
+                getEnv('REACT_APP_API_URL') + `/${service}/${role}/${subjectApi}`,
                 role !== "guest"
                     ? {
                         headers: {
@@ -167,7 +168,7 @@ export default function useApi() {
         try {
 
             const response = await axios.get(
-                process.env.REACT_APP_API_URL + `/${service}/${role}/${subjectApi}/${prop === "id" ? value : `by/${prop.replace(new RegExp('_id$'), '')}/${value}`}`,
+                getEnv('REACT_APP_API_URL') + `/${service}/${role}/${subjectApi}/${prop === "id" ? value : `by/${prop.replace(new RegExp('_id$'), '')}/${value}`}`,
                 role !== "guest"
                     ? {
                         headers: {
@@ -219,7 +220,7 @@ export default function useApi() {
 
             try {
                 const response = await axios.post(
-                    process.env.REACT_APP_API_URL + `/${service}/${role}/${subjectApi}`,
+                    getEnv('REACT_APP_API_URL') + `/${service}/${role}/${subjectApi}`,
                     payload,
                     role !== "guest"
                         ? {
@@ -270,7 +271,7 @@ export default function useApi() {
 
             try {
                 const response = await axios.patch(
-                    process.env.REACT_APP_API_URL + `/${service}/${role}/${subjectApi}/${id}/${prop.replace(new RegExp('_id$'), '')}`,
+                    getEnv('REACT_APP_API_URL') + `/${service}/${role}/${subjectApi}/${id}/${prop.replace(new RegExp('_id$'), '')}`,
                     payload,
                     role !== "guest"
                         ? {
@@ -320,7 +321,7 @@ export default function useApi() {
 
             try {
                 await axios.delete(
-                    process.env.REACT_APP_API_URL + `/${service}/${role}/${subjectApi}/${id}`,
+                    getEnv('REACT_APP_API_URL') + `/${service}/${role}/${subjectApi}/${id}`,
                     role !== "guest"
                         ? {
                             headers: {
