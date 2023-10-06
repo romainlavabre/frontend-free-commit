@@ -4,19 +4,10 @@ import getEnv from "../mixin/getEnv";
 
 
 const build = {
-    async findAllByProject(id) {
-        try {
-            const response = await axios.get(getEnv('REACT_APP_API_URL') + `/developer/builds/by/project/${id}`, this.getConfig());
 
-            return response.data;
-        } catch (e) {
-            console.log(e)
-            return null;
-        }
-    },
     async findById(id) {
         try {
-            const response = await axios.get(getEnv('REACT_APP_API_URL') + `/developer/builds/${id}`, this.getConfig());
+            const response = await axios.get(getEnv('REACT_APP_API_URL') + `/api/developer/builds/${id}`, this.getConfig());
 
             return response.data;
         } catch (e) {

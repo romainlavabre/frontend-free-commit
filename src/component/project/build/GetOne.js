@@ -7,15 +7,13 @@ import isNull from "../../../mixin/global/isNull.js";
 
 export default function GetOne() {
     const {buildId} = useParams();
-    const projects = useSelector(state => state.project.projects);
+    const project = useSelector(state => state.api?.api?.projects?.values?.find(project => !isNull(project) && project.id == buildId));
     const [build, setBuild] = useState(null);
-    const [project, setProject] = useState(null);
 
     useEffect(async () => {
         const build = await api.build.findById(buildId);
 
         setBuild(build);
-        setProject(projects.find(project => project.id === build.project_id))
     }, []);
 
     const getMinutes = () => {
@@ -27,9 +25,8 @@ export default function GetOne() {
         return diffMins;
     }
 
-    if (isNull(build) || isNull(project)) {
-        return null;
-    }
+    if (isNull(build) || isNull(project)) return null;
+
 
     return (
         <>
