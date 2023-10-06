@@ -1,11 +1,9 @@
 import React, {useRef} from "react";
 import api from "../../api/api";
-import useAxiosConfig from "../../use/useAxiosConfig";
 import useAlert from "../../use/useAlert";
-import CheckIcon from "../../component/util/icon/CheckIcon";
+import CheckIcon from "../util/icon/CheckIcon";
 
 export default function CheckEmail() {
-    useAxiosConfig();
     const alert = useAlert();
     const emailInput = useRef();
 
@@ -19,7 +17,7 @@ export default function CheckEmail() {
     return (
         <div>
             <div className="input-group">
-                <label>Recipient</label>
+                <label>Test email</label>
                 <div className="flex">
                     <input className="input-text" ref={emailInput} placeholder="Recipient"/>
                     <button className="text-green-500" onClick={submit}>

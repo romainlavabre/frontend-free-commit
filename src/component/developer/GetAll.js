@@ -3,22 +3,22 @@ import Pagination from "../util/pagination/Pagination";
 import getEnv from "../../mixin/getEnv";
 import database from "../../database/database";
 import React from "react";
+import PlusIcon from "../util/icon/PlusIcon";
 
 export default function User() {
     const navigate = useNavigate();
 
     return (
         <>
-            <div className="flex justify-end">
-                <button className="bg-ovh rounded py-2 px-10" onClick={() => navigate('/developer/create')}>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 20 20"
-                         fill="currentColor">
-                        <path
-                            d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"/>
-                    </svg>
+            <div className="flex justify-between">
+                <div>
+                    <h4 className="text-3xl">Developer</h4>
+                </div>
+                <button className="badge-green-square" onClick={() => navigate('/developer/create')}>
+                    <PlusIcon size={8}/>
                 </button>
             </div>
-            <h4 className="font-bold">Users</h4>
+            <hr className="mx-auto w-8/12 my-5"/>
 
             <Pagination
                 columns={[

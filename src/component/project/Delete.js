@@ -1,17 +1,13 @@
 import PropTypes from "prop-types";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import React from "react";
-import {openAlert, openConfirm} from "../../store/util";
-import {remove} from "../../store/secret";
-import mapErrorMessage from "../../mixin/mapErrorMessage";
-import {useNavigate} from "react-router";
+import {openConfirm} from "../../store/util";
 import TrashIcon from "../util/icon/TrashIcon";
-import api from "../../api/api";
+import useApi from "../../api/auto/useApi";
 
 export default function Delete({id}) {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const project = useSelector(state => state.project.projects.find(project => project.id == id));
+    const {remove} = useApi();
 
     const confirmDeletion = () => {
         dispatch(openConfirm({
@@ -20,22 +16,7 @@ export default function Delete({id}) {
                 async (isDelete) => {
                     if (!isDelete) return;
 
-                    try {
-                        await api.project.delete(id);
-
-                        dispatch(openAlert({
-                            type: 'success',
-                            title: 'Project deleted'
-                        }));
-
-                        navigate('/project');
-                        dispatch(remove(project));
-                    } catch (e) {
-                        dispatch(openAlert({
-                            type: 'error',
-                            title: mapErrorMessage(e)
-                        }));
-                    }
+                    remove("api", "projects", id, "admin");
                 }
             ]
         }))

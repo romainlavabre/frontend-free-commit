@@ -16,6 +16,16 @@ const config = {
             return null;
         }
     },
+    async getEnv() {
+        try {
+            const response = await axios.get(getEnv('REACT_APP_API_URL') + `/api/admin/config/env`, this.getConfig());
+
+            return response.data;
+        } catch (e) {
+            console.log(e)
+            return null;
+        }
+    },
     getConfig() {
         const accessToken = database.read(database.TABLE_AUTHENTICATION, 'access_token');
 

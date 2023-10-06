@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from "react";
 import api from "../../../api/api";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import PropTypes from "prop-types";
 import {openAlert} from "../../../store/util";
 import {useNavigate, useParams} from "react-router";
@@ -8,12 +8,11 @@ import CloseIcon from "../../util/icon/CloseIcon";
 import isNull from "../../../mixin/global/isNull";
 import ExecutedTime from "./executed/ExecutedTime";
 
-export default function ExecutedBuild({projectScope}) {
+export default function ExecutedBuild() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {id} = useParams();
     const [executed, setExecuted] = useState([]);
-    const projects = useSelector(state => state.project.projects);
     const intervalRef = useRef();
 
     useEffect(() => {

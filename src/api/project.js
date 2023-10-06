@@ -38,12 +38,6 @@ const project = {
         const response = await axios.post(getEnv('REACT_APP_API_URL') + '/admin/projects', payload, this.getConfig());
         return response.data;
     },
-    async update(id, property, payload) {
-        await axios.patch(getEnv('REACT_APP_API_URL') + `/admin/projects/${id}/${property}`, payload, this.getConfig());
-    },
-    async delete(id) {
-        await axios.delete(getEnv('REACT_APP_API_URL') + `/admin/projects/${id}`, this.getConfig());
-    },
     getConfig() {
         const accessToken = database.read(database.TABLE_AUTHENTICATION, 'access_token');
 

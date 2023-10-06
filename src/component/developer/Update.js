@@ -81,7 +81,7 @@ export default function Update() {
                     <UpdateEntity
                         id={id}
                         subject="developers"
-                        role="developer"
+                        role="admin"
                         service={"api"}
                         fields={[
 

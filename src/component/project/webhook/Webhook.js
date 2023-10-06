@@ -1,6 +1,6 @@
 import {useParams} from "react-router";
 import CopyIcon from "../../util/icon/CopyIcon";
-import ReloadSignatureKey from "../ReloadSignatureKey";
+import ReloadSignatureKey from "./ReloadSignatureKey";
 import React from "react";
 import useClipboard from "../../../use/useClipboard";
 import useAlert from "../../../use/useAlert";

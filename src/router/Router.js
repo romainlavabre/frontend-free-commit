@@ -4,7 +4,7 @@ import React from "react";
 import Login from "../view/Login";
 import Project from "../view/Project";
 import Developer from "../view/Developer";
-import CreateUser from "../view/developer/CreateUser";
+import CreateDeveloper from "../view/developer/CreateDeveloper";
 import GetDeveloper from "../view/developer/GetDeveloper";
 import UpdateDeveloper from "../view/developer/UpdateDeveloper";
 import Secret from "../view/Secret";
@@ -35,7 +35,7 @@ export default function Router() {
                     <Route exact path="/project/:id/build/:buildId" element={<GetBuild/>}/>
                     <Route exact path="/developer" element={<Developer/>}/>
                     <Route exact path="/developer/:id" element={<GetDeveloper/>}/>
-                    <Route exact path="/developer/create" element={<CreateUser/>}/>
+                    <Route exact path="/developer/create" element={<CreateDeveloper/>}/>
                     <Route exact path="/developer/update/:id" element={<UpdateDeveloper/>}/>
                     <Route exact path="/secret" element={<Secret/>}/>
                     <Route exact path="/secret/:id" element={<GetSecret/>}/>

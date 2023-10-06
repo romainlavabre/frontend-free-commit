@@ -1,27 +1,22 @@
-import React from "react";
-import {useDispatch} from "react-redux";
-import {openAlert} from "../../store/util";
+import React, {useRef} from "react";
 import api from "../../api/api";
 import database from "../../database/database";
 import mixin from "../../mixin/mixin";
 import {useNavigate} from "react-router";
-import {useForm} from "react-hook-form";
 import logo from "../../assets/img/logo/logo-light.png";
+import useAlert from "../../use/useAlert";
 
 export default function Authenticate() {
-
-    const dispatch = useDispatch();
+    const alert = useAlert();
     const navigate = useNavigate();
-    const {register, handleSubmit, formState: {errors}} = useForm();
+    const usernameInput = useRef();
+    const passwordInput = useRef();
 
-    const onSubmit = async (form) => {
-        const response = await api.authentication.authenticate(form.username, form.password);
+    const submit = async () => {
+        const response = await api.authentication.authenticate(usernameInput.current.value, passwordInput.current.value);
 
         if (response === null) {
-            dispatch(openAlert({
-                title: 'Identifiants incorrect',
-                type: 'error'
-            }));
+            alert.launch("Identifiants incorrect", "error");
             return;
         }
 
@@ -30,7 +25,7 @@ export default function Authenticate() {
         database.write(database.TABLE_AUTHENTICATION, 'access_token', response.access_token);
         database.write(database.TABLE_AUTHENTICATION, 'roles', decodedToken.roles);
 
-        navigate('/project')
+        navigate('/project');
     }
 
     return (
@@ -40,27 +35,28 @@ export default function Authenticate() {
                     <div className="flex justify-center">
                         <img src={logo} className="w-56"/>
                     </div>
-                    <h4 className={'font-bold p-5 text-fairfair my-5'}>Authentification</h4>
+                    <h4 className={'font-bold p-5 text-fairfair my-5'}>Authentication</h4>
 
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                        <div className="input-group">
-                            <span
-                                className="input-error">{errors['username'] ? errors['username'].message : null}</span>
+                    <div className="input-group">
+                        <input
+                            type="text"
+                            placeholder="Nom d'utilisateur"
+                            className="input-text"
+                            ref={usernameInput}
+                        />
+                    </div>
 
-                            <input type="text" placeholder="Nom d'utilisateur"
-                                   className="input-text" {...register("username", {required: "Nom d'utilisateur requis"})}/>
-                        </div>
-
-                        <div className="input-group">
-                            <span
-                                className="input-error">{errors['password'] ? errors['password'].message : null}</span>
-                            <input type="password" placeholder="Mot de passe"
-                                   className="input-text" {...register("password", {required: 'Mot de passe requis'})}/>
-                        </div>
-                        <button className="bg-fairfair p-2 rounded-md w-full mt-2" type="submit">
-                            Connexion
-                        </button>
-                    </form>
+                    <div className="input-group">
+                        <input
+                            type="password"
+                            placeholder="Mot de passe"
+                            className="input-text"
+                            ref={passwordInput}
+                        />
+                    </div>
+                    <button className="p-2 rounded-md w-full mt-2 hover:bg-gray-700" onClick={submit}>
+                        Connect
+                    </button>
                 </div>
             </div>
         </>
