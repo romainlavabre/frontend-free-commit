@@ -25,7 +25,7 @@ export default function ({
             setContent([]);
         }
 
-        if (typeof defaultValue === "object") {
+        if (!isNull(defaultValue) && typeof defaultValue === "object") {
             const res = items.filter(item => defaultValue.includes(item[index]));
 
             setContent(res);
