@@ -67,7 +67,8 @@ export default function Update() {
                                         key: "ROLE_DEVELOPER",
                                         value: "ROLE_DEVELOPER"
                                     }
-                                ]
+                                ],
+                                multiple: true
                             },
                             {
                                 title: "Enabled",
