@@ -1,13 +1,13 @@
 import React from "react";
-import SeeLog from "../../../component/project/build/SeeLog";
 import useAxiosConfig from "../../../use/useAxiosConfig";
+import SeeLogV2 from "../../../component/project/build/SeeLogV2";
 
 export default function GetBuild() {
     useAxiosConfig();
 
     return (
         <div className="w-full">
-            <SeeLog/>
+            <SeeLogV2/>
         </div>
     )
 }

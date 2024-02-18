@@ -5,6 +5,7 @@ import secret from "./secret";
 import credential from "./credential";
 import build from "./build";
 import config from "./config";
+import log from "./log";
 
 const api = {
     authentication,
@@ -13,6 +14,7 @@ const api = {
     secret,
     credential,
     build,
+    log,
     config
 };
 

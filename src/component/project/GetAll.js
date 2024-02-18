@@ -70,7 +70,7 @@ export default function GetAll() {
                     },
                     {
                         key: "LAUNCH",
-                        computedValue: data => <LaunchManually projectId={data.project_id}/>
+                        computedValue: data => <LaunchManually key={data.project_id} projectId={data.project_id}/>
                     }
                 ]}
                 row={{
@@ -85,7 +85,7 @@ export default function GetAll() {
                             Authorization: 'Bearer ' + database.read(database.TABLE_AUTHENTICATION, "access_token")
                         }
                     },
-                    interval: 3000
+                    interval: 5000
                 }}
             />
         </>

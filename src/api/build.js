@@ -65,8 +65,12 @@ const build = {
             return null;
         }
     },
-    async launch(projectId) {
-        return await axios.post(getEnv('REACT_APP_API_URL') + `/api/developer/builds/${projectId}`, {}, this.getConfig());
+    async launch(projectId, ignoreSteps) {
+        return await axios.post(getEnv('REACT_APP_API_URL') + `/api/developer/builds/${projectId}`, {
+            build: {
+                ignore_steps: ignoreSteps
+            }
+        }, this.getConfig());
     },
     getConfig() {
         const accessToken = database.read(database.TABLE_AUTHENTICATION, 'access_token');
