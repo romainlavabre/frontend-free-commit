@@ -49,6 +49,12 @@ export default function GetAll() {
                         comparator: "contains"
                     },
                     {
+                        key: "ENV",
+                        value: "secret_env",
+                        searchInput: true,
+                        comparator: "contains"
+                    },
+                    {
                         key: "SCOPE",
                         value: "secret_scope",
                         searchInput: true,

@@ -77,6 +77,12 @@ export default function GetOne() {
                         role="admin"
                         fields={[
                             {
+                                title: "Environment",
+                                name: "env",
+                                type: "text",
+                                disabled: true
+                            },
+                            {
                                 title: "Project",
                                 name: "projects_id",
                                 type: "array",

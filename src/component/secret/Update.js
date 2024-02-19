@@ -73,6 +73,11 @@ export default function Update() {
                                 type: "long-text"
                             },
                             {
+                                title: "Environment",
+                                name: "env",
+                                type: "text"
+                            },
+                            {
                                 title: "Project",
                                 name: "projects_id",
                                 type: "array",

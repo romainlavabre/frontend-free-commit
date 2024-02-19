@@ -11,6 +11,7 @@ export default function Create() {
     const [projects, setProjects] = useState([]);
     const nameInput = useRef();
     const valueInput = useRef();
+    const envInput = useRef();
     const projectsIdInput = useRef();
 
     useEffect(async () => {
@@ -23,6 +24,7 @@ export default function Create() {
             secret: {
                 name: nameInput.current.value,
                 value: valueInput.current.value,
+                env: envInput.current.value,
                 projects_id: projectsIdInput.current
             }
         };
@@ -44,6 +46,15 @@ export default function Create() {
                             title="[A-Z0-9-_]+"
                             placeholder="CLIENT_SECRET"
                             ref={nameInput}
+                        />
+                    </div>
+
+                    <div className="input-group">
+                        <label>Environment</label>
+                        <input
+                            className="input-text w-full"
+                            placeholder="Environment (information)"
+                            ref={envInput}
                         />
                     </div>
 
