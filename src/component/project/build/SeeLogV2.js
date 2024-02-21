@@ -102,49 +102,51 @@ export default function () {
                 Object.keys(logs).map((key, index) => (
                     <div key={key} className="mt-5 w-full">
                         <div className="grid grid-cols-12 gap-4">
-                            <div className="col-span-1">
-                                {
-                                    index === Object.keys(logs).length - 1 && isNull(logs[key].closed_at)
-                                        ? (
-                                            <div className="mr-5">
-                                                <SpinnerV2 color={"orange"} size={5}/>
-                                            </div>
-                                        )
-                                        : (
-                                            <>
-                                                {
-                                                    logs[key].success === false
-                                                        ? (
-                                                            <div className="text-red-600 font-bold mr-5">
-                                                                <ErrorCircleIcon size={6}/>
-                                                            </div>
-                                                        )
-                                                        : (
-                                                            <>
-                                                                {
-                                                                    logs[key].skipped
-                                                                        ? (
-                                                                            <div className="text-orange-500 font-bold mr-5">
-                                                                                <StopCircleIcon size={6}/>
-                                                                            </div>
-                                                                        )
-                                                                        : (
-                                                                            <div className="text-green-600 font-bold mr-5">
-                                                                                <CheckCircleIcon size={6}/>
-                                                                            </div>
-                                                                        )
-                                                                }
-                                                            </>
+                            <div className="col-span-4">
+                                <div className="flex">
+                                    {
+                                        index === Object.keys(logs).length - 1 && isNull(logs[key].closed_at)
+                                            ? (
+                                                <div className="mr-5">
+                                                    <SpinnerV2 color={"orange"} size={5}/>
+                                                </div>
+                                            )
+                                            : (
+                                                <>
+                                                    {
+                                                        logs[key].success === false
+                                                            ? (
+                                                                <div className="text-red-600 font-bold mr-5">
+                                                                    <ErrorCircleIcon size={6}/>
+                                                                </div>
+                                                            )
+                                                            : (
+                                                                <>
+                                                                    {
+                                                                        logs[key].skipped
+                                                                            ? (
+                                                                                <div className="text-orange-500 font-bold mr-5">
+                                                                                    <StopCircleIcon size={6}/>
+                                                                                </div>
+                                                                            )
+                                                                            : (
+                                                                                <div className="text-green-600 font-bold mr-5">
+                                                                                    <CheckCircleIcon size={6}/>
+                                                                                </div>
+                                                                            )
+                                                                    }
+                                                                </>
 
-                                                        )
-                                                }
-                                            </>
+                                                            )
+                                                    }
+                                                </>
 
-                                        )
-                                }
-                            </div>
-                            <div className="col-span-3 whitespace-nowrap">
-                                {key.toUpperCase()}
+                                            )
+                                    }
+                                    <div className="whitespace-nowrap">
+                                        {key.toUpperCase()}
+                                    </div>
+                                </div>
                             </div>
 
                             <div className="col-span-4">
@@ -180,7 +182,13 @@ export default function () {
                             <div
                                 className={`col-span-12 rounded-lg overflow-y-scroll ${zoom[key] || isNull(logs[key].closed_at) ? "h-96 border-2 border-gray-600 text-gray-400" : "h-6 border-none text-gray-600"}`}>
                                 <div className="log-panel break-words mx-5" dangerouslySetInnerHTML={{
-                                    __html: logs[key].content?.split('\n').join('<br/>')
+                                    __html: logs[key].content?.split('\n').map(line => {
+                                        if (line.substring(0, 10).toLowerCase().includes("error")) {
+                                            return `<span class="text-red-600">${line}</span>`
+                                        }
+
+                                        return line;
+                                    }).join('<br/>')
                                 }}>
 
                                 </div>
