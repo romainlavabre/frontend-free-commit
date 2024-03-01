@@ -4,6 +4,7 @@
     "private": true,
     "dependencies": {
         "@headlessui/react": "^1.4.3",
+        "@monaco-editor/react": "^4.6.0",
         "@reduxjs/toolkit": "^1.7.1",
         "@testing-library/jest-dom": "^5.16.1",
         "@testing-library/react": "^12.1.2",

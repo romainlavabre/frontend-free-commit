@@ -1,11 +1,12 @@
-import authentication from "./authentication";
-import project from "./project";
-import user from "./user";
-import secret from "./secret";
-import credential from "./credential";
-import build from "./build";
-import config from "./config";
-import log from "./log";
+import authentication from "./free-commit/authentication";
+import project from "./free-commit/project";
+import user from "./free-commit/user";
+import secret from "./free-commit/secret";
+import credential from "./free-commit/credential";
+import build from "./free-commit/build";
+import config from "./free-commit/config";
+import log from "./free-commit/log";
+import freePingConfig from "./free-ping/config";
 
 const api = {
     authentication,
@@ -15,7 +16,10 @@ const api = {
     credential,
     build,
     log,
-    config
+    config,
+    freeping: {
+        config: freePingConfig
+    }
 };
 
 export default api;

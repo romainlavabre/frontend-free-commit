@@ -8,6 +8,7 @@ import './assets/css/index.css'
 import Alert from "./component/util/modal/Alert";
 import Confirm from "./component/util/modal/Confirm";
 import Info from "./component/util/modal/Info";
+import Modal from "./component/util/modal/Modal";
 
 ReactDOM.render(
     <React.StrictMode>
@@ -16,6 +17,7 @@ ReactDOM.render(
             <Info/>
             <Confirm/>
             <Router/>
+            <Modal/>
         </Provider>
     </React.StrictMode>,
     document.getElementById('root'),

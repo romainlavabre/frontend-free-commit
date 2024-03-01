@@ -1,5 +1,5 @@
 export default {
-    api: {
+    ["api-free-commit"]: {
         projects: {
             cacheLifeTime: 5
         },
@@ -13,6 +13,14 @@ export default {
             cacheLifeTime: 5
         },
         builds: {
+            cacheLifeTime: 5
+        }
+    },
+    ["api-free-ping"]: {
+        pings: {
+            cacheLifeTime: 5
+        },
+        incidents: {
             cacheLifeTime: 5
         }
     }
