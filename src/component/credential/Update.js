@@ -7,7 +7,7 @@ import UpdateEntity from "../util/form/UpdateEntity";
 export default function Update() {
     const {id} = useParams();
     const navigate = useNavigate();
-    const credential = useSelector(state => state.api?.api?.credentials?.values[id]);
+    const credential = useSelector(state => state.api?.["api-free-commit"]?.credentials?.values[id]);
 
 
     return (
@@ -29,7 +29,7 @@ export default function Update() {
                     <UpdateEntity
                         id={id}
                         subject="credentials"
-                        service="api"
+                        service="api-free-commit"
                         role="admin"
                         fields={[
                             {
@@ -44,7 +44,7 @@ export default function Update() {
                     <UpdateEntity
                         id={id}
                         subject="credentials"
-                        service="api"
+                        service="api-free-commit"
                         role="admin"
                         fields={[
                             {

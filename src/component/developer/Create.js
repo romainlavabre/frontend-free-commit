@@ -24,7 +24,7 @@ export default function Create() {
             }
         };
 
-        await create("api", "developers", payload, "admin");
+        await create("api-free-commit", "developers", payload, "admin");
         navigate("/developer");
     }
 

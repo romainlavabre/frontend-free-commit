@@ -57,7 +57,7 @@ export default function useApi() {
             response.data.lastFetchAt = new Date();
 
             dispatch(addOrOverwrite({
-                service: service.replace("service-", "").replace("-", "_"),
+                service: service,
                 subject: subjectStore,
                 entity: response.data
             }));
@@ -119,7 +119,7 @@ export default function useApi() {
             }
 
             dispatch(addOrOverwrite({
-                service: service.replace("service-", "").replace("-", "_"),
+                service: service,
                 subject: subjectStore,
                 entity: response.data,
                 findAllAt: new Date()
@@ -183,7 +183,7 @@ export default function useApi() {
             }
 
             const payload = {
-                service: service.replace("service-", "").replace("-", "_"),
+                service: service,
                 subject: subjectStore,
                 entity: response.data,
                 prop: prop,
@@ -236,7 +236,7 @@ export default function useApi() {
                     response.data.lastFetchAt = new Date();
 
                     dispatch(addOrOverwrite({
-                        service: service.replace("service-", "").replace("-", "_"),
+                        service: service,
                         subject: subjectStore,
                         entity: response.data
                     }));
@@ -291,7 +291,7 @@ export default function useApi() {
                 response.data.lastFetchAt = new Date();
 
                 dispatch(addOrOverwrite({
-                    service: service.replace("service-", "").replace("-", "_"),
+                    service: service,
                     subject: subjectStore,
                     entity: response.data
                 }));
@@ -332,7 +332,7 @@ export default function useApi() {
                 );
 
                 dispatch(remove({
-                    service: service.replace("service-", "").replace("-", "_"),
+                    service: service,
                     subject: subjectStore,
                     id: id
                 }));

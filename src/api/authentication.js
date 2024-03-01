@@ -4,7 +4,7 @@ import getEnv from "../mixin/getEnv";
 const authentication = {
     async authenticate(username, password) {
         try {
-            const response = await axios.post(getEnv('REACT_APP_API_URL') + `/api/auth/token`, {
+            const response = await axios.post(getEnv('REACT_APP_API_URL') + `/api-free-commit/auth/token`, {
                 "auth": {
                     username,
                     password

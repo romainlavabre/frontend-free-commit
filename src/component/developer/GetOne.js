@@ -11,10 +11,10 @@ export default function GetOne() {
     const navigate = useNavigate();
     const {findOneBy} = useApi();
     const {id} = useParams();
-    const developer = useSelector(state => state.api?.api?.developers?.values[id]);
+    const developer = useSelector(state => state.api?.["api-free-commit"]?.developers?.values[id]);
 
     useEffect(() => {
-        findOneBy("api", "developers", "id", id, "developer");
+        findOneBy("api-free-commit", "developers", "id", id, "developer");
     }, []);
 
     if (isNull(developer)) return null;
@@ -42,7 +42,7 @@ export default function GetOne() {
                         id={id}
                         subject="developers"
                         role="admin"
-                        service={"api"}
+                        service={"api-free-commit"}
                         fields={[
                             {
                                 title: "Username",
@@ -92,7 +92,7 @@ export default function GetOne() {
                         id={id}
                         subject="developers"
                         role="developer"
-                        service={"api"}
+                        service={"api-free-commit"}
                         fields={[
 
                             {

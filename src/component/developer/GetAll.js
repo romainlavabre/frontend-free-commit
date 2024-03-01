@@ -83,7 +83,7 @@ export default function User() {
                     }
                 ]}
                 fetch={{
-                    url: getEnv('REACT_APP_API_URL') + "/api/developer/paginations/developer",
+                    url: getEnv('REACT_APP_API_URL') + "/api-free-commit/developer/paginations/developer",
                     options: {
                         headers: {
                             Authorization: `Bearer ${database.read(database.TABLE_AUTHENTICATION, "access_token")}`

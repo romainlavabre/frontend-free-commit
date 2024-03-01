@@ -8,7 +8,7 @@ import isNull from "../../mixin/global/isNull";
 export default function GetOne() {
     const navigate = useNavigate();
     const {id} = useParams();
-    const credential = useSelector(state => state.api?.api?.credentials?.values[id]);
+    const credential = useSelector(state => state.api?.["api-free-commit"]?.credentials?.values[id]);
 
     if (isNull(credential)) return null;
 

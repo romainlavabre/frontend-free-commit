@@ -13,10 +13,10 @@ export default function LaunchManually({projectId}) {
     const alert = useAlert();
     const {findOneBy} = useApi();
     const [open, setOpen] = useState(false);
-    const project = useSelector(state => state.api?.api?.projects?.values[projectId]);
+    const project = useSelector(state => state.api?.["api-free-commit"]?.projects?.values[projectId]);
 
     useEffect(() => {
-        findOneBy("api", "projects", "id", projectId, "developer");
+        findOneBy("api-free-commit", "projects", "id", projectId, "developer");
     }, []);
 
     const launch = async () => {

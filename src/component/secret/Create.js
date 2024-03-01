@@ -19,6 +19,7 @@ export default function Create() {
 
         setProjects(res);
     }, []);
+
     const submit = async () => {
         const payload = {
             secret: {
@@ -29,7 +30,7 @@ export default function Create() {
             }
         };
 
-        await create("api", "secrets", payload, "admin");
+        await create("api-free-commit", "secrets", payload, "admin");
 
         navigate("/secret");
     }

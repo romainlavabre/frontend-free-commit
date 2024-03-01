@@ -6,7 +6,7 @@ import getEnv from "../mixin/getEnv";
 const project = {
     async pagination(perPage = 10) {
         try {
-            const response = await axios.get(getEnv('REACT_APP_API_URL') + `/api/developer/paginations/project?per_page=${perPage}`, this.getConfig());
+            const response = await axios.get(getEnv('REACT_APP_API_URL') + `/api-free-commit/developer/paginations/project?per_page=${perPage}`, this.getConfig());
 
             return response.data;
         } catch (e) {

@@ -10,7 +10,7 @@ import {useNavigate} from "react-router";
 export default function Delete({id}) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const credential = useSelector(state => state.credential.credentials.find(credential => credential.id == id));
+    const credential = useSelector(state => state.api?.["api-free-commit"]?.credentials.find(credential => credential.id == id));
 
     const confirmDeletion = () => {
         dispatch(openConfirm({

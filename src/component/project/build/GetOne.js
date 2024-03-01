@@ -7,7 +7,7 @@ import isNull from "../../../mixin/global/isNull.js";
 
 export default function GetOne() {
     const {buildId} = useParams();
-    const project = useSelector(state => state.api?.api?.projects?.values?.find(project => !isNull(project) && project.id == buildId));
+    const project = useSelector(state => state.api?.["api-free-commit"]?.projects?.values?.find(project => !isNull(project) && project.id == buildId));
     const [build, setBuild] = useState(null);
 
     useEffect(async () => {

@@ -19,7 +19,7 @@ export default function ({
                          }) {
     const currentValue = useRef();
     const {findOneBy, update} = useApi();
-    const subjectEntity = useSelector(state => state.api?.[service.replace("service-", "").replace("-", "_")]?.[subject.split("::")[0]]?.values?.find(entity => !isNull(entity) && entity[searchByProp] == id));
+    const subjectEntity = useSelector(state => state.api?.[service]?.[subject.split("::")[0]]?.values?.find(entity => !isNull(entity) && entity[searchByProp] == id));
     const callSuccess = useRef(false);
 
     useEffect(() => {

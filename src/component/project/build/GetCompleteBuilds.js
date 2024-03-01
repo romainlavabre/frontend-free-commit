@@ -9,7 +9,7 @@ export default function GetCompleteBuilds() {
     const {findAllBy} = useApi();
     const {id} = useParams();
     const navigate = useNavigate();
-    const builds = useSelector(state => state.api?.api?.builds?.values.filter(build => !isNull(build) && build.project_id == id)?.sort((b1, b2) => b1.id < b2.id ? 1 : -1))
+    const builds = useSelector(state => state.api?.["api-free-commit"]?.builds?.values.filter(build => !isNull(build) && build.project_id == id)?.sort((b1, b2) => b1.id < b2.id ? 1 : -1))
     const intervalRef = useRef();
 
     useEffect(async () => {
@@ -19,7 +19,7 @@ export default function GetCompleteBuilds() {
     }, []);
 
     const fetchBuild = () => {
-        findAllBy("api", "builds", "project_id", id, "developer");
+        findAllBy("api-free-commit", "builds", "project_id", id, "developer");
     }
 
     useEffect(() => () => clearInterval(intervalRef.current), []);

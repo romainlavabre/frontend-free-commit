@@ -7,7 +7,7 @@ const config = {
     async checkEmail(email) {
         try {
             const response = await axios.post(
-                getEnv('REACT_APP_API_URL') + `/api/admin/config/mail/test/${email}`, null, this.getConfig()
+                getEnv('REACT_APP_API_URL') + `/api-free-commit/admin/config/mail/test/${email}`, null, this.getConfig()
             );
 
             return response.data;
@@ -18,7 +18,7 @@ const config = {
     },
     async getEnv() {
         try {
-            const response = await axios.get(getEnv('REACT_APP_API_URL') + `/api/admin/config/env`, this.getConfig());
+            const response = await axios.get(getEnv('REACT_APP_API_URL') + `/api-free-commit/admin/config/env`, this.getConfig());
 
             return response.data;
         } catch (e) {

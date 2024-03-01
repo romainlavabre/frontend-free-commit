@@ -12,7 +12,7 @@ export default function ReloadSignatureKey({projectId}) {
             return;
         }
 
-        update("api", "projects", projectId, "signature_key", null, "admin");
+        update("api-free-commit", "projects", projectId, "signature_key", null, "admin");
     }
 
     return (

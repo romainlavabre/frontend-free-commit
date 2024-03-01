@@ -12,11 +12,11 @@ export default function GetOne() {
     const {findOneBy} = useApi();
     const navigate = useNavigate();
     const {id} = useParams();
-    const secret = useSelector(state => state.api?.api?.secrets?.values[id]);
+    const secret = useSelector(state => state.api?.["api-free-commit"]?.secrets?.values[id]);
     const [projects, setProjects] = useState();
 
     useEffect(() => {
-        findOneBy("api", "secrets", "id", id, "developer");
+        findOneBy("api-free-commit", "secrets", "id", id, "developer");
 
         const fetchProject = async () => {
             setProjects((await api.project.pagination(100000)).data);
@@ -51,7 +51,7 @@ export default function GetOne() {
                     <UpdateEntity
                         subject="secrets"
                         id={id}
-                        service="api"
+                        service="api-free-commit"
                         role="admin"
                         fields={[
                             {
@@ -73,7 +73,7 @@ export default function GetOne() {
                     <UpdateEntity
                         subject="secrets"
                         id={id}
-                        service="api"
+                        service="api-free-commit"
                         role="admin"
                         fields={[
                             {

@@ -7,7 +7,7 @@ const build = {
 
     async findById(id) {
         try {
-            const response = await axios.get(getEnv('REACT_APP_API_URL') + `/api/developer/builds/${id}`, this.getConfig());
+            const response = await axios.get(getEnv('REACT_APP_API_URL') + `/api-free-commit/developer/builds/${id}`, this.getConfig());
 
             return response.data;
         } catch (e) {
@@ -17,7 +17,7 @@ const build = {
     },
     async getOutput(executorId) {
         try {
-            const response = await axios.get(getEnv('REACT_APP_API_URL') + `/api/developer/builds/output/${executorId}`, this.getConfig());
+            const response = await axios.get(getEnv('REACT_APP_API_URL') + `/api-free-commit/developer/builds/output/${executorId}`, this.getConfig());
 
             return response.data;
         } catch (e) {
@@ -27,7 +27,7 @@ const build = {
     },
     async getExecuteds() {
         try {
-            const response = await axios.get(getEnv('REACT_APP_API_URL') + `/api/developer/builds/executeds`, this.getConfig());
+            const response = await axios.get(getEnv('REACT_APP_API_URL') + `/api-free-commit/developer/builds/executeds`, this.getConfig());
 
             return response.data;
         } catch (e) {
@@ -37,7 +37,7 @@ const build = {
     },
     async getQueueds() {
         try {
-            const response = await axios.get(getEnv('REACT_APP_API_URL') + `/api/developer/builds/queueds`, this.getConfig());
+            const response = await axios.get(getEnv('REACT_APP_API_URL') + `/api-free-commit/developer/builds/queueds`, this.getConfig());
 
             return response.data;
         } catch (e) {
@@ -47,7 +47,7 @@ const build = {
     },
     async killExecuted(executorId) {
         try {
-            const response = await axios.delete(getEnv('REACT_APP_API_URL') + `/api/developer/builds/kill/executed/${executorId}`, this.getConfig());
+            const response = await axios.delete(getEnv('REACT_APP_API_URL') + `/api-free-commit/developer/builds/kill/executed/${executorId}`, this.getConfig());
 
             return response.status === 204;
         } catch (e) {
@@ -57,7 +57,7 @@ const build = {
     },
     async killQueued(executorId) {
         try {
-            const response = await axios.delete(getEnv('REACT_APP_API_URL') + `/api/developer/builds/kill/queued/${executorId}`, this.getConfig());
+            const response = await axios.delete(getEnv('REACT_APP_API_URL') + `/api-free-commit/developer/builds/kill/queued/${executorId}`, this.getConfig());
 
             return response.status === 204;
         } catch (e) {
@@ -66,7 +66,7 @@ const build = {
         }
     },
     async launch(projectId, ignoreSteps) {
-        return await axios.post(getEnv('REACT_APP_API_URL') + `/api/developer/builds/${projectId}`, {
+        return await axios.post(getEnv('REACT_APP_API_URL') + `/api-free-commit/developer/builds/${projectId}`, {
             build: {
                 ignore_steps: ignoreSteps
             }

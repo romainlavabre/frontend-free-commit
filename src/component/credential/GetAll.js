@@ -10,10 +10,10 @@ import gitlab from "../../assets/img/gitlab.svg";
 export default function GetAll() {
     const {findAll} = useApi();
     const navigate = useNavigate();
-    const credentials = useSelector(state => state.api?.api?.credentials?.values.filter(credential => !isNull(credential)));
+    const credentials = useSelector(state => state.api?.["api-free-commit"]?.credentials?.values.filter(credential => !isNull(credential)));
 
     useEffect(() => {
-        findAll("api", "credentials", "developer");
+        findAll("api-free-commit", "credentials", "developer");
     }, []);
 
     const openSecret = id => {

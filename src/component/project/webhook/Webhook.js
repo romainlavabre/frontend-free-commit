@@ -11,7 +11,7 @@ export default function () {
     const clipboard = useClipboard();
     const alert = useAlert();
     const {id} = useParams();
-    const project = useSelector(state => state.api?.api?.projects?.values[id]);
+    const project = useSelector(state => state.api?.["api-free-commit"]?.projects?.values[id]);
 
     if (isNull(project)) return null;
 

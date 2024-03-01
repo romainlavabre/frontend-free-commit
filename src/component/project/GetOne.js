@@ -15,16 +15,15 @@ export default function GetOne() {
     const navigate = useNavigate();
     const {findOneBy, findAll} = useApi();
     const {id} = useParams();
-    const project = useSelector(state => state.api?.api?.projects?.values[id]);
-    const developers = useSelector(state => state.api?.api?.developers?.values?.filter(user => !isNull(user)));
-    const credentials = useSelector(state => state.api?.api?.credentials?.values?.filter(credential => !isNull(credential)));
+    const project = useSelector(state => state.api?.["api-free-commit"]?.projects?.values[id]);
+    const developers = useSelector(state => state.api?.["api-free-commit"]?.developers?.values?.filter(user => !isNull(user)));
+    const credentials = useSelector(state => state.api?.["api-free-commit"]?.credentials?.values?.filter(credential => !isNull(credential)));
 
     useEffect(() => {
-        findOneBy("api", "projects", "id", id, "developer");
-        findAll("api", "credentials", "developer");
-        findAll("api", "developers", "developer");
+        findOneBy("api-free-commit", "projects", "id", id, "developer");
+        findAll("api-free-commit", "credentials", "developer");
+        findAll("api-free-commit", "developers", "developer");
     }, []);
-
 
     if (isNull(project) || isNull(credentials) || isNull(developers)) return null;
 
@@ -56,7 +55,7 @@ export default function GetOne() {
             <div className="grid grid-cols-2 gap-4">
                 <div className="col-span-1">
                     <UpdateEntity
-                        service="api"
+                        service="api-free-commit"
                         subject="projects"
                         role="admin"
                         id={id}
@@ -99,7 +98,7 @@ export default function GetOne() {
                 </div>
                 <div className="col-span-1">
                     <UpdateEntity
-                        service="api"
+                        service="api-free-commit"
                         subject="projects"
                         role="admin"
                         id={id}

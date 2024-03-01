@@ -9,8 +9,8 @@ import SelectSearch2 from "../util/form/SelectSearch2";
 export default function Create() {
     const {findAll, findOneBy, create} = useApi();
     const navigation = useNavigate();
-    const developers = useSelector(state => state.api?.api?.developers?.values.filter(developer => !isNull(developer)));
-    const credentials = useSelector(state => state.api?.api?.credentials?.values?.filter(credential => !isNull(credential)));
+    const developers = useSelector(state => state.api?.["api-free-commit"]?.developers?.values.filter(developer => !isNull(developer)));
+    const credentials = useSelector(state => state.api?.["api-free-commit"]?.credentials?.values?.filter(credential => !isNull(credential)));
     const [projects, setProject] = useState([]);
     const [model, setModel] = useState(null);
     const nameInput = useRef();
@@ -25,8 +25,8 @@ export default function Create() {
     const repositoryCredentialIdInput = useRef();
 
     useEffect(async () => {
-        findAll("api", "developers", "developer");
-        findAll("api", "credentials", "developer");
+        findAll("api-free-commit", "developers", "developer");
+        findAll("api-free-commit", "credentials", "developer");
         setProject((await api.project.pagination(1000000)).data);
     }, []);
 
@@ -46,7 +46,7 @@ export default function Create() {
             }
         };
 
-        const id = await create("api", "projects", payload, "admin");
+        const id = await create("api-free-commit", "projects", payload, "admin");
 
         if (typeof id === "number") {
             navigation("/project");
@@ -59,7 +59,7 @@ export default function Create() {
             return;
         }
 
-        setModel((await findOneBy("api", "projects", "id", e.target.value, "developer")));
+        setModel((await findOneBy("api-free-commit", "projects", "id", e.target.value, "developer")));
     }
 
     if (isNull(developers) || isNull(credentials)) return null;

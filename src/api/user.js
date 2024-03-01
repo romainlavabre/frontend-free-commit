@@ -3,7 +3,7 @@ import database from "../database/database";
 import getEnv from "../mixin/getEnv";
 
 
-const project = {
+const user = {
     async findAll() {
         try {
             const response = await axios.get(getEnv('REACT_APP_API_URL') + '/developer/developers', this.getConfig());
@@ -42,4 +42,4 @@ const project = {
     }
 }
 
-export default project;
+export default user;

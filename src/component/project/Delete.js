@@ -16,7 +16,7 @@ export default function Delete({id}) {
                 async (isDelete) => {
                     if (!isDelete) return;
 
-                    remove("api", "projects", id, "admin");
+                    remove("api-free-commit", "projects", id, "admin");
                 }
             ]
         }))

@@ -79,7 +79,7 @@ export default function GetAll() {
                     }
                 }}
                 fetch={{
-                    url: getEnv('REACT_APP_API_URL') + '/api/developer/paginations/project',
+                    url: getEnv('REACT_APP_API_URL') + '/api-free-commit/developer/paginations/project',
                     options: {
                         headers: {
                             Authorization: 'Bearer ' + database.read(database.TABLE_AUTHENTICATION, "access_token")
