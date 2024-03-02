@@ -71,8 +71,12 @@ export default function () {
                     />
                 </div>
             </div>
-            <hr className="my-5 w-8/12 mx-auto"/>
-            <Template pingId={id}/>
+            <div className="mt-5">
+                <Template pingId={id}/>
+            </div>
+            <div className="mt-5">
+                <h5 className="text-2xl">Recipient</h5>
+            </div>
         </div>
     );
 }

@@ -16,6 +16,30 @@ const config = {
             return null;
         }
     },
+    async checkDownTimeEmailForPing(email, pingId) {
+        try {
+            const response = await axios.post(
+                getEnv('REACT_APP_API_URL') + `/api-free-ping/admin/configuration/mail/down_time/${email}/${pingId}`, null, this.getConfig()
+            );
+
+            return response.data;
+        } catch (e) {
+            console.log(e)
+            return null;
+        }
+    },
+    async checkSlowDownEmailForPing(email, pingId) {
+        try {
+            const response = await axios.post(
+                getEnv('REACT_APP_API_URL') + `/api-free-ping/admin/configuration/mail/slow_down/${email}/${pingId}`, null, this.getConfig()
+            );
+
+            return response.data;
+        } catch (e) {
+            console.log(e)
+            return null;
+        }
+    },
     async checkSms(phone) {
         try {
             const response = await axios.post(

@@ -6,15 +6,20 @@ import useEventDispatcher from "../../../use/useEventDispatcher";
 import event from "../../../event/event";
 import ZoomIcon from "../../util/icon/ZoomIcon";
 import TemplateEditor from "./TemplateEditor";
+import api from "../../../api/api";
+import useAlert from "../../../use/useAlert";
+import LinkIcon from "../../util/icon/LinkIcon";
 
 export default function ({pingId}) {
     const eventDispatcher = useEventDispatcher();
+    const alert = useAlert();
     const ping = useSelector(state => state.api?.["api-free-ping"]?.pings?.values[pingId]);
     const [selected, setSelected] = useState({
         prop: "down_time_technical_template",
         title: "Down time template for technical team"
     });
     const [fullScreenOpen, setFullScreenOpen] = useState(false);
+
 
     const fullScreen = () => {
         setFullScreenOpen(true);
@@ -87,6 +92,12 @@ export default function ({pingId}) {
                         <td>incident_at</td>
                         <td>End date of incident</td>
                         <td>$incident_at</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>incident_duration</td>
+                        <td>Duration of incident in minute</td>
+                        <td>$incident_duration</td>
                         <td>Yes</td>
                     </tr>
                     </tbody>
@@ -192,14 +203,38 @@ export default function ({pingId}) {
             </div>
 
             <div className="mt-5">
-                <div className="flex justify-between items-center">
-                    <div>
+                <div className="flex justify-between items-center mb-3">
+                    <div className="flex justify-between items-center">
                         <h6 className="text-lg">{selected.title}</h6>
+
+                        <a
+                            className="link ml-5 flex"
+                            target="_blank"
+                            href="https://velocity.apache.org/engine/1.7/user-guide.html#references"
+                        >
+                            <LinkIcon size={6}/>
+                            Read the velocity template doc
+                        </a>
                     </div>
-                    <div>
-                        <button className="badge-blue-square" onClick={fullScreen}>
-                            <ZoomIcon size={6}/>
-                        </button>
+                    <div className="flex items-center">
+                        <div>
+                            <input className="input-text" placeholder={"Send test email to"} onKeyDown={e => {
+                                if (e.key === "Enter") {
+                                    if (selected.prop.includes("down_time")) {
+                                        api.freeping.config.checkDownTimeEmailForPing(e.target.value, pingId);
+                                    } else {
+                                        api.freeping.config.checkSlowDownEmailForPing(e.target.value, pingId);
+                                    }
+
+                                    alert.launch("Mail sent", "success");
+                                }
+                            }}/>
+                        </div>
+                        <div>
+                            <button className="badge-blue-square" onClick={fullScreen}>
+                                <ZoomIcon size={6}/>
+                            </button>
+                        </div>
                     </div>
                 </div>
 

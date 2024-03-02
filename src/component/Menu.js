@@ -104,7 +104,7 @@ export default function Menu() {
 
     return (
         <div className="flex h-screen">
-            <div className=" text-lg bg-gray h-screen w-2/12">
+            <div className="text-lg bg-gray h-full w-2/12">
                 <ul>
                     <li className="flex px-6 py-5 bg-light justify-center">
                         <img src={logo} className="w-32"/>
@@ -177,7 +177,7 @@ export default function Menu() {
                     }
                 </ul>
             </div>
-            <div className="w-full p-3">
+            <div className="w-full p-3 overflow-y-auto">
                 <Outlet/>
             </div>
         </div>
