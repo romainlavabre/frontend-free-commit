@@ -8,6 +8,7 @@ import useEventDispatcher from "../../../../use/useEventDispatcher";
 import {useSelector} from "react-redux";
 import isNull from "../../../../mixin/global/isNull";
 import useAlert from "../../../../use/useAlert";
+import UpdateEntity from "../../../util/form/UpdateEntity";
 
 export default function ({pingId, prop}) {
     const alert = useAlert();
@@ -39,6 +40,49 @@ export default function ({pingId, prop}) {
 
     return (
         <>
+            {
+                prop === "down_time_detected_template" || prop === "down_time_ended_template"
+                    ? (
+                        <div>
+                            <UpdateEntity
+                                subject="pings"
+                                id={pingId}
+                                service="api-free-ping"
+                                role="admin"
+                                fields={[
+                                    {
+                                        title: "Mail subject",
+                                        name: "down_time_user_subject",
+                                        type: "text"
+                                    }
+                                ]}
+                            />
+                        </div>
+                    )
+                    : null
+            }
+
+            {
+                prop === "slow_down_detected_template" || prop === "slow_down_ended_template"
+                    ? (
+                        <div>
+                            <UpdateEntity
+                                subject="pings"
+                                id={pingId}
+                                service="api-free-ping"
+                                role="admin"
+                                fields={[
+                                    {
+                                        title: "Mail subject",
+                                        name: "slow_down_user_subject",
+                                        type: "text"
+                                    }
+                                ]}
+                            />
+                        </div>
+                    )
+                    : null
+            }
             <div className="flex justify-between">
                 <a
                     className="link ml-5 flex"

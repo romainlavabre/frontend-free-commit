@@ -88,7 +88,7 @@ export default function ({pingId}) {
                         },
                         {
                             title: "Down time ended template for user team",
-                            component: <TemplateBase prop={"slow_down_detected_template"} pingId={pingId}/>
+                            component: <TemplateBase prop={"down_time_ended_template"} pingId={pingId}/>
                         },
                         {
                             title: "Slow down detected template for user team",
