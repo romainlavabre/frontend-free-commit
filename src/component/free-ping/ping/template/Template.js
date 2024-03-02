@@ -1,18 +1,10 @@
 import React from "react";
-import {useSelector} from "react-redux";
-import isNull from "../../../../mixin/global/isNull";
 import MultipleCard from "../../../util/card/MultipleCard";
 import TemplateBase from "./TemplateBase";
 
 export default function ({pingId}) {
-    const ping = useSelector(state => state.api?.["api-free-ping"]?.pings?.values[pingId]);
-
-    if (isNull(ping)) return null;
-
     return (
         <div>
-            <h5 className="text-2xl">Templates</h5>
-
             <div className="grid grid-cols-2 gap-4">
                 <table className="col-span-1 text-left">
                     <thead>

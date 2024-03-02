@@ -6,6 +6,7 @@ import Template from "./template/Template";
 import useApi from "../../../api/auto/useApi";
 import MultipleCard from "../../util/card/MultipleCard";
 import Metadata from "./metadata/Metadata";
+import Recipient from "./recipient/Recipient";
 
 export default function () {
     const {findOneBy} = useApi();
@@ -44,7 +45,7 @@ export default function () {
                         },
                         {
                             title: "Recipients",
-                            component: null
+                            component: <Recipient pingId={id}/>
                         }
                     ]}
                 />

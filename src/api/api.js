@@ -7,6 +7,7 @@ import build from "./free-commit/build";
 import config from "./free-commit/config";
 import log from "./free-commit/log";
 import freePingConfig from "./free-ping/config";
+import ping from "./free-ping/ping";
 
 const api = {
     authentication,
@@ -18,7 +19,8 @@ const api = {
     log,
     config,
     freeping: {
-        config: freePingConfig
+        config: freePingConfig,
+        ping: ping
     }
 };
 
