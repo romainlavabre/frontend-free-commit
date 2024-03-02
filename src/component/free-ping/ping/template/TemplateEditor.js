@@ -1,6 +1,6 @@
 import {Editor} from "@monaco-editor/react";
 import React, {useEffect, useRef, useState} from "react";
-import useApi from "../../../api/auto/useApi";
+import useApi from "../../../../api/auto/useApi";
 
 export default function ({initialContent, prop, pingId}) {
     const {update} = useApi();
@@ -38,7 +38,7 @@ export default function ({initialContent, prop, pingId}) {
     }
 
     return (
-        <div className="grid grid-cols-2 gap-4 h-full">
+        <div className="grid grid-cols-2 gap-4 h-screen">
             <div className="col-span-1 h-full">
                 <Editor
                     theme={"vs-dark"}
