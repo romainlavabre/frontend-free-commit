@@ -34,6 +34,7 @@ export default function () {
             <div>
                 <MultipleCard
                     key={"menu"}
+                    gridColsNumber={"grid-cols-3"}
                     items={[
                         {
                             title: "Metadata",

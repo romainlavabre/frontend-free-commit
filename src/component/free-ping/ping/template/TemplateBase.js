@@ -83,7 +83,7 @@ export default function ({pingId, prop}) {
                     )
                     : null
             }
-            <div className="flex justify-between">
+            <div className="flex justify-between mt-5">
                 <a
                     className="link ml-5 flex"
                     target="_blank"

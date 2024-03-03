@@ -65,6 +65,7 @@ export default function ({pingId}) {
             <div className="mt-5">
                 <MultipleCard
                     key={"details"}
+                    gridColsNumber={"grid-cols-6"}
                     items={[
                         {
                             title: "Down time template for technical team",

@@ -11,6 +11,8 @@ import ArrowBottomIcon from "./util/icon/ArrowBottomIcon";
 import ServerStackIcon from "./util/icon/ServerStackIcon";
 import ArrowTopIcon from "./util/icon/ArrowTopIcon";
 import ExclamationTriangleIcon from "./util/icon/ExclamationTriangleIcon";
+import WebIcon from "./util/icon/WebIcon";
+import NotificationIcon from "./util/icon/NotificationIcon";
 
 export default function Menu() {
     const navigate = useNavigate();
@@ -67,10 +69,22 @@ export default function Menu() {
                     route: "/free-ping/ping"
                 },
                 {
+                    icon: <WebIcon size={5}/>,
+                    name: "Page",
+                    active: location.pathname.startsWith('/free-ping/page'),
+                    route: "/free-ping/page"
+                },
+                {
                     icon: <ExclamationTriangleIcon size={5}/>,
                     name: "Outage",
                     active: location.pathname.startsWith('/free-ping/outage'),
                     route: "/free-ping/outage"
+                },
+                {
+                    icon: <NotificationIcon size={5}/>,
+                    name: "Ticket",
+                    active: location.pathname.startsWith('/free-ping/ticket'),
+                    route: "/free-ping/ticket"
                 },
                 {
                     icon: <CogIcon size={5}/>,
