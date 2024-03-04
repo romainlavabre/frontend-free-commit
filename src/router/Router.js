@@ -28,6 +28,7 @@ import Outage from "../view/free-ping/Outage";
 import Page from "../view/free-ping/Page";
 import CreatePage from "../view/free-ping/page/CreatePage";
 import GetPage from "../view/free-ping/page/GetPage";
+import CreatePing from "../view/free-ping/ping/CreatePing";
 
 export default function Router() {
     return (
@@ -54,6 +55,7 @@ export default function Router() {
                     <Route exact path="/free-commit/credential/update/:id" element={<UpdateCredential/>}/>
                     <Route exact path="/free-commit/config" element={<Config/>}/>
                     <Route exact path="/free-ping/ping" element={<Ping/>}/>
+                    <Route exact path="/free-ping/ping/create" element={<CreatePing/>}/>
                     <Route exact path="/free-ping/ping/:id" element={<GetPing/>}/>
                     <Route exact path="/free-ping/outage" element={<Outage/>}/>
                     <Route exact path="/free-ping/page" element={<Page/>}/>
