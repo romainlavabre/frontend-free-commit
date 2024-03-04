@@ -21,7 +21,7 @@ export default function () {
                 </div>
             </div>
             <Pagination
-                name={"free-commit-ping"}
+                name={"free-ping-ping"}
                 row={{
                     onClick: data => {
                         navigate(`/free-ping/ping/${data.ping_id}`)

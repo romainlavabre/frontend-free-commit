@@ -8,6 +8,7 @@ import config from "./free-commit/config";
 import log from "./free-commit/log";
 import freePingConfig from "./free-ping/config";
 import ping from "./free-ping/ping";
+import pagination from "./free-ping/pagination";
 
 const api = {
     authentication,
@@ -20,7 +21,8 @@ const api = {
     config,
     freeping: {
         config: freePingConfig,
-        ping: ping
+        ping: ping,
+        pagination: pagination
     }
 };
 

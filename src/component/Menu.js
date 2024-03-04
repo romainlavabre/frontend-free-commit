@@ -10,9 +10,9 @@ import isNull from "../mixin/global/isNull";
 import ArrowBottomIcon from "./util/icon/ArrowBottomIcon";
 import ServerStackIcon from "./util/icon/ServerStackIcon";
 import ArrowTopIcon from "./util/icon/ArrowTopIcon";
-import ExclamationTriangleIcon from "./util/icon/ExclamationTriangleIcon";
 import WebIcon from "./util/icon/WebIcon";
 import NotificationIcon from "./util/icon/NotificationIcon";
+import OutageIcon from "./free-ping/outage/OutageIcon";
 
 export default function Menu() {
     const navigate = useNavigate();
@@ -75,7 +75,7 @@ export default function Menu() {
                     route: "/free-ping/page"
                 },
                 {
-                    icon: <ExclamationTriangleIcon size={5}/>,
+                    icon: <OutageIcon/>,
                     name: "Outage",
                     active: location.pathname.startsWith('/free-ping/outage'),
                     route: "/free-ping/outage"

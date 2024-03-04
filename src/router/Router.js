@@ -24,6 +24,7 @@ import Menu from "../component/Menu";
 import FreePingConfig from "../view/free-ping/Config";
 import Ping from "../view/free-ping/Ping";
 import GetPing from "../view/free-ping/ping/GetPing";
+import Outage from "../view/free-ping/Outage";
 
 export default function Router() {
     return (
@@ -51,6 +52,7 @@ export default function Router() {
                     <Route exact path="/free-commit/config" element={<Config/>}/>
                     <Route exact path="/free-ping/ping" element={<Ping/>}/>
                     <Route exact path="/free-ping/ping/:id" element={<GetPing/>}/>
+                    <Route exact path="/free-ping/outage" element={<Outage/>}/>
                     <Route exact path="/free-ping/config" element={<FreePingConfig/>}/>
                 </Route>
             </Routes>
