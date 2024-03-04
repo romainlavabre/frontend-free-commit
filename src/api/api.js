@@ -9,6 +9,7 @@ import log from "./free-commit/log";
 import freePingConfig from "./free-ping/config";
 import ping from "./free-ping/ping";
 import pagination from "./free-ping/pagination";
+import statistic from "./free-ping/statistic";
 
 const api = {
     authentication,
@@ -22,7 +23,8 @@ const api = {
     freeping: {
         config: freePingConfig,
         ping: ping,
-        pagination: pagination
+        pagination: pagination,
+        statistic: statistic
     }
 };
 

@@ -4,6 +4,7 @@ import database from "../../../database/database";
 import Pagination from "../../util/pagination/Pagination";
 import dateFormatter from "../../../mixin/global/dateFormatter";
 import isNull from "../../../mixin/global/isNull";
+import StatisticByMonth from "../statistic/StatisticByMonth";
 
 export default function () {
     useEffect(() => {
@@ -104,6 +105,8 @@ export default function () {
                     interval: 5000
                 }}
             />
+
+            <StatisticByMonth pingId={1}/>
         </>
     );
 }
