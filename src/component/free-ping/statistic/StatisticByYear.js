@@ -8,7 +8,7 @@ import priceFormatter from "../../../mixin/global/priceFormatter";
 
 export default function ({pageId, pingId}) {
     const [data, setData] = useState(null);
-    const [year, setYear] = useState(new Date().getFullYear());
+    const [year, setYear] = useState(new Date().getFullYear() - 5);
 
     useEffect(() => {
         if (isNull(year)) return;
@@ -17,13 +17,16 @@ export default function ({pageId, pingId}) {
     }, [year]);
 
     const fetch = async () => {
+        setData((await api.freeping.statistic.byPingFromYearGroupByYear(1, year)));
+        return;
+
         if (!isNull(pageId)) {
-            setData((await api.freeping.statistic.byPageByYearGroupByMonth(pageId, year)));
+            setData((await api.freeping.statistic.byPageFromYearGroupByYear(pageId, year)));
             return;
         }
 
         if (!isNull(pingId)) {
-            setData((await api.freeping.statistic.byPingByYearGroupByMonth(pingId, year)));
+            setData((await api.freeping.statistic.byPingFromYearGroupByYear(pingId, year)));
             return;
         }
     }
@@ -82,7 +85,7 @@ export default function ({pageId, pingId}) {
                     className={"bg-gray-800 text-black"}
                 />
             </div>
-            <h1 className="text-center underline text-sm">Uptime by year, aggregate by month</h1>
+            <h1 className="text-center underline text-sm">Uptime from year, aggregate by year</h1>
         </div>
 
     )

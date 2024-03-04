@@ -25,6 +25,9 @@ import FreePingConfig from "../view/free-ping/Config";
 import Ping from "../view/free-ping/Ping";
 import GetPing from "../view/free-ping/ping/GetPing";
 import Outage from "../view/free-ping/Outage";
+import Page from "../view/free-ping/Page";
+import CreatePage from "../view/free-ping/page/CreatePage";
+import GetPage from "../view/free-ping/page/GetPage";
 
 export default function Router() {
     return (
@@ -53,6 +56,9 @@ export default function Router() {
                     <Route exact path="/free-ping/ping" element={<Ping/>}/>
                     <Route exact path="/free-ping/ping/:id" element={<GetPing/>}/>
                     <Route exact path="/free-ping/outage" element={<Outage/>}/>
+                    <Route exact path="/free-ping/page" element={<Page/>}/>
+                    <Route exact path="/free-ping/page/create" element={<CreatePage/>}/>
+                    <Route exact path="/free-ping/page/:id" element={<GetPage/>}/>
                     <Route exact path="/free-ping/config" element={<FreePingConfig/>}/>
                 </Route>
             </Routes>

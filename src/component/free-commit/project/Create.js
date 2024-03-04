@@ -49,7 +49,7 @@ export default function Create() {
         const id = await create("api-free-commit", "projects", payload, "admin");
 
         if (typeof id === "number") {
-            navigation("/project");
+            navigation("/free-commit/project");
         }
     }
 

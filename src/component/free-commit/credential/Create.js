@@ -17,7 +17,7 @@ export default function Create() {
         };
 
         await create("api-free-commit", "credentials", payload, "admin");
-        navigation("/credential");
+        navigation("/free-commit/credential");
     }
 
     return (

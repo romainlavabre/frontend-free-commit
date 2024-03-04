@@ -13,6 +13,16 @@ const pagination = {
             return null;
         }
     },
+    async findAllPing() {
+        try {
+            const response = await axios.get(getEnv('REACT_APP_API_URL') + `/api-free-ping/admin/paginations/ping?per_page=1000000`, this.getConfig());
+
+            return response.data.data;
+        } catch (e) {
+            console.log(e)
+            return null;
+        }
+    },
     getConfig() {
         const accessToken = database.read(database.TABLE_AUTHENTICATION, 'access_token');
 
