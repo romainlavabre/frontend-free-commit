@@ -64,6 +64,16 @@ export default function ({pageId}) {
                     ]}
                 />
 
+                {
+                    !isNull(page.logo)
+                        ? (
+                            <div className="flex justify-center">
+                                <img src={page.logo}/>
+                            </div>
+                        )
+                        : null
+                }
+
                 <div className="mt-10 flex justify-center">
                     <a href={`${window.location.protocol}//${window.location.host}/public/pages${page.uri}`}
                        target="_blank"

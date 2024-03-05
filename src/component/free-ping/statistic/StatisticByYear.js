@@ -17,9 +17,6 @@ export default function ({pageId, pingId}) {
     }, [year]);
 
     const fetch = async () => {
-        setData((await api.freeping.statistic.byPingFromYearGroupByYear(1, year)));
-        return;
-
         if (!isNull(pageId)) {
             setData((await api.freeping.statistic.byPageFromYearGroupByYear(pageId, year)));
             return;
