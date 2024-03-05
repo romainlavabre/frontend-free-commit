@@ -99,7 +99,7 @@ export default function ({
 
         payload.uploaded_file[subject.replace(regex, replaceBy) + "_" + field.name] = file;
 
-        const result = await update(!service.startsWith("service-") ? `service-${service}` : service, subject, subjectEntity.id, field.name, payload, role);
+        const result = await update(service, subject, subjectEntity.id, field.name, payload, role);
 
         if (result && !isNull(onSuccess)) {
             onSuccess();

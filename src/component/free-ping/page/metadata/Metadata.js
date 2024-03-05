@@ -3,6 +3,7 @@ import isNull from "../../../../mixin/global/isNull";
 import UpdateEntity from "../../../util/form/UpdateEntity";
 import {useEffect, useState} from "react";
 import api from "../../../../api/api";
+import LinkIcon from "../../../util/icon/LinkIcon";
 
 export default function ({pageId}) {
     const page = useSelector(state => state.api?.["api-free-ping"]?.pages?.values[pageId]);
@@ -51,12 +52,30 @@ export default function ({pageId}) {
                     role={"admin"}
                     fields={[
                         {
-                            title: "URI",
+                            title: "URI (after /public/pages)",
                             name: "uri",
                             type: "text"
+                        },
+                        {
+                            title: "Logo",
+                            name: "logo",
+                            type: "file"
                         }
                     ]}
                 />
+
+                <div className="mt-10 flex justify-center">
+                    <a href={`${window.location.protocol}//${window.location.host}/public/pages${page.uri}`}
+                       target="_blank"
+                       className="link flex">
+                        <div className="mx-3">
+                            <LinkIcon size={6}/>
+                        </div>
+                        <div>
+                            Link
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
     );

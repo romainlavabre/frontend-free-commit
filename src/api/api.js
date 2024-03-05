@@ -10,6 +10,8 @@ import freePingConfig from "./free-ping/config";
 import ping from "./free-ping/ping";
 import pagination from "./free-ping/pagination";
 import statistic from "./free-ping/statistic";
+import page from "./free-ping/page";
+import incident from "./free-ping/incident";
 
 const api = {
     authentication,
@@ -24,7 +26,9 @@ const api = {
         config: freePingConfig,
         ping: ping,
         pagination: pagination,
-        statistic: statistic
+        statistic: statistic,
+        page: page,
+        incident: incident
     }
 };
 

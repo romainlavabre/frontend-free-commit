@@ -29,12 +29,14 @@ import Page from "../view/free-ping/Page";
 import CreatePage from "../view/free-ping/page/CreatePage";
 import GetPage from "../view/free-ping/page/GetPage";
 import CreatePing from "../view/free-ping/ping/CreatePing";
+import StatusPage from "../view/free-ping/page/StatusPage";
 
 export default function Router() {
     return (
         <BrowserRouter>
             <Routes>
                 <Route exact path="/" element={<Login/>}/>
+                <Route exact path="/public/pages/*" element={<StatusPage/>}/>
                 <Route element={<Menu/>}>
                     <Route exact path="/free-commit/project" element={<Project/>}/>
                     <Route exact path="/free-commit/project/:id" element={<GetProject/>}/>
