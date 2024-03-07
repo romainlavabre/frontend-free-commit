@@ -36,7 +36,7 @@ export default function () {
     if (isNull(page) || isNull(pings)) return null;
 
     return (
-        <div className="w-full bg-white h-screen text-gray-600 p-5">
+        <div className="w-full bg-white min-h-screen text-gray-600 p-5">
             <div className="w-6/12 mx-auto">
                 <div className="grid grid-cols-3">
                     <div className="col-span-1 ">

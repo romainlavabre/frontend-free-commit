@@ -10,7 +10,7 @@ export default function () {
     return (
         <div className="w-full">
             <div className="flex justify-end">
-                <button className="bg-gray-500 rounded py-2 px-10" onClick={() => navigate('/free-commit/project')}>
+                <button className="bg-gray-500 rounded py-2 px-10" onClick={() => navigate('/free-ping/ping')}>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 20 20"
                          fill="currentColor">
                         <path fillRule="evenodd"

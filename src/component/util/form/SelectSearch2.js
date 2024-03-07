@@ -26,7 +26,7 @@ export default function ({
             return;
         }
 
-        if (typeof defaultValue[0] !== "object") {
+        if (items.length === 0) {
             defaultValue = defaultValue.map(val => {
                 return {
                     [index]: val,

@@ -1,6 +1,14 @@
 import {Chart} from "react-chartjs-2";
 import React, {useEffect, useState} from "react";
-import {BarElement, CategoryScale, Chart as ChartJS, LinearScale, LineElement, PointElement} from "chart.js";
+import {
+    BarElement,
+    CategoryScale,
+    Chart as ChartJS,
+    LinearScale,
+    LineElement,
+    PointElement,
+    registerables
+} from "chart.js";
 import isNull from "../../../mixin/global/isNull";
 import api from "../../../api/api";
 import ChartDataLabels from 'chartjs-plugin-datalabels';
@@ -27,9 +35,10 @@ export default function ({pageId, pingId}) {
             return;
         }
     }
-    
+
     if (isNull(data)) return null;
 
+    ChartJS.register(...registerables);
     ChartJS.register(CategoryScale);
     ChartJS.register(LinearScale);
     ChartJS.register(PointElement);
