@@ -124,7 +124,7 @@ export default function () {
                                         {priceFormatter(ping.availability_percent)} % availability
                                     </div>
                                     <div className="col-span-1 text-right my-auto">
-                                        {ping.downtime_minute} outage minutes
+                                        {ping.downtime_minute} minute downtime
                                     </div>
                                 </div>
                                 <div className="col-span-2">
