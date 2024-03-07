@@ -27,6 +27,7 @@ export default function ({pageId, pingId}) {
             return;
         }
     }
+    
     if (isNull(data)) return null;
 
     ChartJS.register(CategoryScale);

@@ -15,5 +15,5 @@ export default function (date, withTime = true, withDate = true) {
         return `${reference.toLocaleTimeString("fr").split(':')[0]}:${reference.toLocaleTimeString("fr").split(':')[1]}`;
     }
 
-    return `${reference.toLocaleDateString("fr-Fr")} à ${reference.toLocaleTimeString("fr").split(':')[0]}:${reference.toLocaleTimeString("fr").split(':')[1]}`
+    return `${reference.toLocaleDateString("fr-Fr")} at ${reference.toLocaleTimeString("fr").split(':')[0]}:${reference.toLocaleTimeString("fr").split(':')[1]}`
 }

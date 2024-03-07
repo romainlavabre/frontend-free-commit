@@ -1,11 +1,15 @@
-import React, {useEffect} from "react";
+import {useNavigate} from "react-router";
+import Pagination from "../../util/pagination/Pagination";
 import getEnv from "../../../mixin/getEnv";
 import database from "../../../database/database";
-import Pagination from "../../util/pagination/Pagination";
-import dateFormatter from "../../../mixin/global/dateFormatter";
+import React, {useEffect} from "react";
+import PlusIcon from "../../util/icon/PlusIcon";
 import isNull from "../../../mixin/global/isNull";
+import dateFormatter from "../../../mixin/global/dateFormatter";
 
 export default function () {
+    const navigate = useNavigate();
+
     useEffect(() => {
         setTimeout(() => {
             const buttons = document.getElementsByTagName("button");
@@ -16,92 +20,91 @@ export default function () {
                     try {
                         buttons[i].click();
                     } catch (e) {
+                        console.log(e)
                     }
                     break;
                 }
             }
-        }, 10);
+        }, 100);
     }, []);
 
     return (
         <>
             <div className="flex justify-between">
                 <div>
-                    <h4 className="text-3xl">Outage</h4>
+                    <h4 className="text-3xl">Ticket</h4>
                 </div>
-                <div></div>
+                <div>
+                    <button className="badge-green-square" onClick={() => navigate('/free-ping/ticket/create')}>
+                        <PlusIcon size={8}/>
+                    </button>
+                </div>
             </div>
-
             <Pagination
-                name={"free-ping-incident"}
-                row={{}}
+                name={"free-ping-ticket"}
+                row={{
+                    onClick: data => {
+                        navigate(`/free-ping/ticket/${data.ticket_id}`)
+                    }
+                }}
                 columns={[
                     {
                         key: "ID",
-                        value: "incident_id",
+                        value: "ticket_id",
                         searchInput: true,
                         comparator: "eq",
                         primary: true,
                         computedValue: data => {
                             return (
                                 <span className="text-blue-500">
-                                    #{data.incident_id}
+                                    #{data.ticket_id}
                                 </span>
                             )
                         }
                     },
                     {
                         key: "NAME",
-                        value: "ping_title",
+                        value: "ticket_title",
                         searchInput: true,
                         comparator: "contains"
                     },
                     {
-                        key: "OF",
-                        value: "incident_of",
-                        searchInput: true,
-                        comparator: "eq",
-                        computedValue: data => dateFormatter(data.incident_of)
+                        key: "DATE",
+                        value: "ticket_created_at",
+                        computedValue: data => dateFormatter(data.ticket_created_at)
                     },
                     {
-                        key: "AT",
-                        value: "incident_at",
-                        searchInput: true,
-                        comparator: "eq",
-                        computedValue: data => isNull(data.incident_at) ? null : dateFormatter(data.incident_at),
+                        key: "OPENED",
+                        value: "ticket_closed_at",
+                        computedValue: data => (
+                            <span className={isNull(data.ticket_closed_at) ? "badge-green" : "badge-red"}>
+                                {isNull(data.ticket_closed_at) ? "Yes" : "No"}
+                            </span>
+                        ),
                         searchButton: [
                             {
                                 name: "Opened",
-                                value: 3,
                                 conditions: [
-                                    `incident_at${encodeURIComponent("[")}eq${encodeURIComponent("]")}=null`
+                                    `closed_at${encodeURIComponent("[")}eq${encodeURIComponent("]")}=null`
                                 ]
                             },
                             {
                                 name: "Closed",
-                                value: 3,
                                 conditions: [
-                                    `incident_at${encodeURIComponent("[")}ne${encodeURIComponent("]")}=null`
+                                    `closed_at${encodeURIComponent("[")}ne${encodeURIComponent("]")}=null`
                                 ]
                             },
                         ]
-                    },
-                    {
-                        key: "DURATION",
-                        value: "incident_duration",
-                        searchInput: true,
-                        comparator: "supeq",
-                        computedValue: data => data.incident_duration + " minutes"
                     }
                 ]}
                 fetch={{
-                    url: getEnv("REACT_APP_API_URL") + '/api-free-ping/admin/paginations/incident',
+                    url: getEnv("REACT_APP_API_URL") + '/api-free-ping/admin/paginations/ticket',
                     options: {
                         headers: {
                             Authorization: `Bearer ${database.read(database.TABLE_AUTHENTICATION, "access_token")}`
                         }
                     },
-                    interval: 5000
+                    interval: 20000
                 }}
             />
         </>

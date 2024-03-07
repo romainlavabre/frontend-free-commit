@@ -12,6 +12,8 @@ import pagination from "./free-ping/pagination";
 import statistic from "./free-ping/statistic";
 import page from "./free-ping/page";
 import incident from "./free-ping/incident";
+import ticket from "./free-ping/ticket";
+import message from "./free-ping/message";
 
 const api = {
     authentication,
@@ -28,7 +30,9 @@ const api = {
         pagination: pagination,
         statistic: statistic,
         page: page,
-        incident: incident
+        incident: incident,
+        ticket: ticket,
+        message: message
     }
 };
 

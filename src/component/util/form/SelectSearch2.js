@@ -21,19 +21,35 @@ export default function ({
     const searchInput = useRef();
 
     useEffect(() => {
-        if (isNull(defaultValue)) {
+        if (isNull(defaultValue) || defaultValue.length === 0) {
             setContent([]);
+            return;
         }
 
+        if (typeof defaultValue[0] !== "object") {
+            defaultValue = defaultValue.map(val => {
+                return {
+                    [index]: val,
+                    [value]: val
+                }
+            });
+        }
+
+
         if (!isNull(defaultValue) && typeof defaultValue === "object") {
-            const res = items.filter(item => defaultValue.includes(item[index]));
+            if (items.length > 0) {
+                const res = items.filter(item => defaultValue.includes(item[index]));
 
-            setContent(res);
+                setContent(res);
 
-            if (res.length > 0) {
-                setSearch(false);
+                if (res.length > 0) {
+                    setSearch(false);
+                }
+
+                return;
             }
 
+            setContent(defaultValue);
             return;
         }
 
@@ -121,6 +137,13 @@ export default function ({
     }
 
     const onSearch = () => {
+        if (items.length === 0) {
+            if (isNull(searchInput.current) || searchInput.current.value === "") return;
+
+            setResult([{[index]: searchInput.current.value, [value]: searchInput.current.value}]);
+            return;
+        }
+
         if (isNull(searchInput.current) || searchInput.current.value.length === 0) {
             setResult(items.filter(item => !isContentContains(item)));
             return;
@@ -151,6 +174,11 @@ export default function ({
                                     placeholder={placeholder}
                                     ref={searchInput}
                                     onChange={onSearch}
+                                    onKeyDown={e => {
+                                        if (e.key === "Enter") {
+                                            select({[index]: e.target.value, [value]: e.target.value})
+                                        }
+                                    }}
                                 />
                                 <div className="text-gray-500 cursor-pointer" onClick={() => {
                                     searchInput.current.value = "";
@@ -218,7 +246,7 @@ export default function ({
                                     ))
                                     : (
                                         <div className="cursor-default hover:bg-gray-800 text-center">
-                                            No result
+                                            {items.length === 0 ? "Type and press Enter" : "No result"}
                                         </div>
                                     )
                             }

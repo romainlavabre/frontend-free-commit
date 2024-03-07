@@ -30,6 +30,10 @@ import CreatePage from "../view/free-ping/page/CreatePage";
 import GetPage from "../view/free-ping/page/GetPage";
 import CreatePing from "../view/free-ping/ping/CreatePing";
 import StatusPage from "../view/free-ping/page/StatusPage";
+import Ticket from "../view/free-ping/Ticket";
+import CreateTicket from "../view/free-ping/ticket/CreateTicket";
+import GetTicket from "../view/free-ping/ticket/GetTicket";
+import PublicTicket from "../view/free-ping/ticket/PublicTicket";
 
 export default function Router() {
     return (
@@ -37,6 +41,7 @@ export default function Router() {
             <Routes>
                 <Route exact path="/" element={<Login/>}/>
                 <Route exact path="/public/pages/*" element={<StatusPage/>}/>
+                <Route exact path="/public/tickets/*" element={<PublicTicket/>}/>
                 <Route element={<Menu/>}>
                     <Route exact path="/free-commit/project" element={<Project/>}/>
                     <Route exact path="/free-commit/project/:id" element={<GetProject/>}/>
@@ -63,6 +68,9 @@ export default function Router() {
                     <Route exact path="/free-ping/page" element={<Page/>}/>
                     <Route exact path="/free-ping/page/create" element={<CreatePage/>}/>
                     <Route exact path="/free-ping/page/:id" element={<GetPage/>}/>
+                    <Route exact path="/free-ping/ticket" element={<Ticket/>}/>
+                    <Route exact path="/free-ping/ticket/create" element={<CreateTicket/>}/>
+                    <Route exact path="/free-ping/ticket/:id" element={<GetTicket/>}/>
                     <Route exact path="/free-ping/config" element={<FreePingConfig/>}/>
                 </Route>
             </Routes>
