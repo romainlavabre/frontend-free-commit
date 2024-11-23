@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit'
-import isNull from "../mixin/global/isNull";
+import isNull from "../package-react-wrapper/mixin/isNull";
 
 const initialState = {}
 

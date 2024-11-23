@@ -1,77 +1,34 @@
 import {BrowserRouter} from "react-router-dom";
 import {Route, Routes} from "react-router";
 import React from "react";
-import Login from "../view/Login";
-import Project from "../view/free-commit/Project";
-import Developer from "../view/free-commit/Developer";
-import CreateDeveloper from "../view/free-commit/developer/CreateDeveloper";
-import GetDeveloper from "../view/free-commit/developer/GetDeveloper";
-import UpdateDeveloper from "../view/free-commit/developer/UpdateDeveloper";
-import Secret from "../view/free-commit/Secret";
-import CreateSecret from "../view/free-commit/secret/CreateSecret";
-import UpdateSecret from "../view/free-commit/secret/UpdateSecret";
-import GetSecret from "../view/free-commit/secret/GetSecret";
-import Credential from "../view/free-commit/Credential";
-import CreateCredential from "../view/free-commit/credential/CreateCredential";
-import GetCredential from "../view/free-commit/credential/GetCredential";
-import UpdateCredential from "../view/free-commit/credential/UpdateCredential";
-import CreateProject from "../view/free-commit/project/CreateProject";
-import GetProject from "../view/free-commit/project/GetProject";
-import UpdateProject from "../view/free-commit/project/UpdateProject";
-import GetBuild from "../view/free-commit/project/build/GetBuild";
-import Config from "../view/free-commit/Config";
-import Menu from "../component/Menu";
-import FreePingConfig from "../view/free-ping/Config";
-import Ping from "../view/free-ping/Ping";
-import GetPing from "../view/free-ping/ping/GetPing";
-import Outage from "../view/free-ping/Outage";
-import Page from "../view/free-ping/Page";
-import CreatePage from "../view/free-ping/page/CreatePage";
-import GetPage from "../view/free-ping/page/GetPage";
-import CreatePing from "../view/free-ping/ping/CreatePing";
-import StatusPage from "../view/free-ping/page/StatusPage";
-import Ticket from "../view/free-ping/Ticket";
-import CreateTicket from "../view/free-ping/ticket/CreateTicket";
-import GetTicket from "../view/free-ping/ticket/GetTicket";
-import PublicTicket from "../view/free-ping/ticket/PublicTicket";
+import Login from "../component/login/Login";
+import ProjectEntrypoint from "../component/free-commit/project/ProjectEntrypoint";
+import Menu from "../component/free-commit/Menu";
 
 export default function Router() {
     return (
         <BrowserRouter>
             <Routes>
                 <Route exact path="/" element={<Login/>}/>
-                <Route exact path="/public/pages/*" element={<StatusPage/>}/>
-                <Route exact path="/public/tickets/*" element={<PublicTicket/>}/>
                 <Route element={<Menu/>}>
-                    <Route exact path="/free-commit/project" element={<Project/>}/>
-                    <Route exact path="/free-commit/project/:id" element={<GetProject/>}/>
-                    <Route exact path="/free-commit/project/create" element={<CreateProject/>}/>
-                    <Route exact path="/free-commit/project/update/:id" element={<UpdateProject/>}/>
-                    <Route exact path="/free-commit/project/:id/build/:buildId" element={<GetBuild/>}/>
-                    <Route exact path="/free-commit/developer" element={<Developer/>}/>
-                    <Route exact path="/free-commit/developer/:id" element={<GetDeveloper/>}/>
-                    <Route exact path="/free-commit/developer/create" element={<CreateDeveloper/>}/>
-                    <Route exact path="/free-commit/developer/update/:id" element={<UpdateDeveloper/>}/>
-                    <Route exact path="/free-commit/secret" element={<Secret/>}/>
-                    <Route exact path="/free-commit/secret/:id" element={<GetSecret/>}/>
-                    <Route exact path="/free-commit/secret/create" element={<CreateSecret/>}/>
-                    <Route exact path="/free-commit/secret/update/:id" element={<UpdateSecret/>}/>
-                    <Route exact path="/free-commit/credential" element={<Credential/>}/>
-                    <Route exact path="/free-commit/credential/:id" element={<GetCredential/>}/>
-                    <Route exact path="/free-commit/credential/create" element={<CreateCredential/>}/>
-                    <Route exact path="/free-commit/credential/update/:id" element={<UpdateCredential/>}/>
-                    <Route exact path="/free-commit/config" element={<Config/>}/>
-                    <Route exact path="/free-ping/ping" element={<Ping/>}/>
-                    <Route exact path="/free-ping/ping/create" element={<CreatePing/>}/>
-                    <Route exact path="/free-ping/ping/:id" element={<GetPing/>}/>
-                    <Route exact path="/free-ping/outage" element={<Outage/>}/>
-                    <Route exact path="/free-ping/page" element={<Page/>}/>
-                    <Route exact path="/free-ping/page/create" element={<CreatePage/>}/>
-                    <Route exact path="/free-ping/page/:id" element={<GetPage/>}/>
-                    <Route exact path="/free-ping/ticket" element={<Ticket/>}/>
-                    <Route exact path="/free-ping/ticket/create" element={<CreateTicket/>}/>
-                    <Route exact path="/free-ping/ticket/:id" element={<GetTicket/>}/>
-                    <Route exact path="/free-ping/config" element={<FreePingConfig/>}/>
+                    <Route exact path="/free-commit/project" element={<ProjectEntrypoint/>}/>
+                    <Route exact path="/free-commit/project/:id" element={null}/>
+                    <Route exact path="/free-commit/project/create" element={null}/>
+                    <Route exact path="/free-commit/project/update/:id" element={null}/>
+                    <Route exact path="/free-commit/project/:id/build/:buildId" element={null}/>
+                    <Route exact path="/free-commit/developer" element={null}/>
+                    <Route exact path="/free-commit/developer/:id" element={null}/>
+                    <Route exact path="/free-commit/developer/create" element={null}/>
+                    <Route exact path="/free-commit/developer/update/:id" element={null}/>
+                    <Route exact path="/free-commit/secret" element={null}/>
+                    <Route exact path="/free-commit/secret/:id" element={null}/>
+                    <Route exact path="/free-commit/secret/create" element={null}/>
+                    <Route exact path="/free-commit/secret/update/:id" element={null}/>
+                    <Route exact path="/free-commit/credential" element={null}/>
+                    <Route exact path="/free-commit/credential/:id" element={null}/>
+                    <Route exact path="/free-commit/credential/create" element={null}/>
+                    <Route exact path="/free-commit/credential/update/:id" element={null}/>
+                    <Route exact path="/free-commit/config" element={null}/>
                 </Route>
             </Routes>
         </BrowserRouter>

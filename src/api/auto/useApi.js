@@ -1,12 +1,12 @@
 import {useDispatch, useSelector} from "react-redux";
-import isNull from "../../mixin/global/isNull";
 import config from "./config";
 import axios from "axios";
-import database from "../../database/database";
+import database from "../../package-react-wrapper/database/database";
 import {addOrOverwrite, remove} from "../../store/api";
-import useAlert from "../../use/useAlert";
+import useAlert from "../../package-react-wrapper/use/useAlert";
 import enums from "../../enum/enums";
 import getEnv from "../../mixin/getEnv";
+import isNull from "../../package-react-wrapper/mixin/isNull";
 
 let inProgress = [];
 
@@ -48,7 +48,7 @@ export default function useApi() {
                 role !== "guest"
                     ? {
                         headers: {
-                            Authorization: `Bearer ${database.read(database.TABLE_AUTHENTICATION, "access_token")}`
+                            Authorization: `Bearer ${database.read("authentication", "access_token")}`
                         }
                     }
                     : null
@@ -108,7 +108,7 @@ export default function useApi() {
                 role !== "guest"
                     ? {
                         headers: {
-                            Authorization: `Bearer ${database.read(database.TABLE_AUTHENTICATION, "access_token")}`
+                            Authorization: `Bearer ${database.read("authentication", "access_token")}`
                         }
                     }
                     : null
@@ -172,7 +172,7 @@ export default function useApi() {
                 role !== "guest"
                     ? {
                         headers: {
-                            Authorization: `Bearer ${database.read(database.TABLE_AUTHENTICATION, "access_token")}`
+                            Authorization: `Bearer ${database.read("authentication", "access_token")}`
                         }
                     }
                     : null
@@ -225,7 +225,7 @@ export default function useApi() {
                     role !== "guest"
                         ? {
                             headers: {
-                                Authorization: `Bearer ${database.read(database.TABLE_AUTHENTICATION, "access_token")}`
+                                Authorization: `Bearer ${database.read("authentication", "access_token")}`
                             }
                         }
                         : null
@@ -276,7 +276,7 @@ export default function useApi() {
                     role !== "guest"
                         ? {
                             headers: {
-                                Authorization: `Bearer ${database.read(database.TABLE_AUTHENTICATION, "access_token")}`
+                                Authorization: `Bearer ${database.read("authentication", "access_token")}`
                             }
                         }
                         : null
@@ -325,7 +325,7 @@ export default function useApi() {
                     role !== "guest"
                         ? {
                             headers: {
-                                Authorization: `Bearer ${database.read(database.TABLE_AUTHENTICATION, "access_token")}`
+                                Authorization: `Bearer ${database.read("authentication", "access_token")}`
                             }
                         }
                         : null

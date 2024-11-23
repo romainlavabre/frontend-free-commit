@@ -1,6 +1,6 @@
 import axios from "axios";
 import getEnv from "../../mixin/getEnv";
-import database from "../../database/database";
+import database from "../../package-react-wrapper/database/database";
 
 const log = {
     async getExecutorLog(executorId, step, lineNumber) {
@@ -24,7 +24,7 @@ const log = {
         }
     },
     getConfig() {
-        const accessToken = database.read(database.TABLE_AUTHENTICATION, 'access_token');
+        const accessToken = database.read("authentication", 'access_token');
 
         return {
             headers: {
