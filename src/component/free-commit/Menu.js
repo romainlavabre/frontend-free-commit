@@ -6,6 +6,8 @@ import {useState} from "react";
 import {Outlet, useLocation, useNavigate} from "react-router";
 import useAxiosConfig from "../../use/useAxiosConfig";
 import database from "../../package-react-wrapper/database/database";
+import QueuedBuild from "./build/QueuedBuild";
+import ExecutedBuild from "./build/ExecutedBuild";
 
 function getItems() {
     return [
@@ -111,6 +113,9 @@ export default function () {
                         <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                             {getItems().find(item => location.pathname.endsWith(item.path))?.name}
                         </Typography>
+                        <Box sx={{flexGrow: 1}}/>
+                        <QueuedBuild/>
+                        <ExecutedBuild/>
                     </Toolbar>
                 </AppBar>
             </Box>

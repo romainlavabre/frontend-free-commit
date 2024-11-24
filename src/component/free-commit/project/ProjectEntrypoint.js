@@ -9,7 +9,7 @@ import isNull from "../../../package-react-wrapper/mixin/isNull";
 import Project from "./Project";
 
 export default function () {
-    const [selected, setSelected] = useState(3);
+    const [selected, setSelected] = useState(null);
 
     if (!isNull(selected)) return <Project key={selected} projectId={selected} onClose={() => setSelected(null)}/>;
 
