@@ -3,10 +3,10 @@ FROM node:12.16.1-alpine3.9 as build
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 COPY ./package.json /app/
-COPY ./yarn.lock /app/
-RUN yarn --ignore-engines
+COPY ./package-lock.json /app/
+RUN npm ci
 COPY . /app
-RUN yarn build
+RUN npm build
 
 # stage 2 - build the final image and copy the react build files
 FROM nginx:1.21.6-alpine
