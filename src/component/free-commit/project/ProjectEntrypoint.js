@@ -7,6 +7,7 @@ import {Chip} from "@mui/material";
 import {useState} from "react";
 import isNull from "../../../package-react-wrapper/mixin/isNull";
 import Project from "./Project";
+import LaunchBuild from "./LaunchBuild";
 
 export default function () {
     const [selected, setSelected] = useState(null);
@@ -46,6 +47,13 @@ export default function () {
                                     color={row.build_last_exit_code === 0 ? "success" : "error"}
                                 />
                             ))
+                    )
+                    .addPaginationColumn(
+                        new PaginationColumn()
+                            .setHeader("Action")
+                            .setType(null)
+                            .setField("action")
+                            .setValueCompiler(row => <LaunchBuild projectId={row.project_id}/>)
                     )
             }
         />

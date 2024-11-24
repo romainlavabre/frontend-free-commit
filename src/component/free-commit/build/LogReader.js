@@ -119,7 +119,7 @@ export default function ({executorId}) {
     }
 
     return (
-        <Box>
+        <Box height={"100%"} overflow={"auto"} sx={{scrollbarWidth: "none"}}>
             <Box>
                 <Tooltip title={"Kill build"} placement="top">
                     <IconButton onClick={kill}>
@@ -154,9 +154,11 @@ export default function ({executorId}) {
                                     <ExecutedTime at={logs[key].start_at} lock={logs[key].closed_at}/>
                                 </Box>
                                 <Box width={"5%"}>
-                                    <IconButton onClick={handleDownload(key)}>
-                                        <Download/>
-                                    </IconButton>
+                                    <Tooltip title={"Download logs as text file"}>
+                                        <IconButton onClick={handleDownload(key)}>
+                                            <Download/>
+                                        </IconButton>
+                                    </Tooltip>
                                 </Box>
                             </Box>
                             {
@@ -164,9 +166,7 @@ export default function ({executorId}) {
                                     ? (
                                         <Box
                                             sx={{marginLeft: "5%", scrollbarWidth: "none"}}
-                                            height={"40vh"}
                                             overflow={"auto"}
-                                            data-ref="log-panel"
                                         >
                                             {
                                                 getLogsToShow(logs[key].content).map((line, index) => {

@@ -1,6 +1,6 @@
 import useApi from "../../../api/auto/useApi";
 import {useSelector} from "react-redux";
-import {useEffect, useRef} from "react";
+import {useEffect, useRef, useState} from "react";
 import isNull from "../../../package-react-wrapper/mixin/isNull";
 import {
     Autocomplete,
@@ -10,6 +10,7 @@ import {
     FormControlLabel,
     Grid,
     IconButton,
+    Link,
     Table,
     TableBody,
     TableCell,
@@ -22,12 +23,16 @@ import Box from "@mui/material/Box";
 import Accordion from "../../../package-react-wrapper/material/accordion/Accordion";
 import AccordionConfig from "../../../package-react-wrapper/material/accordion/AccordionConfig";
 import AccordionUnity from "../../../package-react-wrapper/material/accordion/AccordionUnity";
-import {ArrowBack, Cached, CopyAll} from "@mui/icons-material";
+import {ArrowBack, Cached, CopyAll, Delete} from "@mui/icons-material";
 import useClipboard from "../../../package-react-wrapper/use/useClipboard";
 import {orange} from "@mui/material/colors";
 import useAlert from "../../../package-react-wrapper/use/useAlert";
 import useConfirm from "../../../package-react-wrapper/use/useConfirm";
 import useHelper from "../../../package-react-wrapper/use/useHelper";
+import ModalConfig from "../../../package-react-wrapper/material/modal/ModalConfig";
+import LogReader from "../build/LogReader";
+import Modal from "../../../package-react-wrapper/material/modal/Modal";
+import LaunchBuild from "./LaunchBuild";
 
 export default function ({projectId, onClose}) {
     const {confirmModal, managedConfirm} = useConfirm();
@@ -41,6 +46,7 @@ export default function ({projectId, onClose}) {
     const secrets = useSelector(state => state.api?.["api-free-commit"]?.secrets?.values?.filter(secret => !isNull(secret)));
     const builds = useSelector(state => state.api?.["api-free-commit"]?.builds?.values.filter(build => build?.project_id == projectId)?.sort((b1, b2) => b1.id < b2.id ? 1 : -1));
     const intervalRef = useRef();
+    const [selectedBuild, setSelectedBuild] = useState(null);
 
     useEffect(() => {
         findOneBy("api-free-commit", "projects", "id", projectId, "developer");
@@ -356,7 +362,11 @@ export default function ({projectId, onClose}) {
                 </Box>
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
-                <Box display="flex" justifyContent="end">
+                <Box display="flex" justifyContent="space-around">
+                    <Button startIcon={<Delete/>} variant="contained" size={"small"} color={"error"} onClick={onClose}>
+                        Delete
+                    </Button>
+                    <LaunchBuild projectId={projectId}/>
                     <Button startIcon={<ArrowBack/>} variant="contained" size={"small"} onClick={onClose}>
                         Back
                     </Button>
@@ -398,9 +408,12 @@ export default function ({projectId, onClose}) {
                                                                 </TableRow>
                                                             )
                                                             : builds.map(build => (
-                                                                <TableRow>
+                                                                <TableRow key={build.id}>
                                                                     <TableCell variant="head">
-                                                                        {build.id}
+                                                                        <Link href="#"
+                                                                              onClick={() => setSelectedBuild(build.id)}>
+                                                                            {build.id}
+                                                                        </Link>
                                                                     </TableCell>
                                                                     <TableCell>
                                                                         <Chip
@@ -429,6 +442,22 @@ export default function ({projectId, onClose}) {
             </Grid>
 
             {confirmModal}
+
+            {
+                !isNull(selectedBuild)
+                    ? (
+                        <Modal
+                            modalConfig={
+                                new ModalConfig()
+                                    .setHeight("90%")
+                                    .setWidth("70%")
+                                    .setOnClose(() => setSelectedBuild(null))
+                                    .setComponent(<LogReader executorId={selectedBuild.toString()}/>)
+                            }
+                        />
+                    )
+                    : null
+            }
         </Grid>
     );
 }
