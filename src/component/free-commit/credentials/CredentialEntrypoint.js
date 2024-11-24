@@ -1,4 +1,4 @@
-import {Button, Table, TableBody, TableCell, TableHead, TableRow} from "@mui/material";
+import {Alert, Button, Link, Table, TableBody, TableCell, TableHead, TableRow} from "@mui/material";
 import useApi from "../../../api/auto/useApi";
 import {useSelector} from "react-redux";
 import {useEffect, useState} from "react";
@@ -28,40 +28,54 @@ export default function () {
 
     return (
         <>
-            <Box display="flex" justifyContent="end">
-                <Button startIcon={<Add/>} onClick={toggleOpenCreate(true)}>
-                    New
-                </Button>
+            <Box display="flex" justifyContent="space-between" alignItems={"center"} width={"100%"}>
+                <Box>
+                    <Alert severity={"info"}>
+                        <Link
+                            href={"https://romain.gitbook.io/free-commit/configure/provider-credentials"}
+                            target={"_blank"}
+                        >
+                            Read more about the credentials
+                        </Link>
+                    </Alert>
+                </Box>
+                <Box>
+                    <Button startIcon={<Add/>} onClick={toggleOpenCreate(true)}>
+                        New
+                    </Button>
+                </Box>
             </Box>
-            <Table>
-                <TableHead>
-                    <TableRow>
-                        <TableCell>ID</TableCell>
-                        <TableCell>Name</TableCell>
-                        <TableCell></TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {
-                        credentials.map(c => (
-                            <TableRow key={c.id}>
-                                <TableCell>{c.id}</TableCell>
-                                <TableCell>{c.name}</TableCell>
-                                <TableCell>
-                                    <Button
-                                        startIcon={<ArrowRight/>}
-                                        variant="contained"
-                                        size={"small"}
-                                        onClick={() => setSelected(c.id)}
-                                    >
-                                        Go
-                                    </Button>
-                                </TableCell>
-                            </TableRow>
-                        ))
-                    }
-                </TableBody>
-            </Table>
+            <Box mt={2}>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>ID</TableCell>
+                            <TableCell>Name</TableCell>
+                            <TableCell></TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {
+                            credentials.map(c => (
+                                <TableRow key={c.id}>
+                                    <TableCell>{c.id}</TableCell>
+                                    <TableCell>{c.name}</TableCell>
+                                    <TableCell>
+                                        <Button
+                                            startIcon={<ArrowRight/>}
+                                            variant="contained"
+                                            size={"small"}
+                                            onClick={() => setSelected(c.id)}
+                                        >
+                                            Go
+                                        </Button>
+                                    </TableCell>
+                                </TableRow>
+                            ))
+                        }
+                    </TableBody>
+                </Table>
+            </Box>
 
             {
                 openCreate

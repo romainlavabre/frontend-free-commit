@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import {CircularProgress, IconButton, Tooltip} from "@mui/material";
+import {Alert, CircularProgress, IconButton, Link, Tooltip} from "@mui/material";
 import {ArrowDropDown, ArrowRight, CheckCircle, DoDisturb, Download, Error, SkipNext} from "@mui/icons-material";
 import api from "../../../api/api";
 import useAlert from "../../../package-react-wrapper/use/useAlert";
@@ -120,12 +120,24 @@ export default function ({executorId}) {
 
     return (
         <Box height={"100%"} overflow={"auto"} sx={{scrollbarWidth: "none"}}>
-            <Box>
-                <Tooltip title={"Kill build"} placement="top">
-                    <IconButton onClick={kill}>
-                        <DoDisturb/>
-                    </IconButton>
-                </Tooltip>
+            <Box display="flex" alignItems="center">
+                <Box>
+                    <Tooltip title={"Kill build"} placement="top">
+                        <IconButton onClick={kill}>
+                            <DoDisturb/>
+                        </IconButton>
+                    </Tooltip>
+                </Box>
+                <Box width={"30%"} ml={2}>
+                    <Alert severity={"info"}>
+                        <Link
+                            href={"https://romain.gitbook.io/free-commit/build/logs"}
+                            target={"_blank"}
+                        >
+                            Read more about the logs
+                        </Link>
+                    </Alert>
+                </Box>
             </Box>
             <Box>
                 {

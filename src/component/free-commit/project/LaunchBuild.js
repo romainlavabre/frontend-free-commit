@@ -1,5 +1,5 @@
-import {Close, Construction, RadioButtonChecked, RadioButtonUnchecked} from "@mui/icons-material";
-import {Button, Divider, Drawer, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
+import {Construction, RadioButtonChecked, RadioButtonUnchecked} from "@mui/icons-material";
+import {Alert, Button, Divider, Drawer, Link, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
 import List from "@mui/material/List";
 import {useSelector} from "react-redux";
 import {useEffect, useState} from "react";
@@ -63,6 +63,16 @@ export default function ({projectId}) {
 
             <Drawer open={open && !isNull(project)} onClose={toggleDrawer(false)} anchor={"right"}>
                 <Box sx={{width: 400}} role="presentation">
+                    <Box m={2}>
+                        <Alert severity={"info"}>
+                            <Link
+                                href={"https://romain.gitbook.io/free-commit/build/manual-launch"}
+                                target={"_blank"}
+                            >
+                                Read more about the manual launch
+                            </Link>
+                        </Alert>
+                    </Box>
                     <List>
                         {!isNull(project) && project.available_steps.map((text, index) => (
                             <ListItem key={text} disablePadding>
@@ -90,18 +100,6 @@ export default function ({projectId}) {
                                 onClick={handleLaunch}
                             >
                                 Launch
-                            </Button>
-                        </Box>
-                        <Box mt={2}>
-                            <Button
-                                startIcon={<Close/>}
-                                variant="contained"
-                                size="small"
-                                color={"warning"}
-                                fullWidth
-                                onClick={handleClose}
-                            >
-                                Abort
                             </Button>
                         </Box>
                     </Box>

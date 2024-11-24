@@ -3,6 +3,7 @@ import {useSelector} from "react-redux";
 import {useEffect, useRef, useState} from "react";
 import isNull from "../../../package-react-wrapper/mixin/isNull";
 import {
+    Alert,
     Autocomplete,
     Button,
     Checkbox,
@@ -23,7 +24,7 @@ import Box from "@mui/material/Box";
 import Accordion from "../../../package-react-wrapper/material/accordion/Accordion";
 import AccordionConfig from "../../../package-react-wrapper/material/accordion/AccordionConfig";
 import AccordionUnity from "../../../package-react-wrapper/material/accordion/AccordionUnity";
-import {ArrowBack, Cached, CopyAll, Delete} from "@mui/icons-material";
+import {ArrowBack, Cached, CopyAll, Delete, Help} from "@mui/icons-material";
 import useClipboard from "../../../package-react-wrapper/use/useClipboard";
 import {orange} from "@mui/material/colors";
 import useAlert from "../../../package-react-wrapper/use/useAlert";
@@ -278,6 +279,15 @@ export default function ({projectId, onClose}) {
                                                         fullWidth
                                                         defaultValue={project.spec_file_path}
                                                         onKeyDown={handleKeyDown("spec_file_path")}
+                                                        InputProps={{
+                                                            endAdornment: (
+                                                                <IconButton color={"warning"} onClick={() => {
+                                                                    window.open("https://romain.gitbook.io/free-commit/build/spec-file", "_blank")
+                                                                }}>
+                                                                    <Help/>
+                                                                </IconButton>
+                                                            )
+                                                        }}
                                                     />
                                                 </Tooltip>
                                             </Box>
@@ -387,6 +397,16 @@ export default function ({projectId, onClose}) {
                     <Button startIcon={<ArrowBack/>} variant="contained" size={"small"} onClick={onClose}>
                         Back
                     </Button>
+                </Box>
+                <Box mt={3}>
+                    <Alert severity={"info"}>
+                        <Link
+                            href={"https://romain.gitbook.io/free-commit/build"}
+                            target={"_blank"}
+                        >
+                            Read more about the builds
+                        </Link>
+                    </Alert>
                 </Box>
                 <Box mt={2}>
                     <Accordion
