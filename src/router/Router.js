@@ -6,6 +6,7 @@ import ProjectEntrypoint from "../component/free-commit/project/ProjectEntrypoin
 import Menu from "../component/free-commit/Menu";
 import SecretEntrypoint from "../component/free-commit/secret/SecretEntrypoint";
 import CredentialsEntrypoint from "../component/free-commit/credentials/CredentialEntrypoint";
+import DeveloperEntrypoint from "../component/free-commit/developer/DeveloperEntrypoint";
 
 export default function Router() {
     return (
@@ -14,10 +15,7 @@ export default function Router() {
                 <Route exact path="/" element={<Login/>}/>
                 <Route element={<Menu/>}>
                     <Route exact path="/free-commit/project" element={<ProjectEntrypoint/>}/>
-                    <Route exact path="/free-commit/developer" element={null}/>
-                    <Route exact path="/free-commit/developer/:id" element={null}/>
-                    <Route exact path="/free-commit/developer/create" element={null}/>
-                    <Route exact path="/free-commit/developer/update/:id" element={null}/>
+                    <Route exact path="/free-commit/developer" element={<DeveloperEntrypoint/>}/>
                     <Route exact path="/free-commit/secret" element={<SecretEntrypoint/>}/>
                     <Route exact path="/free-commit/credential" element={<CredentialsEntrypoint/>}/>
                     <Route exact path="/free-commit/config" element={null}/>
