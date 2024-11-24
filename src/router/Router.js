@@ -4,6 +4,7 @@ import React from "react";
 import Login from "../component/login/Login";
 import ProjectEntrypoint from "../component/free-commit/project/ProjectEntrypoint";
 import Menu from "../component/free-commit/Menu";
+import SecretEntrypoint from "../component/free-commit/secret/SecretEntrypoint";
 
 export default function Router() {
     return (
@@ -12,15 +13,11 @@ export default function Router() {
                 <Route exact path="/" element={<Login/>}/>
                 <Route element={<Menu/>}>
                     <Route exact path="/free-commit/project" element={<ProjectEntrypoint/>}/>
-                    <Route exact path="/free-commit/project/:id" element={null}/>
-                    <Route exact path="/free-commit/project/create" element={null}/>
-                    <Route exact path="/free-commit/project/update/:id" element={null}/>
-                    <Route exact path="/free-commit/project/:id/build/:buildId" element={null}/>
                     <Route exact path="/free-commit/developer" element={null}/>
                     <Route exact path="/free-commit/developer/:id" element={null}/>
                     <Route exact path="/free-commit/developer/create" element={null}/>
                     <Route exact path="/free-commit/developer/update/:id" element={null}/>
-                    <Route exact path="/free-commit/secret" element={null}/>
+                    <Route exact path="/free-commit/secret" element={<SecretEntrypoint/>}/>
                     <Route exact path="/free-commit/secret/:id" element={null}/>
                     <Route exact path="/free-commit/secret/create" element={null}/>
                     <Route exact path="/free-commit/secret/update/:id" element={null}/>
