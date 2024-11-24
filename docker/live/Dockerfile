@@ -1,12 +1,13 @@
 # stage1 - build react app first
-FROM node:12.16.1-alpine3.9 as build
+FROM node:23.3.0-alpine3.20 AS build
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
-COPY ./package.json /app/
-COPY ./package-lock.json /app/
+COPY ./package.json /app/package.json
+COPY ./package-lock.json /app/package-lock.json
 RUN npm ci
 COPY . /app
-RUN npm build
+RUN npm run build
+RUN ls
 
 # stage 2 - build the final image and copy the react build files
 FROM nginx:1.21.6-alpine
