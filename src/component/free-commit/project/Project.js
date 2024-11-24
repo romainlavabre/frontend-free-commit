@@ -39,7 +39,7 @@ export default function ({projectId, onClose}) {
     const clipboard = useClipboard();
     const alert = useAlert();
     const helper = useHelper();
-    const {findOneBy, findAll, findAllBy, update} = useApi();
+    const {findOneBy, findAll, findAllBy, update, remove} = useApi();
     const project = useSelector(state => state.api?.["api-free-commit"]?.projects?.values[projectId]);
     const developers = useSelector(state => state.api?.["api-free-commit"]?.developers?.values?.filter(developer => !isNull(developer)));
     const credentials = useSelector(state => state.api?.["api-free-commit"]?.credentials?.values?.filter(credential => !isNull(credential)));
@@ -104,6 +104,17 @@ export default function ({projectId, onClose}) {
         );
     }
 
+    const handleDelete = () => {
+        managedConfirm(
+            "You will delete this project",
+            null,
+            async () => {
+                await remove("api-free-commit", "projects", projectId, "admin");
+                onClose();
+            }
+        )
+    }
+
     const getMinutes = (build) => {
         const d2 = new Date(build.completed_at);
         const d1 = new Date(build.created_at);
@@ -140,7 +151,7 @@ export default function ({projectId, onClose}) {
                                             </Box>
                                             <Box mt={2}>
                                                 <TextField
-                                                    key={project.name}
+                                                    key={project.description}
                                                     label={"Description"}
                                                     variant="standard"
                                                     fullWidth
@@ -363,7 +374,13 @@ export default function ({projectId, onClose}) {
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
                 <Box display="flex" justifyContent="space-around">
-                    <Button startIcon={<Delete/>} variant="contained" size={"small"} color={"error"} onClick={onClose}>
+                    <Button
+                        startIcon={<Delete/>}
+                        variant="contained"
+                        size={"small"}
+                        color={"error"}
+                        onClick={handleDelete}
+                    >
                         Delete
                     </Button>
                     <LaunchBuild projectId={projectId}/>
