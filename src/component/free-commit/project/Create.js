@@ -1,4 +1,16 @@
-import {Autocomplete, Button, Checkbox, FormControlLabel, Grid, TextField, Tooltip} from "@mui/material";
+import {
+    Autocomplete,
+    Button,
+    Checkbox,
+    FormControl,
+    FormControlLabel,
+    Grid,
+    InputLabel,
+    MenuItem,
+    Select,
+    TextField,
+    Tooltip
+} from "@mui/material";
 import Box from "@mui/material/Box";
 import useApi from "../../../api/auto/useApi";
 import {useSelector} from "react-redux";
@@ -11,6 +23,7 @@ export default function ({onSuccess}) {
     const developers = useSelector(state => state.api?.["api-free-commit"]?.developers?.values?.filter(developer => !isNull(developer)));
     const credentials = useSelector(state => state.api?.["api-free-commit"]?.credentials?.values?.filter(credential => !isNull(credential)));
     const secrets = useSelector(state => state.api?.["api-free-commit"]?.secrets?.values?.filter(secret => !isNull(secret)));
+    const executors = useSelector(state => state.api?.["api-free-commit"]?.executors?.values?.filter(executor => !isNull(executor)));
     const [copyFromId, setCopyFromId] = useState(null);
     const copyFrom = useSelector(state => state.api?.["api-free-commit"]?.projects?.values[copyFromId]);
     const nameInput = useRef();
@@ -23,12 +36,14 @@ export default function ({onSuccess}) {
     const developersIdInput = useRef();
     const secretsIdInput = useRef();
     const repositoryCredentialIdInput = useRef();
+    const executorIdInput = useRef();
 
 
     useEffect(() => {
         findAll("api-free-commit", "credentials", "developer");
         findAll("api-free-commit", "developers", "developer");
         findAll("api-free-commit", "secrets", "developer");
+        findAll("api-free-commit", "executors", "developer");
     }, []);
 
     useEffect(() => {
@@ -56,7 +71,8 @@ export default function ({onSuccess}) {
                 allow_concurrent_execution: allowConcurrentExecutionInput.current.checked,
                 developers_id: developersIdInput.current,
                 secrets_id: secretsIdInput.current,
-                repository_credential_id: repositoryCredentialIdInput.current
+                repository_credential_id: repositoryCredentialIdInput.current,
+                executor_id: executorIdInput.current.value
             }
         };
 
@@ -227,6 +243,24 @@ export default function ({onSuccess}) {
                         defaultValue={secrets.filter(o => copyFrom?.secrets_id.includes(o.id)) ?? []}
                         onChange={(e, val) => secretsIdInput.current = val?.map(v => v.id) ?? []}
                     />
+                </Box>
+                <Box mt={2}>
+                    <FormControl fullWidth variant="standard">
+                        <InputLabel id="driver">Executor</InputLabel>
+                        <Select
+                            key={JSON.stringify(copyFrom)}
+                            labelId="driver"
+                            label="Role"
+                            defaultValue={!isNull(copyFrom) ? copyFrom.executor_id : executors.find(e => e.driver === "localDriver").id}
+                            inputRef={executorIdInput}
+                        >
+                            {
+                                executors.map(e => (
+                                    <MenuItem key={e.id} value={e.id}>{e.name}</MenuItem>
+                                ))
+                            }
+                        </Select>
+                    </FormControl>
                 </Box>
             </Grid>
             <Grid item xs={12}>

@@ -8,10 +8,14 @@ import {
     Button,
     Checkbox,
     Chip,
+    FormControl,
     FormControlLabel,
     Grid,
     IconButton,
+    InputLabel,
     Link,
+    MenuItem,
+    Select,
     Table,
     TableBody,
     TableCell,
@@ -46,6 +50,7 @@ export default function ({projectId, onClose}) {
     const credentials = useSelector(state => state.api?.["api-free-commit"]?.credentials?.values?.filter(credential => !isNull(credential)));
     const secrets = useSelector(state => state.api?.["api-free-commit"]?.secrets?.values?.filter(secret => !isNull(secret)));
     const builds = useSelector(state => state.api?.["api-free-commit"]?.builds?.values.filter(build => build?.project_id == projectId)?.sort((b1, b2) => b1.id < b2.id ? 1 : -1));
+    const executors = useSelector(state => state.api?.["api-free-commit"]?.executors?.values?.filter(executor => !isNull(executor)));
     const intervalRef = useRef();
     const [selectedBuild, setSelectedBuild] = useState(null);
 
@@ -54,6 +59,7 @@ export default function ({projectId, onClose}) {
         findAll("api-free-commit", "credentials", "developer");
         findAll("api-free-commit", "developers", "developer");
         findAll("api-free-commit", "secrets", "developer");
+        findAll("api-free-commit", "executors", "developer");
 
         fetchBuild();
 
@@ -311,6 +317,23 @@ export default function ({projectId, onClose}) {
                                                     defaultValue={secrets.filter(o => project.secrets_id.includes(o.id))}
                                                     onChange={(e, val) => handleSelectChange("secrets_id", val?.map(v => v.id) ?? [])}
                                                 />
+                                            </Box>
+                                            <Box mt={2}>
+                                                <FormControl fullWidth variant="standard">
+                                                    <InputLabel id="driver">Executor</InputLabel>
+                                                    <Select
+                                                        labelId="driver"
+                                                        label="Role"
+                                                        defaultValue={!isNull(project.executor_id) ? project.executor_id : executors.find(e => e.driver === "localDriver").id}
+                                                        onChange={e => handleSelectChange("executor_id", e.target.value)}
+                                                    >
+                                                        {
+                                                            executors.map(e => (
+                                                                <MenuItem key={e.id} value={e.id}>{e.name}</MenuItem>
+                                                            ))
+                                                        }
+                                                    </Select>
+                                                </FormControl>
                                             </Box>
                                         </>
                                     ))
