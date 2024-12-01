@@ -1,7 +1,16 @@
 import Box from "@mui/material/Box";
 import {AppBar, IconButton, ListItemIcon, ListItemText, Menu, MenuItem, Toolbar} from "@mui/material";
 import Typography from "@mui/material/Typography";
-import {AccountCircle, Construction, GitHub, Key, Logout, Menu as MenuIcon, Settings} from "@mui/icons-material";
+import {
+    AccountCircle,
+    Construction,
+    Engineering,
+    GitHub,
+    Key,
+    Logout,
+    Menu as MenuIcon,
+    Settings
+} from "@mui/icons-material";
 import {useState} from "react";
 import {Outlet, useLocation, useNavigate} from "react-router";
 import useAxiosConfig from "../../use/useAxiosConfig";
@@ -25,6 +34,11 @@ function getItems() {
             name: "Source code credentials",
             path: "/free-commit/credential",
             icon: <GitHub fontSize={"small"}/>
+        },
+        {
+            name: "Executors",
+            path: "/free-commit/executor",
+            icon: <Engineering fontSize={"small"}/>
         },
         {
             name: "Users",

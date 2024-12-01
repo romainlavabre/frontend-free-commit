@@ -14,6 +14,9 @@ export default {
         },
         builds: {
             cacheLifeTime: 5
+        },
+        executors: {
+            cacheLifeTime: 5
         }
     },
     ["api-free-ping"]: {

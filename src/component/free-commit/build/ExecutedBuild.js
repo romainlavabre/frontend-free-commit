@@ -47,7 +47,7 @@ export default function () {
 
     return (
         <>
-            <Tooltip title={executed.length === 0 ? "The slaves are sleeping" : "Slaves work"}>
+            <Tooltip title={executed.length === 0 ? "The executors are sleeping" : "Executors work"}>
                 <IconButton
                     size="large"
                     aria-label="account of current user"
@@ -84,7 +84,7 @@ export default function () {
             >
                 {
                     executed.map(item => (
-                        <Tooltip key={item.executor_id} title={`Kill the task ${item.executor_id}`}
+                        <Tooltip key={item.executor_id} title={`Show the task ${item.executor_id}`}
                                  placement="left">
                             <MenuItem onClick={handleTaskClicked(item.executor_id)}>
                                 <ListItemIcon>
