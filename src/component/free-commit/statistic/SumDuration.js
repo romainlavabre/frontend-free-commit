@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import api from "../../../api/api";
 import {BarChart} from "@mui/x-charts";
 import isNull from "../../../package-react-wrapper/mixin/isNull";
+import Typography from "@mui/material/Typography";
 
 const chartSetting = {
     yAxis: [
@@ -24,28 +25,22 @@ export default function () {
     const fetch = async () => {
         setResult((await api.statistic.sumDuration()).data);
     }
-
-    const getKeys = () => result.map(r => r.date);
-
-    const getValues = () => {
-        return result.map(r => {
-            return {
-                label: r.date,
-                data: [r.duration],
-                stack: "main"
-            }
-        });
-    }
+    
 
     if (isNull(result)) return null;
 
     return (
-        <BarChart
-            dataset={result}
-            xAxis={[{scaleType: "band", dataKey: "date"}]}
-            //series={getValues()}
-            slotProps={{}}
-            {...chartSetting}
-        />
+        <>
+            <BarChart
+                dataset={result}
+                xAxis={[{scaleType: "band", dataKey: "date"}]}
+                //series={getValues()}
+                slotProps={{}}
+                {...chartSetting}
+            />
+            <Typography variant="body2" component="div" textAlign={"center"}>
+                Total build duration by year & month (in seconds)
+            </Typography>
+        </>
     )
 }
