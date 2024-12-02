@@ -6,6 +6,7 @@ import credential from "./free-commit/credential";
 import build from "./free-commit/build";
 import config from "./free-commit/config";
 import log from "./free-commit/log";
+import statistic from "./free-commit/statistic";
 
 const api = {
     authentication,
@@ -15,7 +16,8 @@ const api = {
     credential,
     build,
     log,
-    config
+    config,
+    statistic
 };
 
 export default api;

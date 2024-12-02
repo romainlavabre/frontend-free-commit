@@ -9,6 +9,7 @@ import {
     Key,
     Logout,
     Menu as MenuIcon,
+    PieChart,
     Settings
 } from "@mui/icons-material";
 import {useState} from "react";
@@ -44,6 +45,11 @@ function getItems() {
             name: "Users",
             path: "/free-commit/developer",
             icon: <AccountCircle fontSize={"small"}/>
+        },
+        {
+            name: "Statistics",
+            path: "/free-commit/statistic",
+            icon: <PieChart fontSize={"small"}/>
         },
         {
             name: "Config",
