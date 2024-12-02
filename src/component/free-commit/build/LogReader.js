@@ -115,7 +115,7 @@ export default function ({executorId}) {
     }
 
     const handleDownload = key => () => {
-        download(btoa(logs[key].content), "text/plain", `${key}.txt`);
+        download(btoa(unescape(encodeURIComponent(logs[key].content))), "text/plain", `${key}.txt`);
     }
 
     return (
