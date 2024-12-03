@@ -25,7 +25,7 @@ export default function () {
     const fetch = async () => {
         setResult((await api.statistic.sumDuration()).data);
     }
-    
+
 
     if (isNull(result)) return null;
 
@@ -34,8 +34,6 @@ export default function () {
             <BarChart
                 dataset={result}
                 xAxis={[{scaleType: "band", dataKey: "date"}]}
-                //series={getValues()}
-                slotProps={{}}
                 {...chartSetting}
             />
             <Typography variant="body2" component="div" textAlign={"center"}>
