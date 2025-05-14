@@ -52,6 +52,13 @@ export default function ({onSuccess}) {
         findOneBy("api-free-commit", "projects", "id", copyFromId, "developer");
     }, [copyFromId]);
 
+    useEffect(() => {
+        if (isNull(copyFrom)) return;
+
+        repositoryCredentialIdInput.current = copyFrom.repository_credential_id;
+        secretsIdInput.current = copyFrom.secrets_id;
+    }, [JSON.stringify(copyFrom)]);
+
     const handleCopyFromKeyDown = e => {
         if (e.key !== "Enter") return;
 
